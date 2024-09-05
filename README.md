@@ -17,7 +17,7 @@
 5. News and Trends
 /news [crypto]: Display the latest news about a specific cryptocurrency.
 /trends [crypto]: Display market trends, including most-discussed, most-traded cryptocurrencies, etc.
-
+ 
 6. Crypto Comparator
 /comparer [crypto1] [crypto2] : Compare two cryptos in terms of price, market cap, volume, etc.
 /comparer_indicators [crypto1] [crypto2] [indicator]: Compare a specific indicator (such as RSI, MACD) between two cryptos.

@@ -3,9 +3,11 @@
 # TODO indicators ?
 # TODO fix data manipulation
 
-import discord
 from discord.ext import commands
 import requests
+
+import pandas as pd
+import pandas_ta as ta
 
 class Comparator(commands.Cog):
     def __init__(self, bot):
@@ -52,7 +54,7 @@ class Comparator(commands.Cog):
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days={days}"
         response = requests.get(url)
         data = response.json()
-        print(data) # ? debug
+        # print(data) # ? debug
 
         # TODO fix data manipulation
         if 'prices' in data:
@@ -73,7 +75,7 @@ class Comparator(commands.Cog):
         # Fetch historical data (e.g., 30 days)
         df1 = await self.fetch_historical_data(crypto1, '30')
         df2 = await self.fetch_historical_data(crypto2, '30')
-        print(df1, df2) # ? debug
+        # print(df1, df2) # ? debug
 
         if df1 is None or df2 is None:
             await ctx.send("Error fetching historical data. Please check the cryptocurrency names.")

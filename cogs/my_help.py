@@ -4,7 +4,7 @@ import discord
 import os
 
 from discord.ext import commands
-from utils.errors import *
+# from utils.errors import *
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,7 +13,17 @@ BOT_CHAN = os.getenv('BOT_CHAN')
 h_embed = discord.Embed(color=discord.Color.blurple())  # Help
 e_embed = discord.Embed(color=discord.Color.red())  # Error
 
-VISIBLE_COGS = [ "Misc", "Price", "Alerts", "TechnicalAnalysis", "HistoricalData", "NewsTrends", "Comparator" ]
+VISIBLE_COGS = [ "Misc", 
+                "Price", 
+                "Alerts", 
+                "TechnicalAnalysis", 
+                "HistoricalData", 
+                "NewsTrends", 
+                "Comparator",
+                "MarketData",
+                "Portfolio",
+                "MarketAlerts"
+                ]
 
 class Help(commands.Cog):
     def __init__(self, bot):
@@ -23,7 +33,7 @@ class Help(commands.Cog):
     async def help(self, ctx, args=None):
         # display full command list
         command_names_list = [x.name for x in self.bot.commands]
-        cogs_names_list = [x for x in self.bot.cogs]
+        # cogs_names_list = [x for x in self.bot.cogs]
         if not args:
             h_embed.clear_fields()
             h_embed.set_author(name="Available Commands")
@@ -35,7 +45,7 @@ class Help(commands.Cog):
                     for cmd in cmds:
                         cmds_desc += f"{cmd}\t{cmd.help}\n"
                     h_embed.add_field(name=f"{cog.qualified_name}:", value=f"```{cmds_desc}```", inline=False)
-            h_embed.set_footer(text=f"!help <command> or !help <group> to display more")
+            h_embed.set_footer(text="!help <command> or !help <group> to display more")
             return await ctx.send(f"{ctx.author.mention}", embed=h_embed)
         elif args in VISIBLE_COGS:
             cog = self.bot.get_cog(args)
