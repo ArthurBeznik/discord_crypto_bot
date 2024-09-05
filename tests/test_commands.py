@@ -1,6 +1,8 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from bot import bot  # Adjust import based on your project structure
+import bot  # Adjust import based on your project structure
+import os
+print(os.getcwd())
 
 @pytest.fixture
 def mock_channel():
@@ -64,6 +66,3 @@ def test_tuto_command(mock_ctx):
     with patch('discord.ext.commands.Context.send') as mock_send:
         bot.loop.run_until_complete(run_command())
         mock_send.assert_called_with("**Tutorial on blockchain:**\nA blockchain is a decentralized ledger...")
-
-# Add additional tests for other commands following the same pattern
-
