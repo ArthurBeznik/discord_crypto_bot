@@ -69,7 +69,7 @@ class Portfolio(commands.Cog):
         # For simplicity, we'll only calculate the performance based on current prices.
         # More complex analysis would require historical data and user entry timestamps.
         summary = f"**Portfolio Performance Analysis for {ctx.author.mention} over {period}:**\n"
-        total_initial_value = 0
+        # total_initial_value = 0
         total_current_value = 0
 
         for crypto, quantity in self.portfolios[user_id].items():

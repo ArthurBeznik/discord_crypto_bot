@@ -9,7 +9,7 @@ import requests
 import pandas as pd
 import pandas_ta as ta
 
-class Comparator(commands.Cog):
+class CryptoComparator(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -109,4 +109,4 @@ class Comparator(commands.Cog):
         await ctx.send(result)
 
 async def setup(bot):
-    await bot.add_cog(Comparator(bot))
+    await bot.add_cog(CryptoComparator(bot))

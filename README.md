@@ -51,7 +51,7 @@
 /share_position [crypto] [price]: Allow users to share their position or analysis with the community.
 /survey [question] [option1] [option2]...: Create community surveys on crypto topics.
 
-14. Airdrops and ICOs
+14. Airdrops and ICOs => Crypto events
 /airdrop [crypto]: Display upcoming airdrops for a specific cryptocurrency.
 /ico [crypto]: Display upcoming or current ICOs (Initial Coin Offerings).
 

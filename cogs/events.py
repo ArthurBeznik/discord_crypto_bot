@@ -47,6 +47,19 @@ class Events(commands.Cog):
         Censures profanity.
         Only reacts to commands when entered in the bot channel.
         """
+        # Avoid responding to the bot's own messages
+        if message.author == self.bot.user:
+            return
+        
+        # Check if the word "samulel" is in the message content (case-insensitive)
+        if "samulel" in message.content.lower():
+            try:
+                # Send a private message to the user
+                await message.author.send("C'est un gate ca")
+            except discord.Forbidden:
+                # Handle the case where the bot is not allowed to send DMs
+                print(f"Failed to send DM to {message.author.name}")
+            
         # if message.author.id == BOT_ID:
         #     return
         # await check_badwords(message)

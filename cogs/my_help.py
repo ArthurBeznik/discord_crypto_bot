@@ -4,7 +4,6 @@ import discord
 import os
 
 from discord.ext import commands
-# from utils.errors import *
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,10 +18,15 @@ VISIBLE_COGS = [ "Misc",
                 "TechnicalAnalysis", 
                 "HistoricalData", 
                 "NewsTrends", 
-                "Comparator",
+                "CryptoComparator",
                 "MarketData",
                 "Portfolio",
-                "MarketAlerts"
+                "MarketAlerts",
+                "CryptoEvents",
+                "TipsAndTricks",
+                "RegulatoryNews",
+                "Social",
+                
                 ]
 
 class Help(commands.Cog):
@@ -67,7 +71,6 @@ class Help(commands.Cog):
             e_embed.clear_fields()
             e_embed.add_field(name="Erreur", value="Cette commande n'existe pas")
             return await ctx.send(embed=e_embed)
-
 
 async def setup(bot):
     await bot.add_cog(Help(bot))

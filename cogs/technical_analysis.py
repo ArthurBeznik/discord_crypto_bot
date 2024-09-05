@@ -1,4 +1,5 @@
-import discord
+# technical_analysis.py
+
 from discord.ext import commands
 import requests
 import pandas as pd

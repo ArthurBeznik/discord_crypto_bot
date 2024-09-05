@@ -1,10 +1,7 @@
 # price.py
 
-import discord
-import os
-
 from discord.ext import commands
-from utils.errors import *
+from utils.errors import show_help
 from dotenv import load_dotenv
 import requests
 

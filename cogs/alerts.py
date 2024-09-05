@@ -3,11 +3,8 @@
 # TODO task loop => every x minutes?
 # TODO for an alert, does it notify when the treshold is <, > or = ?
 
-import discord
-import os
-
 from discord.ext import commands, tasks
-from utils.errors import *
+from utils.errors import show_help
 from dotenv import load_dotenv
 import requests
 
@@ -69,7 +66,7 @@ class Alerts(commands.Cog):
                         # Remove the alert after notifying
                         del self.alerts[user_id][crypto]
                 else:
-                    print(f"Error fetching price for alert check.")
+                    print("Error fetching price for alert check.")
 
 async def setup(bot):
     await bot.add_cog(Alerts(bot))

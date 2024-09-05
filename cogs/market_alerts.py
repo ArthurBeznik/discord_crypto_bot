@@ -19,7 +19,7 @@ class MarketAlerts(commands.Cog):
         self.global_alert_channel_id = ALERT_CHANNEL # Set this to your alert channel ID
         self.check_market_alerts.start()
 
-    @tasks.loop(minutes=1)  # ! Set the number of minutes
+    @tasks.loop(minutes=10)  # ! Set the number of minutes
     async def check_market_alerts(self):
         """
         Check global market metrics and send alerts if needed.
