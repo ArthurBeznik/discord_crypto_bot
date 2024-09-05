@@ -1,9 +1,9 @@
 # social.py
 
-from discord.ext import commands
 import os
-
+from discord.ext import commands
 from dotenv import load_dotenv
+from utils.errors import show_help
 
 load_dotenv()
 SURVEY_CHAN = os.getenv('SURVEY_CHANNEL_ID')
@@ -14,10 +14,13 @@ class Social(commands.Cog):
         self.survey_channel_id = SURVEY_CHAN  # Set this to the ID of the channel where surveys will be posted
 
     @commands.command(description="Share your position or analysis with the community.")
-    async def share_position(self, ctx, crypto: str, price: float):
+    async def share_position(self, ctx, crypto: str = None, price: float = None):
         """
         !share_position <crypto> <price>
         """
+        if crypto is None or price is None:
+            return await show_help(ctx)
+        
         position_message = f"**User {ctx.author.name} has shared their position:**\n" \
                            f"Cryptocurrency: {crypto}\n" \
                            f"Price: ${price:.2f}\n" \
@@ -33,10 +36,13 @@ class Social(commands.Cog):
             await ctx.send("Survey channel not found. Please contact the bot administrator.")
 
     @commands.command(description="Create a community survey on a crypto topic.")
-    async def survey(self, ctx, question: str, *options: str):
+    async def survey(self, ctx, question: str = None, *options: str):
         """
         !survey "<question>" <option1> <option2>...
         """
+        if question is None or not options:
+            return await show_help(ctx)
+    
         if len(options) < 2:
             await ctx.send("You need to provide at least two options for the survey.")
             return

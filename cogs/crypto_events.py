@@ -6,6 +6,7 @@
 from discord.ext import commands
 from datetime import datetime
 import requests
+from utils.errors import show_help
 
 class CryptoEvents(commands.Cog):
     def __init__(self, bot):
@@ -13,10 +14,13 @@ class CryptoEvents(commands.Cog):
         self.events = {}  # In-memory storage for events
 
     @commands.command(description="Display upcoming events for a specific cryptocurrency.")
-    async def calendar(self, ctx, crypto: str):
+    async def calendar(self, ctx, crypto: str = None):
         """
         !calendar <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+        
         try:
             if crypto not in self.events:
                 await ctx.send(f"No events found for `{crypto}`.")
@@ -38,10 +42,13 @@ class CryptoEvents(commands.Cog):
             await ctx.send(f"An error occurred: {e}")
 
     @commands.command(description="Add an event to the calendar.")
-    async def add_event(self, ctx, crypto: str, date: str, *, description: str):
+    async def add_event(self, ctx, crypto: str = None, date: str = None, description: str = None):
         """
         !add_event <crypto> <date> <description>
         """
+        if crypto is None or date is None or description is None:
+            return await show_help(ctx)
+
         try:
             # Validate date format
             try:
@@ -65,10 +72,13 @@ class CryptoEvents(commands.Cog):
 
     # TODO find API for airdrops
     @commands.command(description="Display upcoming airdrops for a specific cryptocurrency.")
-    async def airdrop(self, ctx, crypto: str):
+    async def airdrop(self, ctx, crypto: str = None):
         """
         !airdrop <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+
         # TODO find API
         url = f"https://api.example.com/airdrops?crypto={crypto}"
         # print(url) # ? debug
@@ -97,10 +107,13 @@ class CryptoEvents(commands.Cog):
 
     # TODO find API for ICOs
     @commands.command(description="Display upcoming or current ICOs for a specific cryptocurrency.")
-    async def ico(self, ctx, crypto: str):
+    async def ico(self, ctx, crypto: str = None):
         """
         !ico <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+
         # TODO find API
         url = "https://api.coingecko.com/api/v3/coins/bitcoin"
         response = requests.get(url)

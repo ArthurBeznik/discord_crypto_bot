@@ -5,10 +5,7 @@
 
 from discord.ext import commands, tasks
 from utils.errors import show_help
-from dotenv import load_dotenv
 import requests
-
-load_dotenv()
 
 # Price alerts
 # ==============================================
@@ -25,6 +22,7 @@ class Alerts(commands.Cog):
         """
         if not crypto or not threshold:
             return await show_help(ctx)
+        
         print(f"Setting alert for user: {ctx.author.id} | crypto: {crypto} | treshold: {threshold}") # ? debug
         user_id = ctx.author.id
         if user_id not in self.alerts:
@@ -39,6 +37,7 @@ class Alerts(commands.Cog):
         """
         if not crypto:
             return await show_help(ctx)
+        
         print(f"Cancelling alert for user: {ctx.author.id} | crypto: {crypto}") # ? debug
         user_id = ctx.author.id
         if user_id in self.alerts and crypto in self.alerts[user_id]:

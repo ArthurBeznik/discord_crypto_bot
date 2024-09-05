@@ -1,7 +1,6 @@
 # misc.py
 
 import discord
-
 from discord.ext import commands
 
 o_embed = discord.Embed(color=discord.Color.orange())  # misc

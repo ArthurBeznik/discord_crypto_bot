@@ -3,10 +3,10 @@
 # TODO trends?
 
 import os
-
 from discord.ext import commands
 import requests
 from dotenv import load_dotenv
+from utils.errors import show_help
 
 load_dotenv()
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
@@ -16,10 +16,13 @@ class NewsTrends(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Display the latest news about a specific cryptocurrency.")
-    async def news(self, ctx, crypto: str):
+    async def news(self, ctx, crypto: str = None):
         """
         !news <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+    
         url = f"https://newsapi.org/v2/everything?q={crypto}&apiKey={NEWS_API_KEY}"
         response = requests.get(url)
         data = response.json()

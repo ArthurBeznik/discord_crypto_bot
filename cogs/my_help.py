@@ -2,7 +2,6 @@
 
 import discord
 import os
-
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -26,7 +25,10 @@ VISIBLE_COGS = [ "Misc",
                 "TipsAndTricks",
                 "RegulatoryNews",
                 "Social",
-                
+                "SentimentBot",
+                "PaperTrading",
+                "AutoUpdates",
+                "EducationSupport",
                 ]
 
 class Help(commands.Cog):

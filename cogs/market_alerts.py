@@ -1,12 +1,14 @@
 # market_alerts.py
 
+# TODO store in DB
+
 import os
 from discord.ext import commands, tasks
 import requests
 import json
 import pandas as pd
-
 from dotenv import load_dotenv
+from utils.errors import show_help
 
 load_dotenv()
 ALERT_CHANNEL = os.getenv('ALERT_CHANNEL_ID')
@@ -15,8 +17,8 @@ class MarketAlerts(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.last_global_cap = None
-        self.alert_threshold = 5  # Percentage change to trigger an alert
-        self.global_alert_channel_id = ALERT_CHANNEL # Set this to your alert channel ID
+        self.alert_threshold = 5  # ! Percentage change to trigger an alert
+        self.global_alert_channel_id = ALERT_CHANNEL # ! Set up in .env
         self.check_market_alerts.start()
 
     @tasks.loop(minutes=10)  # ! Set the number of minutes
@@ -25,6 +27,7 @@ class MarketAlerts(commands.Cog):
         Check global market metrics and send alerts if needed.
         """
         print("Sending market alerts") # ? debug
+
         url = "https://api.coingecko.com/api/v3/global"
         response = requests.get(url)
         data = response.json()
@@ -50,11 +53,15 @@ class MarketAlerts(commands.Cog):
         self.last_global_cap = current_global_cap
 
     @commands.command(description="Receive alerts for significant volatility in a cryptocurrency.")
-    async def volatility_alert(self, ctx, crypto: str, threshold: float):
+    async def volatility_alert(self, ctx, crypto: str = None, threshold: float = None):
         """
         !volatility_alert <crypto> <threshold>
         """
-        print("volatility_alert")
+        if crypto is None or threshold is None:
+            return await show_help(ctx)
+        
+        print("volatility_alert") # ? debug
+
         # Store user-specific alerts
         user_id = str(ctx.author.id)
         alert_data = {
@@ -112,7 +119,7 @@ class MarketAlerts(commands.Cog):
                         if user:
                             await user.send(f"**Volatility Alert:** {crypto} has experienced {max_volatility:.2f}% volatility in the last 24 hours.")
 
-    @tasks.loop(hours=1)  # Check user alerts every hour
+    @tasks.loop(hours=1)  # ! set number of hours
     async def check_user_volatility_alerts(self):
         await self.check_volatility_alerts()
 

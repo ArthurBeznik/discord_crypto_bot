@@ -2,10 +2,7 @@
 
 from discord.ext import commands
 from utils.errors import show_help
-from dotenv import load_dotenv
 import requests
-
-load_dotenv()
 
 # Real-time price commands
 # ==============================================
@@ -18,9 +15,11 @@ class Price(commands.Cog):
         """
         !price <crypto>
         """
-        print(f'Sending price for {crypto}') # ? debug
-        if not crypto:
+        if crypto is None:
             return await show_help(ctx)
+        
+        print(f'Sending price for {crypto}') # ? debug
+        
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd"
         response = requests.get(url)
         if response.status_code == 200:
@@ -35,10 +34,11 @@ class Price(commands.Cog):
         """
         !mult_price <crypto1> <crypto2> ...
         """
-        print(f'Sending mult prices {cryptos}') # ? debug
         if not cryptos:
-            await ctx.send("Please provide at least one cryptocurrency.")
-            return
+            return await show_help(ctx)
+        
+        print(f'Sending mult prices {cryptos}') # ? debug
+        
         crypto_list = ','.join(cryptos)
         # print(crypto_list) # ? debug
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_list}&vs_currencies=usd"

@@ -1,10 +1,10 @@
 # sentiment_bot.py
 
-import discord
 from discord.ext import commands
 import praw
 from textblob import TextBlob
 import os
+from utils.errors import show_help
 
 # Set up Reddit API credentials
 REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
@@ -23,10 +23,13 @@ class SentimentBot(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Analyze market sentiment for a cryptocurrency.")
-    async def sentiment(self, ctx, crypto: str):
+    async def sentiment(self, ctx, crypto: str = None):
         """
         !sentiment <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+        
         # Fetch Reddit comments
         subreddit = reddit.subreddit('all')
         comments = subreddit.search(f'{crypto}', limit=100)
@@ -74,6 +77,5 @@ class SentimentBot(commands.Cog):
 
         await ctx.send(sentiment_message)
 
-# To add this cog to your bot
 async def setup(bot):
     await bot.add_cog(SentimentBot(bot))

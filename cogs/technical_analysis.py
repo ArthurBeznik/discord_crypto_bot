@@ -3,17 +3,21 @@
 from discord.ext import commands
 import requests
 import pandas as pd
-import ta  # Technical Analysis library
+import ta
+from utils.errors import show_help
 
 class TechnicalAnalysis(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(description="Provide basic technical analysis including indicators such as RSI, MACD, EMA, etc.")
-    async def technical_analysis(self, ctx, crypto: str):
+    async def technical_analysis(self, ctx, crypto: str = None):
         """
         !technical_analysis <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+    
         # Fetch historical data from a public API
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days=30"
         response = requests.get(url)
@@ -44,10 +48,13 @@ class TechnicalAnalysis(commands.Cog):
         await ctx.send(response_message)
 
     @commands.command(description="Provide advanced analysis including additional indicators, support/resistance, volume, and recommendations.")
-    async def advanced_analysis(self, ctx, crypto: str):
+    async def advanced_analysis(self, ctx, crypto: str = None):
         """
         !advanced_analysis <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+        
         # Fetch historical data from a public API
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days=30"
         response = requests.get(url)

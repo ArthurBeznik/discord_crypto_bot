@@ -1,19 +1,25 @@
+# historical_data.py
+
 import discord
 from discord.ext import commands
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
+from utils.errors import show_help
 
 class HistoricalData(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(description="Generate a graph with historical data for a cryptocurrency over a specific period.")
-    async def graphic(self, ctx, crypto: str, period: str):
+    async def graphic(self, ctx, crypto: str = None, period: str = None):
         """
         !graphic <crypto> <period>
         """
+        if crypto is None or period is None:
+            return await show_help(ctx)
+
         # Define the period mapping
         period_mapping = {
             "1d": "1",
@@ -64,10 +70,13 @@ class HistoricalData(commands.Cog):
         await ctx.send(file=file)
 
     @commands.command(description="Provide detailed historical data in tabular form for analysis.")
-    async def history(self, ctx, crypto: str, period: str):
+    async def history(self, ctx, crypto: str = None, period: str = None):
         """
         !history <crypto> <period>
         """
+        if crypto is None or period is None:
+            return await show_help(ctx)
+    
         # Define the period mapping
         period_mapping = {
             "1d": "1",

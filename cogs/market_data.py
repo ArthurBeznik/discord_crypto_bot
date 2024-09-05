@@ -2,16 +2,20 @@
 
 from discord.ext import commands
 import requests
+from utils.errors import show_help
 
 class MarketData(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(description="Display the market capitalization of a cryptocurrency.")
-    async def market_cap(self, ctx, crypto: str):
+    async def market_cap(self, ctx, crypto: str = None):
         """
         !market_cap <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+    
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd&include_market_cap=true"
         response = requests.get(url)
         data = response.json()
@@ -23,10 +27,13 @@ class MarketData(commands.Cog):
             await ctx.send(f"Error fetching market cap for {crypto}. Please check the cryptocurrency name.")
 
     @commands.command(description="Display the current trading volume of a cryptocurrency.")
-    async def volume(self, ctx, crypto: str):
+    async def volume(self, ctx, crypto: str = None):
         """
         !volume <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+    
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd&include_24hr_vol=true"
         response = requests.get(url)
         data = response.json()

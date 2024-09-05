@@ -1,5 +1,7 @@
 # tips_n_tricks.py
 
+# TODO add tips n tricks
+
 from discord.ext import commands
 import random
 from datetime import datetime, timedelta
@@ -28,7 +30,6 @@ class TipsAndTricks(commands.Cog):
         !tuto <subject>
         """
         if subject is None:
-            # Display all available subject titles
             subjects_list = ", ".join(self.tutorials.keys())
             await ctx.send(f"Available tutorial subjects: {subjects_list}")
         else:

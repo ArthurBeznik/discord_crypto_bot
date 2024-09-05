@@ -5,9 +5,9 @@
 
 from discord.ext import commands
 import requests
-
 import pandas as pd
 import pandas_ta as ta
+from utils.errors import show_help
 
 class CryptoComparator(commands.Cog):
     def __init__(self, bot):
@@ -15,10 +15,13 @@ class CryptoComparator(commands.Cog):
 
     # TODO market_cap and 24h volume are NA
     @commands.command(description="Compare two cryptocurrencies in terms of price, market cap, volume, etc.")
-    async def compare(self, ctx, crypto1: str, crypto2: str):
+    async def compare(self, ctx, crypto1: str = None, crypto2: str = None):
         """
         !compare <crypto1> <crypto2>
         """
+        if crypto1 is None or crypto2 is None:
+            return await show_help(ctx)
+        
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto1},{crypto2}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true"
         response = requests.get(url)
         data = response.json()
@@ -48,7 +51,7 @@ class CryptoComparator(commands.Cog):
         else:
             await ctx.send("Error fetching data for one or both cryptocurrencies. Please check the names and try again.")
 
-    async def fetch_historical_data(self, crypto: str, days: str):
+    async def fetch_historical_data(self, crypto: str = None, days: str = None):
         print(f"Fetching historical data of {crypto} for {days} days") # ? debug
 
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days={days}"
@@ -66,10 +69,13 @@ class CryptoComparator(commands.Cog):
             return None
 
     @commands.command(description="Compare a specific indicator between two cryptocurrencies.")
-    async def compare_indicators(self, ctx, crypto1: str, crypto2: str, indicator: str):
+    async def compare_indicators(self, ctx, crypto1: str = None, crypto2: str = None, indicator: str = None):
         """
         !compare_indicators <crypto1> <crypto2> <indicator>
         """
+        if crypto1 is None or crypto2 is None or indicator is None:
+            return await show_help(ctx)
+        
         print(f"Comparing {crypto1} and {crypto2} on {indicator}") # ? debug
         
         # Fetch historical data (e.g., 30 days)
@@ -78,8 +84,8 @@ class CryptoComparator(commands.Cog):
         # print(df1, df2) # ? debug
 
         if df1 is None or df2 is None:
-            await ctx.send("Error fetching historical data. Please check the cryptocurrency names.")
-            return
+            return await ctx.send("Error fetching historical data. Please check the cryptocurrency names.")
+            # return
 
         # Calculate the chosen indicator
         if indicator.lower() == 'rsi':
@@ -103,8 +109,8 @@ class CryptoComparator(commands.Cog):
                 f"{crypto2}: {macd2:.2f}"
             )
         else:
-            await ctx.send("Unsupported indicator. Please use 'RSI' or 'MACD'.")
-            return
+            return await ctx.send("Unsupported indicator. Please use 'RSI' or 'MACD'.")
+            # return
 
         await ctx.send(result)
 

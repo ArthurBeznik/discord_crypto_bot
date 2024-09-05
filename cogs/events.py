@@ -2,7 +2,6 @@
 
 import discord
 import discord.ui
-
 from discord.ext import commands
 
 e_embed = discord.Embed(color=discord.Color.red())  # Error

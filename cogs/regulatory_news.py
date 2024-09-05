@@ -5,8 +5,8 @@
 from discord.ext import commands
 import requests
 import os
-
 from dotenv import load_dotenv
+from utils.errors import show_help
 
 load_dotenv()
 NEWS_KEY = os.getenv('NEWS_API_KEY')
@@ -17,10 +17,13 @@ class RegulatoryNews(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Display the latest news on crypto regulations in a specific country.")
-    async def regulation(self, ctx, country: str):
+    async def regulation(self, ctx, country: str = None):
         """
         !regulation <country>
         """
+        if country is None:
+            return await show_help(ctx)
+
         url = f"https://newsapi.org/v2/everything?q=crypto+regulations+{country}&apiKey={NEWS_KEY}"
         # print(url) # ? debug
 
@@ -45,10 +48,13 @@ class RegulatoryNews(commands.Cog):
 
     # TODO fix data manip
     @commands.command(description="Check whether a specific cryptocurrency complies with regulations in various countries.")
-    async def compliance(self, ctx, crypto: str):
+    async def compliance(self, ctx, crypto: str = None):
         """
         !compliance <crypto>
         """
+        if crypto is None:
+            return await show_help(ctx)
+
         headers = {
             'Accepts': 'application/json',
             'X-CMC_PRO_API_KEY': CMC_KEY
@@ -78,7 +84,6 @@ class RegulatoryNews(commands.Cog):
         except Exception as e:
             await ctx.send(f"An error occurred: {e}")
 
-# To add this cog to your bot
 async def setup(bot):
     await bot.add_cog(RegulatoryNews(bot))
 

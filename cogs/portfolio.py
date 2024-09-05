@@ -5,6 +5,7 @@
 from discord import app_commands
 from discord.ext import commands
 import requests
+from utils.errors import show_help
 
 class Portfolio(commands.Cog):
     def __init__(self, bot):
@@ -13,10 +14,13 @@ class Portfolio(commands.Cog):
 
     @commands.command(description="Add cryptocurrency to your virtual portfolio.")
     @app_commands.autocomplete()
-    async def add_to_portfolio(self, ctx, crypto: str, quantity: float):
+    async def add_to_portfolio(self, ctx, crypto: str = None, quantity: float = None):
         """
         !add_to_portfolio <crypto> <quantity>
         """
+        if crypto is None or quantity is None:
+            return await show_help(ctx)
+    
         user_id = str(ctx.author.id)
         if user_id not in self.portfolios:
             self.portfolios[user_id] = {}
@@ -56,11 +60,15 @@ class Portfolio(commands.Cog):
         summary += f"\n**Total Portfolio Value:** ${total_value:.2f}"
         await ctx.send(summary)
 
+    # TODO implement
     @commands.command(description="Analyze the performance of your portfolio over a given period.")
-    async def portefeuille_rendement(self, ctx, period: str):
+    async def portefeuille_rendement(self, ctx, period: str = None):
         """
         !portefeuille_rendement <period>
         """
+        if period is None:
+            return await show_help(ctx)
+        
         user_id = str(ctx.author.id)
         if user_id not in self.portfolios or not self.portfolios[user_id]:
             await ctx.send("Your portfolio is empty.")
