@@ -1,5 +1,7 @@
 # price.py
 
+import discord
+from discord import app_commands
 from discord.ext import commands
 from utils.errors import show_help
 import requests
@@ -10,7 +12,7 @@ class Price(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Display the current price of any cryptocurrency")
+    @app_commands.command(description="Display the current price of any cryptocurrency")
     async def price(self, ctx, crypto: str = None):
         """
         !price <crypto>
