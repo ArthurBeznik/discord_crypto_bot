@@ -7,6 +7,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
 from utils.errors import show_help
+import logging
+
+logger = logging.getLogger(__name__)
 
 class HistoricalData(commands.Cog):
     def __init__(self, bot):
@@ -17,6 +20,8 @@ class HistoricalData(commands.Cog):
         """
         !graphic <crypto> <period>
         """
+        logger.debug(f"Called graphic with crypto: {crypto} | period: {period} | author: {ctx.author.id}")
+
         if crypto is None or period is None:
             return await show_help(ctx)
 
@@ -32,17 +37,24 @@ class HistoricalData(commands.Cog):
 
         days = period_mapping.get(period.lower())
         if not days:
-            await ctx.send("Invalid period. Use 1d, 1w, 1m, 3m, 6m, or 1y.")
-            return
+            error_message = "Invalid period. Use 1d, 1w, 1m, 3m, 6m, or 1y."
+            logger.error(f"{error_message} Was given: {days}")
+            return await ctx.send(error_message)
+
+        logger.info(f"Fetching historical data for {crypto} over {days} days")
 
         # Fetch historical data
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days={days}"
-        response = requests.get(url)
-        data = response.json()
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+        except requests.RequestException as e:
+            logger.error(f"Error fetching data: {e}")
+            return await ctx.send("Error fetching data. Please try again.")
 
         if "prices" not in data:
-            await ctx.send("Error fetching data. Please try again.")
-            return
+            return await ctx.send("Error fetching data. Please try again.")
 
         # Convert data to DataFrame
         df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
@@ -67,16 +79,19 @@ class HistoricalData(commands.Cog):
 
         # Send the plot to Discord
         file = discord.File(buf, filename='graphic.png')
-        await ctx.send(file=file)
+        logger.info(f"Sending historical price graph for {crypto} over {days} days")
+        return await ctx.send(file=file)
 
     @commands.command(description="Provide detailed historical data in tabular form for analysis.")
     async def history(self, ctx, crypto: str = None, period: str = None):
         """
         !history <crypto> <period>
         """
+        logger.debug(f"Called history with crypto: {crypto} | period: {period} | author: {ctx.author.id}")
+
         if crypto is None or period is None:
             return await show_help(ctx)
-    
+
         # Define the period mapping
         period_mapping = {
             "1d": "1",
@@ -92,14 +107,20 @@ class HistoricalData(commands.Cog):
             await ctx.send("Invalid period. Use 1d, 1w, 1m, 3m, 6m, or 1y.")
             return
 
+        logger.info(f"Fetching historical data for {crypto} over {days} days")
+
         # Fetch historical data
         url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days={days}"
-        response = requests.get(url)
-        data = response.json()
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            data = response.json()
+        except requests.RequestException as e:
+            logger.error(f"Error fetching data: {e}")
+            return await ctx.send("Error fetching data. Please try again.")
 
         if "prices" not in data:
-            await ctx.send("Error fetching data. Please try again.")
-            return
+            return await ctx.send("Error fetching data. Please try again.")
 
         # Convert data to DataFrame
         df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
@@ -112,7 +133,8 @@ class HistoricalData(commands.Cog):
             f"To see more data, please use the command with a longer period."
         )
 
-        await ctx.send(response_message)
+        logger.info(f"Sending historical data table for {crypto} over {days} days")
+        return await ctx.send(response_message)
 
 async def setup(bot):
     await bot.add_cog(HistoricalData(bot))

@@ -2,6 +2,10 @@
 
 import discord
 from discord.ext import commands
+from utils.errors import show_help
+import logging
+
+logger = logging.getLogger(__name__)
 
 o_embed = discord.Embed(color=discord.Color.orange())  # misc
 s_embed = discord.Embed(color=discord.Color.green())  # Success
@@ -29,16 +33,21 @@ class Misc(commands.Cog):
 
 
     @commands.command(description="Test")
-    async def pcog(self, ctx, cog_name):
+    async def pcog(self, ctx, cog_name: str = None):
         """
-        Testing command to list commands in a cog.
+        !pcog <cog_name>
         """
-        print(f"Printing cog: {cog_name}") # ? debug
+        logger.debug(f"Called pcog, cog_name: {cog_name}")
+
+        if cog_name is None:
+            return await show_help(ctx)
+        
         cog = self.bot.get_cog(cog_name)
         if cog:
             commands = cog.get_commands()
             command_names = [c.name for c in commands]
             await ctx.send(f"Commands in cog `{cog_name}`: {', '.join(command_names)}")
+            logger.info("Sent print cog")
         else:
             await ctx.send(f"No cog found with the name `{cog_name}`.")
 

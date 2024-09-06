@@ -1,8 +1,9 @@
 import pytest
 from unittest.mock import MagicMock, patch
 import bot  # Adjust import based on your project structure
-import os
-print(os.getcwd())
+
+# import os
+# print(os.getcwd())
 
 @pytest.fixture
 def mock_channel():

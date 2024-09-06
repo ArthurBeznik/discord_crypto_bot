@@ -1,50 +1,45 @@
 # events.py
 
 import discord
-import discord.ui
+import os
 from discord.ext import commands
+import logging
+from dotenv import load_dotenv
 
-e_embed = discord.Embed(color=discord.Color.red())  # Error
-s_embed = discord.Embed(color=discord.Color.green())  # Success
-o_embed = discord.Embed(color=discord.Color.orange())  # misc
+logger = logging.getLogger(__name__)
+load_dotenv()
+GUILD_ID = os.getenv('DISCORD_GUILD_ID')
 
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'Logged in as {self.bot.user} (ID: {self.bot.user.id})')
-        print('------')
+        """
+        Triggered when the bot is ready.
+        """
+        # await self.bot.tree.sync()  # Register slash commands with Discord
+        logger.info(f"Logged in as {self.bot.user} (ID: {self.bot.user.id})")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """
-        Bot welcomes newcomers and sends them faction join embed.
+        Triggered when a new member joins the server.
         """
-        print("member joined")
-        # await faction_join(member)
-        # await count_members(member)
-
+        logger.info(f"New member {member} joined the server")
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         """
-        Bot farewells
+        Triggered when a member leaves the server.
         """
-        print("member remove")
-        # await self.bot.get_channel(DEPART_CHAN).send(f"Ciao {member}!")
-        # await count_members(member)
-
+        logger.info(f"Member {member} left the server")
 
     @commands.Cog.listener()
     async def on_message(self, message):
         """
-        Bot reacts to message.
-        Delete links.
-        Censures profanity.
-        Only reacts to commands when entered in the bot channel.
+        Triggered when a message is sent in a channel.
         """
         # Avoid responding to the bot's own messages
         if message.author == self.bot.user:
@@ -55,19 +50,23 @@ class Events(commands.Cog):
             try:
                 # Send a private message to the user
                 await message.author.send("C'est un gate ca")
+                logger.info(f"Sent DM to {message.author} in response to 'samulel'")
             except discord.Forbidden:
                 # Handle the case where the bot is not allowed to send DMs
-                print(f"Failed to send DM to {message.author.name}")
-            
-        # if message.author.id == BOT_ID:
-        #     return
-        # await check_badwords(message)
-        # if await check_links(message) is True:
-        #     return
-        # if await check_channel(message) is True:
-        #     return
-        # await log(message)
-        # return await bot.process_commands(message)  # not needed inside a cog
+                logger.error(f"Failed to send DM to {message.author}. DM permissions might be restricted.")
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        """
+        Triggered when an error occurs during command execution.
+        """
+        if isinstance(error, commands.CommandNotFound):
+            await ctx.send("This command does not exist. Please use a valid command.")
+            logger.warning(f"Command not found: {ctx.message.content}")
+        else:
+            # For other errors, log them and send a generic error message
+            logger.error(f"An error occurred: {error}", exc_info=True)
+            await ctx.send("An error occurred while processing your command.")
 
 async def setup(bot):
     await bot.add_cog(Events(bot))

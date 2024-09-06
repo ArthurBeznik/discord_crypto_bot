@@ -1,14 +1,16 @@
 # alerts.py
 
 # TODO task loop => every x minutes?
-# TODO for an alert, does it notify when the treshold is <, > or = ?
+# TODO for an alert, does it notify when the threshold is <, > or = ?
+# TODO fix dict_items size error => DB
 
 from discord.ext import commands, tasks
 from utils.errors import show_help
 import requests
+import logging
 
-# Price alerts
-# ==============================================
+logger = logging.getLogger(__name__)
+
 class Alerts(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -20,14 +22,17 @@ class Alerts(commands.Cog):
         """
         !alert <crypto> <threshold>
         """
+        logger.debug(f"Called alert, crypto {crypto} |  treshold: {threshold} | author: {ctx.author.id}")
+
         if not crypto or not threshold:
             return await show_help(ctx)
         
-        print(f"Setting alert for user: {ctx.author.id} | crypto: {crypto} | treshold: {threshold}") # ? debug
         user_id = ctx.author.id
         if user_id not in self.alerts:
             self.alerts[user_id] = {}
+
         self.alerts[user_id][crypto] = threshold
+        logger.info(f"Setting alert for user: {user_id} | crypto: {crypto} | threshold: {threshold}")
         await ctx.send(f"Price alert set for {crypto} at ${threshold:.2f}.")
 
     @commands.command(description="Cancel a previously set price alert.")
@@ -35,21 +40,25 @@ class Alerts(commands.Cog):
         """
         !cancel_alert <crypto>
         """
+        logger.debug(f"Called cancel_alert, crypto: {crypto} | author: {ctx.author.id}")
+
         if not crypto:
             return await show_help(ctx)
-        
-        print(f"Cancelling alert for user: {ctx.author.id} | crypto: {crypto}") # ? debug
+
         user_id = ctx.author.id
         if user_id in self.alerts and crypto in self.alerts[user_id]:
             del self.alerts[user_id][crypto]
+            logger.info(f"Cancelling alert for user: {user_id} | crypto: {crypto}")
             await ctx.send(f"Price alert for {crypto} has been canceled.")
         else:
             await ctx.send(f"No alert found for {crypto}.")
 
-    # ! Set the number of minutes
-    @tasks.loop(minutes=1)  # Check every 5 minutes 
+    # TODO fix dict_items size error
+    # ! Set the number of minutes for the task loop
+    @tasks.loop(minutes=1)  # Check every 1 minute
     async def check_alerts(self):
-        # print(f"Current alerts: {self.alerts.items()}") # ? debug
+        logger.debug(f"Current alerts: {self.alerts.items()}")
+        
         for user_id, alerts in self.alerts.items():
             for crypto, threshold in alerts.items():
                 url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd"
@@ -60,12 +69,12 @@ class Alerts(commands.Cog):
                     if price >= threshold:
                         user = self.bot.get_user(user_id)
                         if user:
-                            print(f"Sending alert to user: {user_id}") # ? debug
+                            logger.info(f"Sending alert to user: {user_id}")
                             await user.send(f"Alert: The price of {crypto} has reached ${price:.2f}.")
                         # Remove the alert after notifying
                         del self.alerts[user_id][crypto]
                 else:
-                    print("Error fetching price for alert check.")
+                    logger.error("Error fetching price for alert check.")
 
 async def setup(bot):
     await bot.add_cog(Alerts(bot))
