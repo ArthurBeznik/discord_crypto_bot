@@ -1,57 +1,43 @@
-# price.py
-
 import discord
-from discord import app_commands
+import os
 from discord.ext import commands
-from utils.errors import show_help
+from discord import app_commands
+import logging
 import requests
+from dotenv import load_dotenv
 
-# Real-time price commands
-# ==============================================
+load_dotenv()
+GUILD_ID = os.getenv('DISCORD_GUILD_ID')
+BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+MY_GUILD = discord.Object(id=GUILD_ID)
+
+logger = logging.getLogger(__name__)
+
 class Price(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @app_commands.command(description="Display the current price of any cryptocurrency")
-    async def price(self, ctx, crypto: str = None):
+    @app_commands.command(description="Display the current price of one or multiple cryptocurrencies")
+    @app_commands.rename(cryptos="crypto")
+    @app_commands.describe(cryptos='Name of the crypto')
+    async def price(self, interaction: discord.Interaction, cryptos: str):
         """
-        !price <crypto>
+        /price <crypto> [<crypto1> <crypto2> ...]
         """
-        if crypto is None:
-            return await show_help(ctx)
         
-        print(f'Sending price for {crypto}') # ? debug
-        
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto}&vs_currencies=usd"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            price = data.get(crypto, {}).get("usd", "N/A")
-            await ctx.send(f"The current price of {crypto} is ${price}")
-        else:
-            await ctx.send("Error fetching the price. Please try again.")
-
-    @commands.command(description="Display the current price of several cryptocurrencies at once.")
-    async def mult_price(self, ctx, *cryptos: str):
-        """
-        !mult_price <crypto1> <crypto2> ...
-        """
-        if not cryptos:
-            return await show_help(ctx)
-        
-        print(f'Sending mult prices {cryptos}') # ? debug
+        logger.info(f'Input crypto: {cryptos}') # ? debug
         
         crypto_list = ','.join(cryptos)
-        # print(crypto_list) # ? debug
+        logger.info(crypto_list)
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_list}&vs_currencies=usd"
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
             prices = {crypto: data.get(crypto, {}).get("usd", "N/A") for crypto in cryptos}
             response_message = "\n".join([f"The current price of {crypto} is ${prices[crypto]}" for crypto in cryptos])
-            await ctx.send(response_message)
+            await interaction.response.send_message(response_message)
         else:
-            await ctx.send("Error fetching the prices. Please try again.")
+            await interaction.response.send_message("Error fetching the prices. Please try again.")
 
 async def setup(bot):
     await bot.add_cog(Price(bot))

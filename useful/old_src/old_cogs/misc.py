@@ -1,4 +1,3 @@
-
 # misc.py
 
 import discord

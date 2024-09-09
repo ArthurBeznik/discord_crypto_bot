@@ -25,7 +25,6 @@ MY_GUILD = discord.Object(id=GUILD_ID)
 
 # intents = discord.Intents.default()
 intents=discord.Intents(
-        # kwargs found at https://docs.pycord.dev/en/master/api.html?highlight=discord%20intents#discord.Intents
         guilds=True, members=True, messages=True, reactions=True,
         presences=True, message_content=True,
     )
@@ -41,7 +40,7 @@ async def load_cogs():
     """
     Dynamically loads all cogs from the `cogs` folder.
     """
-    for filename in os.listdir("tree_version/src/cogs"):
+    for filename in os.listdir("src/cogs"):
         if filename.endswith(".py"):
             try:
                 await bot.load_extension(f"cogs.{filename[:-3]}")
@@ -53,7 +52,7 @@ async def unload_cogs():
     """
     Dynamically loads all cogs from the `cogs` folder.
     """
-    for filename in os.listdir("tree_version/src/cogs"):
+    for filename in os.listdir("src/cogs"):
         if filename.endswith(".py"):
             try:
                 await bot.unload_extension(f"cogs.{filename[:-3]}")
@@ -62,7 +61,7 @@ async def unload_cogs():
                 logger.error(f"Failed to unload extension {filename}: {e}")
 
 async def remove_cogs():
-    for filename in os.listdir("tree_version/src/cogs"):
+    for filename in os.listdir("src/cogs"):
         if filename.endswith(".py"):
             try:
                 await bot.remove_cog(f"cogs.{filename[:-3]}")
