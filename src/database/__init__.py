@@ -1,38 +1,46 @@
-import aiosqlite
+import psycopg2
+import os
+from dotenv import load_dotenv
 import logging
 
 logger = logging.getLogger(__name__)
 
+load_dotenv()
+
+logger.info(f"DB_URL: {os.getenv('DATABASE_URL')}")
+
 class DatabaseManager:
-    def __init__(self, db_path='src/database/database.db'):
-        self.db_path = db_path
+    def __init__(self):
+        self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
+        self.cursor = self.conn.cursor()
 
-    async def initialize(self):
+    def create_alert_table(self):
+        query = """
+        CREATE TABLE IF NOT EXISTS alerts (
+            id SERIAL PRIMARY KEY,
+            user_id BIGINT NOT NULL,
+            crypto VARCHAR(100) NOT NULL,
+            threshold FLOAT NOT NULL
+        );
         """
-        Initialize the database and create tables if they don't exist.
-        """
-        async with aiosqlite.connect(self.db_path) as db:
-            with open('src/database/schema.sql') as file:
-                await db.executescript(file.read())
-            await db.commit()
+        self.cursor.execute(query)
+        self.conn.commit()
 
-    async def execute(self, query, params=None):
-        """
-        Execute a query without returning results.
-        """
-        async with aiosqlite.connect(self.db_path) as db:
-            async with db.execute(query, params or ()) as cursor:
-                await db.commit()
+    def add_alert(self, user_id, crypto, threshold):
+        query = "INSERT INTO alerts (user_id, crypto, threshold) VALUES (%s, %s, %s)"
+        self.cursor.execute(query, (user_id, crypto, threshold))
+        self.conn.commit()
 
-    async def fetchall(self, query, params=None):
-        """Fetch all rows from a query."""
-        async with aiosqlite.connect(self.db_path) as db:
-            async with db.execute(query, params or ()) as cursor:
-                return await cursor.fetchall()
+    def remove_alert(self, user_id, crypto):
+        query = "DELETE FROM alerts WHERE user_id = %s AND crypto = %s"
+        self.cursor.execute(query, (user_id, crypto))
+        self.conn.commit()
 
-    async def fetchone(self, query, params=None):
-        """Fetch a single row from a query."""
-        async with aiosqlite.connect(self.db_path) as db:
-            async with db.execute(query, params or ()) as cursor:
-                return await cursor.fetchone()
+    def get_alerts(self):
+        query = "SELECT * FROM alerts"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
+    def close(self):
+        self.cursor.close()
+        self.conn.close()

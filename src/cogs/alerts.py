@@ -14,10 +14,11 @@ class Alert(commands.GroupCog, name="alert"):
         self.db = bot.db  # Access the DatabaseManager instance from the bot
         # self.check_alerts.start()  # Start the task loop for checking alerts
 
-    @commands.Cog.listener()
-    async def on_ready(self):
+    # @commands.Cog.listener()
+    # async def on_ready(self):
         # Ensure the database is initialized when the bot is ready
-        await self.db.initialize()
+        # await self.db.initialize()
+        # await self.db.create_alert_table()
 
     @tasks.loop(minutes=1)  # Check every 1 minute
     async def check_alerts(self):
@@ -25,8 +26,9 @@ class Alert(commands.GroupCog, name="alert"):
         
         try:
             # Fetch all alerts from the database
-            alerts = await self.db.fetchall('SELECT user_id, crypto, threshold FROM alerts')
-            
+            # alerts = await self.db.fetchall('SELECT user_id, crypto, threshold FROM alerts')
+            alerts = []
+
             # Organize alerts by user_id
             user_alerts = {}
             for user_id, crypto, threshold in alerts:
@@ -65,11 +67,12 @@ class Alert(commands.GroupCog, name="alert"):
     @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
     async def create_alert(self, interaction: discord.Interaction, crypto: str, threshold: float):
         try:
-            await self.db.execute(
-                'INSERT INTO alerts (user_id, crypto, threshold) VALUES (?, ?, ?)',
-                (interaction.user.id, crypto, threshold)
-            )
-            await interaction.response.send_message(f'Alert set for {crypto} at {threshold}')
+            # Defer the interaction in case database processing takes time
+            await interaction.response.defer(thinking=True)
+            self.db.add_alert(interaction.user.id, crypto, threshold)
+            # Send the final message once the alert is successfully added
+            await interaction.followup.send(f'Alert set for {crypto} at {threshold}')
+            # await interaction.response.send_message(f'Alert set for {crypto} at {threshold}')
         except Exception as e:
             await interaction.response.send_message(f'Failed to set alert: {e}')
             logger.error(f'Error creating alert: {e}')
@@ -78,10 +81,10 @@ class Alert(commands.GroupCog, name="alert"):
     @app_commands.describe(crypto='The cryptocurrency of the alert to cancel.')
     async def cancel_alert(self, interaction: discord.Interaction, crypto: str):
         try:
-            await self.db.execute(
-                'DELETE FROM alerts WHERE user_id = ? AND crypto = ?',
-                (interaction.user.id, crypto)
-            )
+            # await self.db.execute(
+            #     'DELETE FROM alerts WHERE user_id = ? AND crypto = ?',
+            #     (interaction.user.id, crypto)
+            # )
             await interaction.response.send_message(f'Alert for {crypto} has been canceled.')
         except Exception as e:
             logger.error(f'Error canceling alert: {e}')
@@ -91,10 +94,11 @@ class Alert(commands.GroupCog, name="alert"):
     async def show_alerts(self, interaction: discord.Interaction):
         logger.info(f"Dislaying alerts for {interaction.user.name}")
         try:
-            alerts = await self.db.fetchall(
-                'SELECT crypto, threshold FROM alerts WHERE user_id = ?',
-                (interaction.user.id,)
-            )
+            # alerts = await self.db.fetchall(
+            #     'SELECT crypto, threshold FROM alerts WHERE user_id = ?',
+            #     (interaction.user.id,)
+            # )
+            alerts = []
             if alerts:
                 alert_list = '\n'.join([f'{crypto}: {threshold}' for crypto, threshold in alerts])
                 await interaction.response.send_message(f'Your alerts:\n{alert_list}')
@@ -107,5 +111,6 @@ class Alert(commands.GroupCog, name="alert"):
 async def setup(bot):
     # Ensure the DatabaseManager instance is available in the bot before loading the cog
     bot.db = DatabaseManager()  # Initialize DatabaseManager here if not already initialized
-    await bot.db.initialize()  # Initialize database tables
+    # await bot.db.initialize()  # Initialize database tables
+    bot.db.create_alert_table()
     await bot.add_cog(Alert(bot))

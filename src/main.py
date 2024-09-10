@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import logging
 
-from database import DatabaseManager
+from database.__init__ import DatabaseManager
 from utils.errors import handle_check_failure
 
 logging.basicConfig(
@@ -107,7 +107,7 @@ async def on_ready():
 
     # Init DB
     bot.db = DatabaseManager()
-    await bot.db.initialize()
+    bot.db.create_alert_table()
 
     # Bot is ready
     logger.info(f"Logged in as {bot.user}")
