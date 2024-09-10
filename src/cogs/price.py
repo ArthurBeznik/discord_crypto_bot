@@ -7,7 +7,7 @@ import logging
 import requests
 
 from utils.embeds import error_embed, success_embed
-from utils.list import get_crypto_autocomplete_choices, load_crypto_list
+from utils.list import get_crypto_autocomplete_choices
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +15,6 @@ class Price(commands.GroupCog, name="price"):
     def __init__(self, bot):
         self.bot = bot
         self.crypto_map = bot.crypto_map
-        # self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
-        super().__init__()
 
     @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
     @app_commands.rename(crypto="crypto")

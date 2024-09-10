@@ -41,7 +41,7 @@ class Misc(commands.Cog):
     @app_commands.command(name="coffee", description="Mmmh, hot coffee")
     async def coffee(self, interaction: discord.Interaction):
         """
-        /coffee
+        Coffee
         """
         o_embed.clear_fields()
         o_embed.set_image(url="https://c.tenor.com/QrDVGQ9cnsMAAAAC/coffee-creamer.gif")
