@@ -6,6 +6,9 @@ import os
 from dotenv import load_dotenv
 import logging
 
+from database import DatabaseManager
+from utils.errors import handle_check_failure
+
 logging.basicConfig(
     level=logging.INFO,
     # level=logging.DEBUG,
@@ -97,11 +100,21 @@ async def on_ready():
     # Reload cogs and sync tree
     await load_cogs()
     await sync_tree()
-    logger.info(bot.tree.get_commands(guild=MY_GUILD))
-    await inspect_cog('Misc')
+    # logger.info(bot.tree.get_commands(guild=MY_GUILD))
+
+    # Inspect cog
+    # await inspect_cog('Misc')
+
+    # Init DB
+    bot.db = DatabaseManager()
+    await bot.db.initialize()
 
     # Bot is ready
     logger.info(f"Logged in as {bot.user}")
 
+@bot.event
+async def on_command_error(interaction: discord.Interaction, error: Exception):
+    logger.error(f"An error occurred: {error}", exc_info=True)
+    await handle_check_failure(interaction, error)
 
 bot.run(BOT_TOKEN)

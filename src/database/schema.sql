@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `alerts` (
+    `id` SERIAL PRIMARY KEY,
+    `user_id` BIGINT NOT NULL,
+    `crypto` VARCHAR(50) NOT NULL,
+    `threshold` DECIMAL NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

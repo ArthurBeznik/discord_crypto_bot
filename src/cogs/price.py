@@ -1,43 +1,118 @@
+# price.py
+
 import discord
-import os
 from discord.ext import commands
 from discord import app_commands
 import logging
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-GUILD_ID = os.getenv('DISCORD_GUILD_ID')
-BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-MY_GUILD = discord.Object(id=GUILD_ID)
+from utils.list import get_crypto_autocomplete_choices, load_crypto_list
 
 logger = logging.getLogger(__name__)
 
-class Price(commands.Cog):
+class Price(commands.GroupCog, name="price"):
     def __init__(self, bot):
         self.bot = bot
+        self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
+        super().__init__()
 
-    @app_commands.command(description="Display the current price of one or multiple cryptocurrencies")
-    @app_commands.rename(cryptos="crypto")
-    @app_commands.describe(cryptos='Name of the crypto')
-    async def price(self, interaction: discord.Interaction, cryptos: str):
+    @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
+    @app_commands.rename(crypto="crypto")
+    @app_commands.describe(crypto='Name or symbol of the cryptocurrency')
+    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
+    async def price_single(self, interaction: discord.Interaction, crypto: str):
         """
-        /price <crypto> [<crypto1> <crypto2> ...]
+        /price single <crypto>
+        Fetches and returns the price of a single cryptocurrency.
         """
-        
-        logger.info(f'Input crypto: {cryptos}') # ? debug
-        
-        crypto_list = ','.join(cryptos)
-        logger.info(crypto_list)
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_list}&vs_currencies=usd"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            prices = {crypto: data.get(crypto, {}).get("usd", "N/A") for crypto in cryptos}
-            response_message = "\n".join([f"The current price of {crypto} is ${prices[crypto]}" for crypto in cryptos])
-            await interaction.response.send_message(response_message)
-        else:
-            await interaction.response.send_message("Error fetching the prices. Please try again.")
+        try:
+            logger.info(f'Input crypto: {crypto}')  # Debug log
+
+            # Resolve the cryptocurrency
+            crypto_id = self.crypto_map.get(crypto.lower())
+            if not crypto_id:
+                logger.warning(f"Unrecognized cryptocurrency: {crypto}")
+                await interaction.response.send_message(f"Unrecognized cryptocurrency: {crypto}")
+                return
+
+            # Fetch the price for the single crypto
+            url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_id}&vs_currencies=usd"
+            response = requests.get(url)
+
+            if response.status_code == 200:
+                data = response.json()
+                price_message = f"The current price of {crypto} is ${data.get(crypto_id, {}).get('usd', 'N/A')}"
+                logger.info(f"Price fetched successfully for {crypto}: ${data.get(crypto_id, {}).get('usd', 'N/A')}")
+                await interaction.response.send_message(price_message)
+            else:
+                logger.error(f"Error fetching prices for {crypto}. Status code: {response.status_code}")
+                await interaction.response.send_message("Error fetching the prices. Please try again.")
+
+        except Exception as e:
+            logger.error(f"Exception in price_single: {str(e)}")
+            await interaction.response.send_message("An error occurred while fetching the price. Please try again later.")
+
+    @app_commands.command(name="multiple", description="Get the price of multiple cryptocurrencies")
+    @app_commands.rename(cryptos="cryptos")
+    @app_commands.describe(cryptos='Names or symbols of the cryptocurrencies, separated by spaces')
+    async def price_multiple(self, interaction: discord.Interaction, cryptos: str):
+        """
+        /price multiple <crypto1> <crypto2> ...
+        Fetches and returns the price of multiple cryptocurrencies, shows errors for unrecognized ones.
+        """
+        try:
+            logger.info(f'Input cryptos: {cryptos}')  # Debug log
+
+            # Split the input by spaces
+            crypto_list_input = cryptos.split()
+            resolved_cryptos = []
+            unrecognized_cryptos = []
+
+            # Resolve each cryptocurrency
+            for crypto in crypto_list_input:
+                crypto_id = self.crypto_map.get(crypto.lower())
+                if crypto_id:
+                    resolved_cryptos.append((crypto, crypto_id))  # Store both the input and resolved id
+                else:
+                    unrecognized_cryptos.append(crypto)  # Store unrecognized crypto
+
+            # If no valid cryptos were found, return the error
+            if not resolved_cryptos and unrecognized_cryptos:
+                await interaction.response.send_message(f"Unrecognized cryptocurrencies: {', '.join(unrecognized_cryptos)}")
+                logger.warning(f"All provided cryptocurrencies were unrecognized: {', '.join(unrecognized_cryptos)}")
+                return
+
+            # Fetch the prices for the resolved cryptos
+            crypto_query = ','.join([crypto_id for _, crypto_id in resolved_cryptos])
+            url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_query}&vs_currencies=usd"
+            response = requests.get(url)
+
+            if response.status_code == 200:
+                data = response.json()
+                response_message = []
+
+                # Construct the message for recognized cryptos
+                for crypto, crypto_id in resolved_cryptos:
+                    price = data.get(crypto_id, {}).get('usd', 'N/A')
+                    response_message.append(f"The current price of {crypto} is ${price}")
+                    logger.info(f"Price fetched successfully for {crypto}: ${price}")
+
+                # Construct the message for unrecognized cryptos (if any)
+                if unrecognized_cryptos:
+                    unrecognized_message = f"Unrecognized cryptocurrencies: {', '.join(unrecognized_cryptos)}"
+                    response_message.append(unrecognized_message)
+                    logger.warning(f"Unrecognized cryptocurrencies: {', '.join(unrecognized_cryptos)}")
+
+                # Send the final message
+                await interaction.response.send_message("\n".join(response_message))
+
+            else:
+                logger.error(f"Error fetching prices for multiple cryptos. Status code: {response.status_code}")
+                await interaction.response.send_message("Error fetching the prices. Please try again.")
+
+        except Exception as e:
+            logger.error(f"Exception in price_multiple: {str(e)}")
+            await interaction.response.send_message("An error occurred while fetching the prices. Please try again later.")
 
 async def setup(bot):
-    await bot.add_cog(Price(bot))
+    await bot.add_cog(Price(bot))  # Adds the Price cog to the bot
