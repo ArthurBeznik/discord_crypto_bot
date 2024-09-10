@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 # Fetch admin IDs from environment variable
 ADMIN_IDS = set(int(id) for id in os.getenv('ADMIN_IDS', '').split(',') if id)
-# logger.info(f"ADMIN_IDS: {ADMIN_IDS}") # ? debug
+logger.info(f"ADMIN_IDS: {ADMIN_IDS}") # ? debug
 
 def is_admin():
     # logger.info("is_admin called") # ? debug
