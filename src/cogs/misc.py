@@ -31,7 +31,7 @@ class Misc(commands.Cog):
     @app_commands.command(name="flemme", description="La flemme")
     async def flemme(self, interaction: discord.Interaction):
         """
-        Says flemme.
+        Flemme
         """
         o_embed.clear_fields()
         o_embed.set_image(url="https://media1.tenor.com/m/nXNHCwBK_M4AAAAC/lazy-cat.gif")

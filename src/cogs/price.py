@@ -6,6 +6,7 @@ from discord import app_commands
 import logging
 import requests
 
+from utils.embeds import error_embed, success_embed
 from utils.list import get_crypto_autocomplete_choices, load_crypto_list
 
 logger = logging.getLogger(__name__)
@@ -13,7 +14,8 @@ logger = logging.getLogger(__name__)
 class Price(commands.GroupCog, name="price"):
     def __init__(self, bot):
         self.bot = bot
-        self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
+        self.crypto_map = bot.crypto_map
+        # self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
         super().__init__()
 
     @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
@@ -31,8 +33,10 @@ class Price(commands.GroupCog, name="price"):
             # Resolve the cryptocurrency
             crypto_id = self.crypto_map.get(crypto.lower())
             if not crypto_id:
-                logger.warning(f"Unrecognized cryptocurrency: {crypto}")
-                await interaction.response.send_message(f"Unrecognized cryptocurrency: {crypto}")
+                unrecognized_message = f"Unrecognized cryptocurrency: {crypto}"
+                logger.warning(unrecognized_message)
+                embed = error_embed('Unrecognized cryptocurrency', crypto)
+                await interaction.response.send_message(embed=embed)
                 return
 
             # Fetch the price for the single crypto
@@ -43,7 +47,8 @@ class Price(commands.GroupCog, name="price"):
                 data = response.json()
                 price_message = f"The current price of {crypto} is ${data.get(crypto_id, {}).get('usd', 'N/A')}"
                 logger.info(f"Price fetched successfully for {crypto}: ${data.get(crypto_id, {}).get('usd', 'N/A')}")
-                await interaction.response.send_message(price_message)
+                embed = success_embed(price_message, '')
+                await interaction.response.send_message(embed=embed)
             else:
                 logger.error(f"Error fetching prices for {crypto}. Status code: {response.status_code}")
                 await interaction.response.send_message("Error fetching the prices. Please try again.")

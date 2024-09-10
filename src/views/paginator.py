@@ -20,7 +20,7 @@ class CryptoPaginator(discord.ui.View):
 
     # Function to create the embed for the current page
     def create_embed(self):
-        embed = discord.Embed(title="Available Cryptocurrencies", color=0x00ff00)
+        embed = discord.Embed(title="Available Cryptocurrencies", color=0x00A300)
         start_index = self.current_page * self.per_page
         end_index = start_index + self.per_page
         cryptos_on_page = self.cryptos[start_index:end_index]

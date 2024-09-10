@@ -6,7 +6,6 @@ import logging
 from dotenv import load_dotenv
 
 from utils.checks import is_admin
-# from utils.errors import handle_check_failure
 
 load_dotenv()
 GUILD_ID = os.getenv('DISCORD_GUILD_ID')
@@ -18,11 +17,6 @@ logger = logging.getLogger(__name__)
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    # @admin_only_command.error
-    # async def adminonly_error(self, interaction: discord.Interaction, error):
-    #     if isinstance(error, discord.app_commands.errors.CheckFailure):
-    #         await interaction.response.send_message("You do not have permission to use this command.", ephemeral=True)
 
     @app_commands.command(name='adminonly', description='A command only accessible by admins.')
     @is_admin()
@@ -58,7 +52,7 @@ class Admin(commands.Cog):
             await self.bot.tree.sync(guild=MY_GUILD)
             logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
             await interaction.response.send_message(f"Commands synced to guild {MY_GUILD.id}")
-            logger.info(f"Synced commands to guild: {MY_GUILD}")
+            logger.info(f"Synced commands to guild: {MY_GUILD.id}")
         except Exception as e:
             await interaction.response.send_message(f"Error syncing commands: {e}")
             logger.error(f"Failed to sync commands: {e}")
@@ -72,11 +66,10 @@ class Admin(commands.Cog):
         Slash command to remove a command.
         """
         try:
-            logger.info('Remove 0', self.bot.tree.get_commands(guild=MY_GUILD))
-            # self.bot.tree.remove_command(command_name)
-            # self.bot.remove_command(command_name)
+            logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
+            self.bot.tree.remove_command(command_name)
             await self.bot.tree.sync(guild=MY_GUILD)
-            logger.info('Remove 1', self.bot.tree.get_commands(guild=MY_GUILD))
+            logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
             await interaction.response.send_message(f"Commands synced to guild {MY_GUILD.id}")
             logger.info(f"Removed command {command_name} from guild: {MY_GUILD}")
         except Exception as e:
@@ -93,7 +86,6 @@ class Admin(commands.Cog):
             logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
             self.bot.tree.clear_commands(guild=MY_GUILD)
             await self.bot.tree.sync(guild=MY_GUILD)
-            logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
             logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
             await interaction.response.send_message(f"Commands synced to guild {MY_GUILD.id}")
             logger.info(f"Cleared all commands from guild: {MY_GUILD}")

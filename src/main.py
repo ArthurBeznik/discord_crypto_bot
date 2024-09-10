@@ -1,5 +1,3 @@
-# main.py
-
 import discord
 from discord.ext import commands
 import os
@@ -7,12 +5,14 @@ from dotenv import load_dotenv
 import logging
 
 from database.__init__ import DatabaseManager
+from utils.list import load_crypto_list
 from utils.errors import handle_check_failure
 
+# Setup logging
 logging.basicConfig(
     level=logging.INFO,
-    # level=logging.DEBUG,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s', datefmt='%H:%M:%S', # without date
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    datefmt='%H:%M:%S',
     handlers=[
         logging.FileHandler("bot.log"),
         logging.StreamHandler()
@@ -21,100 +21,89 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+# Load environment variables
 load_dotenv()
-GUILD_ID = os.getenv('DISCORD_GUILD_ID')
-BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-MY_GUILD = discord.Object(id=GUILD_ID)
 
-# intents = discord.Intents.default()
-intents=discord.Intents(
-        guilds=True, members=True, messages=True, reactions=True,
-        presences=True, message_content=True,
-    )
+# Define intents
+intents = discord.Intents(
+    guilds=True, members=True, messages=True, reactions=True,
+    presences=True, message_content=True
+)
 
-bot = commands.Bot(command_prefix="/", intents=intents)
+class CryptoBot(commands.Bot):
+    def __init__(self) -> None:
+        super().__init__(command_prefix="/", intents=intents, help_command=None)
+        self.db = None
+        self.crypto_map = load_crypto_list()
 
-async def inspect_cog(cog_name: str):
-    cog = bot.get_cog(cog_name)
-    commands = cog.get_app_commands()
-    logger.info([c.name for c in commands])
+    async def setup_hook(self) -> None:
+        """
+        This method is called when the bot starts up.
+        """
+        # Initialize the database
+        await self.init_db()
 
-async def load_cogs():
-    """
-    Dynamically loads all cogs from the `cogs` folder.
-    """
-    for filename in os.listdir("src/cogs"):
-        if filename.endswith(".py"):
-            try:
-                await bot.load_extension(f"cogs.{filename[:-3]}")
-                logger.info(f"Loaded extension: {filename}")
-            except Exception as e:
-                logger.error(f"Failed to load extension {filename}: {e}")
+        # Load cogs and sync the tree
+        await self.load_cogs()
+        await self.sync_tree()
 
-async def unload_cogs():
-    """
-    Dynamically loads all cogs from the `cogs` folder.
-    """
-    for filename in os.listdir("src/cogs"):
-        if filename.endswith(".py"):
-            try:
-                await bot.unload_extension(f"cogs.{filename[:-3]}")
-                logger.info(f"Unloaded extension: {filename}")
-            except Exception as e:
-                logger.error(f"Failed to unload extension {filename}: {e}")
+    async def init_db(self) -> None:
+        """
+        Initialize the database connection and ensure tables are created.
+        """
+        self.db = DatabaseManager()
+        self.db.initialize()  # Ensure tables are created
 
-async def remove_cogs():
-    for filename in os.listdir("src/cogs"):
-        if filename.endswith(".py"):
-            try:
-                await bot.remove_cog(f"cogs.{filename[:-3]}")
-                logger.info(f"Removed extension: {filename}")
-            except Exception as e:
-                logger.error(f"Failed to remove extension {filename}: {e}")
+    async def load_cogs(self) -> None:
+        """
+        Dynamically loads all cogs from the `cogs` folder.
+        """
+        for filename in os.listdir("src/cogs"):
+            if filename.endswith(".py"):
+                try:
+                    await self.load_extension(f"cogs.{filename[:-3]}")
+                    logger.info(f"Loaded extension: {filename}")
+                except Exception as e:
+                    logger.error(f"Failed to load extension {filename}: {e}")
 
-async def clear_commands():
-    bot.tree.clear_commands(guild=MY_GUILD)
-    bot.recursively_remove_all_commands()
-    await bot.tree.sync(guild=MY_GUILD)
+    async def sync_tree(self) -> None:
+        """
+        Sync the command tree with the guild.
+        """
+        guild = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
+        self.tree.copy_global_to(guild=guild)
+        await self.tree.sync(guild=guild)
 
-async def sync_tree():
-    bot.tree.copy_global_to(guild=MY_GUILD)
-    await bot.tree.sync(guild=MY_GUILD)
+    async def on_ready(self) -> None:
+        """
+        Event called when the bot is ready.
+        """
+        # Bot is ready
+        logger.info(f"Logged in as {self.user}")
 
-@bot.event
-async def on_ready():
-    # # Load cogs and sync tree
-    # await load_cogs()
-    # bot.tree.copy_global_to(guild=MY_GUILD)
-    # await bot.tree.sync(guild=MY_GUILD)
-    # logger.info(bot.tree.get_commands(guild=MY_GUILD))
+    async def on_app_command_completion(self, interaction: discord.Interaction, command) -> None:
+        """
+        Event called when a command is successfully executed.
+        """
+        full_command_name = interaction.command.name
+        split = full_command_name.split(" ")
+        executed_command = str(split[0])
+        if interaction.guild:
+            logger.info(
+                f"Executed command: {executed_command} in {interaction.guild.name} (ID: {interaction.guild.id}) by {interaction.user.name} (ID: {interaction.user.id})"
+            )
+        else:
+            logger.info(
+                f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs"
+            )
 
-    # # Clear commands, remove cogs, unload cogs and sync tree
-    # await clear_commands()
-    # await remove_cogs()
-    # await unload_cogs()
-    # bot.tree.copy_global_to(guild=MY_GUILD)
-    # await bot.tree.sync(guild=MY_GUILD)
-    # logger.info(bot.tree.get_commands(guild=MY_GUILD))
 
-    # Reload cogs and sync tree
-    await load_cogs()
-    await sync_tree()
-    # logger.info(bot.tree.get_commands(guild=MY_GUILD))
+# Create bot instance and run it
+bot = CryptoBot()
 
-    # Inspect cog
-    # await inspect_cog('Misc')
-
-    # Init DB
-    bot.db = DatabaseManager()
-    bot.db.create_alert_table()
-
-    # Bot is ready
-    logger.info(f"Logged in as {bot.user}")
-
-@bot.event
-async def on_command_error(interaction: discord.Interaction, error: Exception):
-    logger.error(f"An error occurred: {error}", exc_info=True)
+@bot.tree.error
+async def on_app_command_error(interaction: discord.Interaction, error: discord.app_commands.AppCommandError) -> None:
+    logger.error(f"Error on command: {interaction.command.name}")
     await handle_check_failure(interaction, error)
 
-bot.run(BOT_TOKEN)
+bot.run(os.getenv('DISCORD_BOT_TOKEN'))

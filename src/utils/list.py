@@ -22,7 +22,7 @@ def load_crypto_list():
             crypto_map[crypto['id']] = crypto['id']
             crypto_map[crypto['name'].lower()] = crypto['id']
             crypto_map[crypto['symbol'].lower()] = crypto['id']
-        # logger.info(f"Loaded {len(cryptos)} cryptocurrencies.")
+        logger.info(f"Loaded {len(cryptos)} cryptocurrencies.")
         # logger.info(f"Data: {cryptos}") # ? debug
     else:
         logger.error(f"Failed to load cryptocurrencies. Status code: {response.status_code}")
@@ -33,7 +33,7 @@ async def get_crypto_autocomplete_choices(interaction: discord.Interaction, inpu
     """
     Return a list of autocomplete choices based on the last word in the input.
     """
-    logger.info(f"input_value: {input_value}")
+    # logger.info(f"input_value: {input_value}") # ? debug
 
     if not input_value.strip():
         return []

@@ -7,24 +7,19 @@ logger = logging.getLogger(__name__)
 
 load_dotenv()
 
-logger.info(f"DB_URL: {os.getenv('DATABASE_URL')}")
-
 class DatabaseManager:
     def __init__(self):
         self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         self.cursor = self.conn.cursor()
 
-    def create_alert_table(self):
-        query = """
-        CREATE TABLE IF NOT EXISTS alerts (
-            id SERIAL PRIMARY KEY,
-            user_id BIGINT NOT NULL,
-            crypto VARCHAR(100) NOT NULL,
-            threshold FLOAT NOT NULL
-        );
+    def initialize(self):
         """
-        self.cursor.execute(query)
-        self.conn.commit()
+        Initialize the database and create tables from schema.sql.
+        """
+        with open('src/database/schema.sql', 'r') as schema_file:
+            schema = schema_file.read()
+            self.cursor.execute(schema)
+            self.conn.commit()
 
     def add_alert(self, user_id, crypto, threshold):
         query = "INSERT INTO alerts (user_id, crypto, threshold) VALUES (%s, %s, %s)"
@@ -37,7 +32,7 @@ class DatabaseManager:
         self.conn.commit()
 
     def get_alerts(self):
-        query = "SELECT * FROM alerts"
+        query = "SELECT user_id, crypto, threshold FROM alerts"
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
