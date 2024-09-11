@@ -6,11 +6,11 @@
 import discord
 import logging
 
-from utils.crypto_data import load_crypto_list
+from utils.crypto_data import load_crypto_map
 
 logger = logging.getLogger(__name__)
 
-crypto_map = load_crypto_list()
+crypto_map = load_crypto_map()
 
 async def get_crypto_autocomplete_choices(interaction: discord.Interaction, input_value: str):
     """_summary_

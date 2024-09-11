@@ -62,9 +62,13 @@ class Alert(commands.GroupCog, name="alert"):
     @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
     async def create_alert(self, interaction: discord.Interaction, crypto: str, threshold: float):
         try:
+            # Resolve the cryptocurrency
+            crypto_id = self.bot.crypto_map.get(crypto.lower())
+            logger.info(f"Resolved crypto: {crypto_id}")
+
             await interaction.response.defer(thinking=True)
-            self.db.add_alert(interaction.user.id, crypto, threshold)
-            await interaction.followup.send(f'Alert set for {crypto} at ${threshold:.2f}')
+            self.db.add_alert(interaction.user.id, crypto_id, threshold)
+            await interaction.followup.send(f'Alert set for {crypto_id} at ${threshold:.2f}')
         except Exception as e:
             logger.error(f'Error creating alert: {e}')
             await interaction.followup.send(f'Failed to set alert: {e}')
@@ -73,9 +77,13 @@ class Alert(commands.GroupCog, name="alert"):
     @app_commands.describe(crypto='The cryptocurrency of the alert to cancel.')
     async def cancel_alert(self, interaction: discord.Interaction, crypto: str):
         try:
+            # Resolve the cryptocurrency
+            crypto_id = self.bot.crypto_map.get(crypto.lower())
+            logger.info(f"Resolved crypto: {crypto_id}")
+
             await interaction.response.defer(thinking=True)
-            self.db.remove_alert(interaction.user.id, crypto)
-            await interaction.followup.send(f'Alert for {crypto} has been canceled.')
+            self.db.remove_alert(interaction.user.id, crypto_id)
+            await interaction.followup.send(f'Alert for {crypto_id} has been canceled.')
         except Exception as e:
             logger.error(f'Error canceling alert: {e}')
             await interaction.followup.send(f'Failed to cancel alert: {e}')

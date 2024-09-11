@@ -28,7 +28,7 @@ Ton ton est professionnel mais accessible, tu prends une « respiration métapho
 # Initialize OpenAI client
 client = OpenAI(api_key=os.getenv('CHATGPT_API_KEY'))
 
-class AskGPT(commands.Cog):
+class AskGPT(commands.Cog, name="askGPT"):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 

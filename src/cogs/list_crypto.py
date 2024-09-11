@@ -18,14 +18,16 @@ MY_GUILD = discord.Object(id=GUILD_ID)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class ListCrypto(commands.Cog):
+class ListCrypto(commands.Cog, name="listCrypto"):
     def __init__(self, bot):
         self.bot = bot
 
-    @app_commands.command(name="list_crypto")
+    @app_commands.command(name="list_crypto", description="Command to list available cryptocurrencies from the CoinGecko API.")
     async def list_crypto(self, interaction: discord.Interaction):
-        """
-        Command to list available cryptocurrencies from the CoinGecko API.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
         """
         logger.info(f"Listing available cryptos, author: {interaction.user.id}")
         
@@ -34,13 +36,15 @@ class ListCrypto(commands.Cog):
 
         if response.status_code == 200:
             cryptos = response.json()
+            # logger.info(cryptos) # ? debug
 
             if not cryptos:
                 await interaction.response.send_message("No cryptocurrencies found.")
                 return
 
             # Create an instance of the paginator with the list of cryptos
-            view = CryptoPaginator(cryptos)
+            view = CryptoPaginator(self.bot.crypto_list)
+            # view = CryptoPaginator(cryptos)
             
             # Send the initial message with the first page of the cryptos and add the paginator buttons
             await interaction.response.send_message(embed=view.create_embed(), view=view)

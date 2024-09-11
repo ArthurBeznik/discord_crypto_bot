@@ -12,7 +12,7 @@ MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
 logger = logging.getLogger(__name__)
 
-class Admin(commands.Cog):
+class Admin(commands.Cog, name="admin"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -29,8 +29,11 @@ class Admin(commands.Cog):
     @app_commands.describe(cog_name='Name of the cog to load')
     @is_admin()
     async def load(self, interaction: discord.Interaction, cog_name: str):
-        """
-        Slash command to load a new cog.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            cog_name (str): _description_
         """
         try:
             await self.bot.load_extension(f"cogs.{cog_name}")
@@ -43,8 +46,10 @@ class Admin(commands.Cog):
     @app_commands.command(name="sync", description="Sync commands to the Discord server")
     @is_admin()
     async def sync(self, interaction: discord.Interaction):
-        """
-        Slash command to sync commands.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
         """
         try:
             await self.bot.tree.sync(guild=MY_GUILD)
@@ -60,8 +65,11 @@ class Admin(commands.Cog):
     @app_commands.describe(command_name='Name of the command to remove')
     @is_admin()
     async def remove(self, interaction: discord.Interaction, command_name: str):
-        """
-        Slash command to remove a command.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            command_name (str): _description_
         """
         try:
             logger.info(self.bot.tree.get_commands(guild=MY_GUILD))
@@ -77,8 +85,10 @@ class Admin(commands.Cog):
     @app_commands.command(name="clear", description="Clear all commands from the server")
     @is_admin()
     async def clear(self, interaction: discord.Interaction):
-        """
-        Slash command to clear all commands.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
         """
         try:
             logger.info(self.bot.tree.get_commands(guild=MY_GUILD))

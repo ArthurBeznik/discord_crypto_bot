@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 o_embed = discord.Embed(color=discord.Color.orange())  # misc
 s_embed = discord.Embed(color=discord.Color.green())  # Success
 
-class Misc(commands.Cog):
+class Misc(commands.Cog, name="misc"):
     def __init__(self, bot):
         self.bot = bot
 

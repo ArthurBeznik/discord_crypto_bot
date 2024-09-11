@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 class Price(commands.GroupCog, name="price"):
     def __init__(self, bot):
         self.bot = bot
-        # self.crypto_map = bot.crypto_map
 
     @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
     @app_commands.rename(crypto="crypto")
@@ -68,6 +67,7 @@ class Price(commands.GroupCog, name="price"):
         """
         try:
             logger.info(f'Input cryptos: {cryptos}')  # Debug log
+            logger.info(self.bot.crypto_map)
 
             # Split the input by spaces
             crypto_list_input = cryptos.split()
@@ -121,4 +121,4 @@ class Price(commands.GroupCog, name="price"):
             await interaction.response.send_message("An error occurred while fetching the prices. Please try again later.")
 
 async def setup(bot):
-    await bot.add_cog(Price(bot))  # Adds the Price cog to the bot
+    await bot.add_cog(Price(bot))

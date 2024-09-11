@@ -1,7 +1,7 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-import requests
+from utils.crypto_data import fetch_crypto_info
 from utils.autocomplete import get_crypto_autocomplete_choices
 from utils.embeds import error_embed
 import logging
@@ -14,22 +14,6 @@ class Info(commands.Cog):
         self.bot = bot
         # self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
 
-    def fetch_crypto_info(self, crypto_id: str):
-        """
-        Fetches market data for a cryptocurrency from CoinGecko API.
-        :param crypto: Name or symbol of the cryptocurrency
-        :return: Dictionary with market data
-        """
-        url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}"
-        # url = f"https://api.coingecko.com/api/v3/simple/price?ids={crypto_id}&vs_currencies=usd"
-        response = requests.get(url)
-        
-        if response.status_code != 200:
-            return None
-        
-        data = response.json()
-        return data
-
     @app_commands.command(name="info", description="Display comprehensive market information for a cryptocurrency.")
     @app_commands.rename(crypto="crypto")
     @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
@@ -38,10 +22,12 @@ class Info(commands.Cog):
         """
         /info <crypto>: Display comprehensive market information for a cryptocurrency.
         """
+        # Resolve the cryptocurrency
         crypto_id = self.bot.crypto_map.get(crypto.lower())
+        logger.info(f"Resolved crypto: {crypto_id}")
 
         # Fetch cryptocurrency data
-        data = self.fetch_crypto_info(crypto_id)
+        data = fetch_crypto_info(crypto_id)
 
         if data is None:
             embed = error_embed("Error Fetching Data", f"Could not fetch data for {crypto}. Please try again.")

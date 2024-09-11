@@ -6,17 +6,92 @@ from datetime import datetime, timedelta
 import os
 
 logger = logging.getLogger(__name__)
-crypto_map = {}
 
-def fetch_crypto_data(crypto_id: str, days: int = 30):
-    """_summary_
+CACHE_DIR = "data"
+MAP_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_map.json")
+LIST_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_list.json")
+CACHE_DURATION = timedelta(days=1)  # Cache duration
+
+API_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
+
+def fetch_from_cache_or_api(cache_file, fetch_function):
+    """
+    Fetch data from cache if valid, otherwise fetch from API and cache it.
 
     Args:
-        crypto_id (str): _description_
-        days (int, optional): _description_. Defaults to 30.
+        cache_file (str): Path to the cache file.
+        fetch_function (callable): Function to fetch data from the API.
 
     Returns:
-        _type_: _description_
+        dict: Data loaded from cache or fetched from the API.
+    """
+    if os.path.exists(cache_file):
+        file_mod_time = datetime.fromtimestamp(os.path.getmtime(cache_file))
+        if datetime.now() - file_mod_time < CACHE_DURATION:
+            logger.info(f"Loading data from cache: {cache_file}")
+            with open(cache_file, 'r') as f:
+                return json.load(f)
+    
+    logger.info(f"Fetching data from API: {cache_file}")
+    data = fetch_function()
+    if data:
+        with open(cache_file, 'w') as f:
+            json.dump(data, f)
+        logger.info(f"Cached {len(data)} items.")
+    else:
+        logger.error(f"Failed to fetch data for {cache_file}.")
+    
+    return data
+
+def load_crypto_map():
+    """
+    Load the cryptocurrency map from a cache file or fetch from the CoinGecko API.
+    
+    Returns:
+        dict: Dictionary mapping names/symbols to cryptocurrency IDs.
+    """
+    def fetch_crypto_map():
+        # url = f"{API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
+        response = requests.get(API_URL)
+        if response.status_code == 200:
+            cryptos = response.json()
+            crypto_map = {}
+            for crypto in cryptos:
+                crypto_map[crypto['id']] = crypto['id']
+                crypto_map[crypto['name'].lower()] = crypto['id']
+                crypto_map[crypto['symbol'].lower()] = crypto['id']
+            return crypto_map
+        return None
+
+    return fetch_from_cache_or_api(MAP_CACHE_FILE, fetch_crypto_map)
+
+def load_crypto_list():
+    """
+    Load the list of cryptocurrencies from a cache file or fetch from the CoinGecko API.
+    
+    Returns:
+        list: List of dictionaries with cryptocurrency details.
+    """
+    def fetch_crypto_list():
+        # url = f"{API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
+        response = requests.get(API_URL)
+        if response.status_code == 200:
+            cryptos = response.json()
+            return [{'id': crypto['id'], 'symbol': crypto['symbol'], 'name': crypto['name']} for crypto in cryptos]
+        return None
+
+    return fetch_from_cache_or_api(LIST_CACHE_FILE, fetch_crypto_list)
+
+def fetch_crypto_data(crypto_id: str, days: int = 30):
+    """
+    Fetch historical market data for a cryptocurrency.
+
+    Args:
+        crypto_id (str): Cryptocurrency ID.
+        days (int): Number of days of historical data to fetch.
+
+    Returns:
+        pd.DataFrame: DataFrame with historical prices and volumes.
     """
     url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart?vs_currency=usd&days={days}"
     response = requests.get(url)
@@ -25,55 +100,31 @@ def fetch_crypto_data(crypto_id: str, days: int = 30):
     if "prices" not in data or "total_volumes" not in data:
         return None
 
-    # Convert price data to DataFrame
-    df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
-    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-    df.set_index('timestamp', inplace=True)
+    # Convert price and volume data to DataFrames
+    price_df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
+    price_df['timestamp'] = pd.to_datetime(price_df['timestamp'], unit='ms')
+    price_df.set_index('timestamp', inplace=True)
 
-    # Convert volume data to DataFrame
     volume_df = pd.DataFrame(data['total_volumes'], columns=['timestamp', 'volume'])
     volume_df['timestamp'] = pd.to_datetime(volume_df['timestamp'], unit='ms')
     volume_df.set_index('timestamp', inplace=True)
 
-    # Merge the two DataFrames
-    df['volume'] = volume_df['volume']
+    # Merge DataFrames
+    price_df['volume'] = volume_df['volume']
+    return price_df
 
-    return df
-
-CACHE_FILE = "data/crypto_list.json"
-CACHE_DURATION = timedelta(days=1)  # Cache the list for 1 day
-
-def load_crypto_list():
+def fetch_crypto_info(crypto_id: str):
     """
-    Load the cryptocurrency list from a cache file if it exists and is valid.
-    Otherwise, fetch it from the CoinGecko API and store it in a cache file.
+    Fetch detailed market data for a cryptocurrency.
+
+    Args:
+        crypto_id (str): Cryptocurrency ID.
+
+    Returns:
+        dict: Dictionary with detailed market data.
     """
-    # Check if the cache file exists and if it's still valid (not expired)
-    if os.path.exists(CACHE_FILE):
-        file_mod_time = datetime.fromtimestamp(os.path.getmtime(CACHE_FILE))
-        if datetime.now() - file_mod_time < CACHE_DURATION:
-            logger.info("Loading cryptocurrency list from cache.")
-            with open(CACHE_FILE, 'r') as f:
-                return json.load(f)
-    
-    # If no valid cache, fetch the list from the API
-    logger.info("Fetching cryptocurrency list from CoinGecko API...")
-    url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250=&page=1"
+    url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}"
     response = requests.get(url)
-    
     if response.status_code == 200:
-        cryptos = response.json()
-        for crypto in cryptos:
-            crypto_map[crypto['id']] = crypto['id']
-            crypto_map[crypto['name'].lower()] = crypto['id']
-            crypto_map[crypto['symbol'].lower()] = crypto['id']
-
-        # Cache the data to the file
-        with open(CACHE_FILE, 'w') as f:
-            json.dump(crypto_map, f)
-
-        logger.info(f"Loaded and cached {len(cryptos)} cryptocurrencies.")
-    else:
-        logger.error(f"Failed to load cryptocurrencies. Status code: {response.status_code}")
-    
-    return crypto_map
+        return response.json()
+    return None

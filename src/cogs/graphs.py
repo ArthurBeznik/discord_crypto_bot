@@ -33,10 +33,14 @@ class Graphs(commands.GroupCog, name="graph"):
         """
         /graphic <crypto> <period>: Generate a graph with historical data.
         """
+        # Resolve the cryptocurrency
+        crypto_id = self.bot.crypto_map.get(crypto.lower())
+        logger.info(f"Resolved crypto: {crypto_id}")
+
         days = period_map.get(period, 30)
 
         # Fetch historical data
-        df = fetch_crypto_data(crypto, days)
+        df = fetch_crypto_data(crypto_id, days)
 
         if df is None:
             embed = error_embed("Error Fetching Data", f"Could not fetch data for {crypto}. Please try again.")
@@ -73,11 +77,15 @@ class Graphs(commands.GroupCog, name="graph"):
         """
         /history <crypto> <period>: Provide detailed historical data in tabular form.
         """
+        # Resolve the cryptocurrency
+        crypto_id = self.bot.crypto_map.get(crypto.lower())
+        logger.info(f"Resolved crypto: {crypto_id}")
+
         days = period_map.get(period, 30)
-        logger.info(days)
+        # logger.info(days) # ? debug
 
         # Fetch historical data
-        df = fetch_crypto_data(crypto, days)
+        df = fetch_crypto_data(crypto_id, days)
 
         if df is None:
             embed = error_embed("Error Fetching Data", f"Could not fetch data for {crypto}. Please try again.")
@@ -86,7 +94,7 @@ class Graphs(commands.GroupCog, name="graph"):
 
         # If the period is 1 year, resample the data to one data point per month
         if period == "1y":
-            df = df.resample('M').last()  # Use the last available price for each month
+            df = df.resample('ME').last()  # Use the last available price for each month
 
         # Format the data as a table
         df['price'] = df['price'].apply(lambda x: f"${x:.2f}")

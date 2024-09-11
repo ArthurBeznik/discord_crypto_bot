@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import logging
 
 from database.__init__ import DatabaseManager
-from utils.crypto_data import load_crypto_list
+from utils.crypto_data import load_crypto_list, load_crypto_map
 from utils.errors import handle_check_failure
 
 # Setup logging
@@ -22,6 +22,7 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
 # Load environment variables
 load_dotenv()
@@ -36,7 +37,8 @@ class CryptoBot(commands.Bot):
     def __init__(self) -> None:
         super().__init__(command_prefix="/", intents=intents, help_command=None)
         self.db = None
-        self.crypto_map = load_crypto_list()
+        self.crypto_map = load_crypto_map()
+        self.crypto_list = load_crypto_list()
 
     async def setup_hook(self) -> None:
         """
@@ -82,6 +84,7 @@ class CryptoBot(commands.Bot):
         """
         # Bot is ready
         logger.info(f"Logged in as {self.user}")
+        # logger.info(self.tree.get_commands(guild=MY_GUILD))
 
     async def on_app_command_completion(self, interaction: discord.Interaction, command) -> None:
         """
