@@ -34,7 +34,7 @@ class Misc(commands.Cog):
         Flemme
         """
         o_embed.clear_fields()
-        o_embed.set_image(url="https://media1.tenor.com/m/nXNHCwBK_M4AAAAC/lazy-cat.gif")
+        o_embed.set_image(url="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWphbGZ5bmxqd3IzdGU5OGo2c3NodTkxYnkycmJmbTRod294anhwbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YuexGWhubkGX4I0Q6j/giphy.gif")
         await interaction.response.send_message(f"{interaction.user.mention}", embed=o_embed)
         logger.info(f"Sent flemme to {interaction.user.name}")
 
@@ -45,6 +45,15 @@ class Misc(commands.Cog):
         """
         o_embed.clear_fields()
         o_embed.set_image(url="https://c.tenor.com/QrDVGQ9cnsMAAAAC/coffee-creamer.gif")
+        await interaction.response.send_message(f"{interaction.user.mention}", embed=o_embed)
+
+    @app_commands.command(name="mingati", description="C'est un gâté")
+    async def mingati(self, interaction: discord.Interaction):
+        """
+        C'est un gâté
+        """
+        o_embed.clear_fields()
+        o_embed.set_image(url="https://media1.tenor.com/m/6DqObjgpaNQAAAAd/sch-cest-un-g%C3%A2t%C3%A9.gif")
         await interaction.response.send_message(f"{interaction.user.mention}", embed=o_embed)
 
 async def setup(bot):

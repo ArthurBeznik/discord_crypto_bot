@@ -7,14 +7,14 @@ import logging
 import requests
 
 from utils.embeds import error_embed, success_embed
-from utils.list import get_crypto_autocomplete_choices
+from utils.autocomplete import get_crypto_autocomplete_choices
 
 logger = logging.getLogger(__name__)
 
 class Price(commands.GroupCog, name="price"):
     def __init__(self, bot):
         self.bot = bot
-        self.crypto_map = bot.crypto_map
+        # self.crypto_map = bot.crypto_map
 
     @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
     @app_commands.rename(crypto="crypto")
@@ -29,7 +29,10 @@ class Price(commands.GroupCog, name="price"):
             logger.info(f'Input crypto: {crypto}')  # Debug log
 
             # Resolve the cryptocurrency
-            crypto_id = self.crypto_map.get(crypto.lower())
+            # crypto_id = self.crypto_map.get(crypto.lower())
+            crypto_id = self.bot.crypto_map.get(crypto.lower())
+            logger.info(f"Resolved crypto: {crypto_id}")
+            
             if not crypto_id:
                 unrecognized_message = f"Unrecognized cryptocurrency: {crypto}"
                 logger.warning(unrecognized_message)
@@ -73,7 +76,7 @@ class Price(commands.GroupCog, name="price"):
 
             # Resolve each cryptocurrency
             for crypto in crypto_list_input:
-                crypto_id = self.crypto_map.get(crypto.lower())
+                crypto_id = self.bot.crypto_map.get(crypto.lower())
                 if crypto_id:
                     resolved_cryptos.append((crypto, crypto_id))  # Store both the input and resolved id
                 else:

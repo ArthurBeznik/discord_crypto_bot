@@ -1,15 +1,13 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-import requests
-import pandas as pd
 import matplotlib.pyplot as plt
 from io import BytesIO
-from utils.list import get_crypto_autocomplete_choices
+from utils.crypto_data import fetch_crypto_data
+from utils.autocomplete import get_crypto_autocomplete_choices
 from utils.embeds import error_embed, success_embed
 import logging
 
-# Create a logger instance
 logger = logging.getLogger(__name__)
 
 period_map = {
@@ -27,25 +25,6 @@ class Graphs(commands.GroupCog, name="graph"):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    def fetch_crypto_data(self, crypto: str, days: int):
-        """
-        Fetches historical data for a cryptocurrency from CoinGecko API.
-        :param crypto: Name or symbol of the cryptocurrency
-        :param days: Time period in days for which to fetch data
-        :return: DataFrame with historical prices
-        """
-        url = f"https://api.coingecko.com/api/v3/coins/{crypto}/market_chart?vs_currency=usd&days={days}"
-        response = requests.get(url)
-        data = response.json()
-
-        if "prices" not in data:
-            return None
-
-        df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
-        df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-        df.set_index('timestamp', inplace=True)
-        return df
-
     @app_commands.command(name="graphic", description="Generate a graph with historical data for a cryptocurrency.")
     @app_commands.rename(crypto="crypto", period="period")
     @app_commands.describe(crypto="Name or symbol of the cryptocurrency", period=time_period)
@@ -57,7 +36,7 @@ class Graphs(commands.GroupCog, name="graph"):
         days = period_map.get(period, 30)
 
         # Fetch historical data
-        df = self.fetch_crypto_data(crypto, days)
+        df = fetch_crypto_data(crypto, days)
 
         if df is None:
             embed = error_embed("Error Fetching Data", f"Could not fetch data for {crypto}. Please try again.")
@@ -98,7 +77,7 @@ class Graphs(commands.GroupCog, name="graph"):
         logger.info(days)
 
         # Fetch historical data
-        df = self.fetch_crypto_data(crypto, days)
+        df = fetch_crypto_data(crypto, days)
 
         if df is None:
             embed = error_embed("Error Fetching Data", f"Could not fetch data for {crypto}. Please try again.")

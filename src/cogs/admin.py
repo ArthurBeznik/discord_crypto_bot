@@ -8,9 +8,7 @@ from dotenv import load_dotenv
 from utils.checks import is_admin
 
 load_dotenv()
-GUILD_ID = os.getenv('DISCORD_GUILD_ID')
-BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-MY_GUILD = discord.Object(id=GUILD_ID)
+MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
 logger = logging.getLogger(__name__)
 

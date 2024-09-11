@@ -3,7 +3,7 @@ from discord.ext import commands, tasks
 from discord import app_commands
 import logging
 import requests
-from utils.list import get_crypto_autocomplete_choices
+from utils.autocomplete import get_crypto_autocomplete_choices
 
 logger = logging.getLogger(__name__)
 

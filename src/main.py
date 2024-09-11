@@ -1,3 +1,5 @@
+# main.py
+
 import discord
 from discord.ext import commands
 import os
@@ -5,7 +7,7 @@ from dotenv import load_dotenv
 import logging
 
 from database.__init__ import DatabaseManager
-from utils.list import load_crypto_list
+from utils.crypto_data import load_crypto_list
 from utils.errors import handle_check_failure
 
 # Setup logging
