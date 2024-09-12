@@ -1,3 +1,7 @@
+# ask_gpt.py
+
+# TODO move system message
+
 import discord
 import os
 from discord import app_commands
@@ -10,8 +14,9 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# Configuration
 CHANNEL_ID = int(os.getenv('ASK_CHAT_CHANNEL_ID'))
+client = OpenAI(api_key=os.getenv('CHATGPT_API_KEY'))
+
 GPT_SYSTEM_MESSAGE = """Tu es un expert en analyse de cryptomonnaies, spécialisé dans le trading journalier (day trading), le scalping, le swingtrading, et d'autres stratégies de trading, en particulier pour les memecoins et les altcoins. Tu fournis des analyses approfondies concernant la volatilité du marché, la liquidité, ainsi que les tendances des réseaux sociaux + news d'actulalités crypto. Ton approche est principalement basée sur l’analyse technique, utilisant des indicateurs comme le RSI (Relative Strength Index), le MACD (Moving Average Convergence Divergence), le NUPL. (Net Unrealized Profit/Loss) et les bandes de Bollinger.
 Ton objectif est d’aider à maximiser les gains tout en minimisant les risques, en incluant des stratégies de gestion des risques telles que le dimensionnement des positions, les stop-loss, les take-profit, et la diversification. Tu fournis également une estimation du pourcentage de réussite pour chaque analyse, basée sur des données chiffrées.
 
@@ -25,11 +30,8 @@ En fonction d'un graphique donné par l'utilisateur (par exemple, une image), tu
 
 Ton ton est professionnel mais accessible, tu prends une « respiration métaphorique » avant chaque réponse pour garantir la précision, et tu offres des conseils basés sur des données tout en évitant de donner des recommandations financières directes."""
 
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv('CHATGPT_API_KEY'))
-
 class AskGPT(commands.Cog, name="askGPT"):
-    def __init__(self, bot: commands.Bot):
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     async def get_gpt_response(self, message: str) -> str:
@@ -48,9 +50,9 @@ class AskGPT(commands.Cog, name="askGPT"):
             return response_text
         except Exception as e:
             logger.error(f"Error in get_gpt_response: {e}")
-            return "Une erreur s'est produite lors du traitement de votre demande."
+            return "An error occured while processing your request." 
 
-    async def send_long_message(self, channel: discord.TextChannel, message: str):
+    async def send_long_message(self, channel: discord.TextChannel, message: str) -> None:
         logger.info("Sending long message.")
         if len(message) <= 2000:
             await channel.send(message)
@@ -61,8 +63,8 @@ class AskGPT(commands.Cog, name="askGPT"):
                 await channel.send(part)
             logger.info("Long message sent in parts.")
 
-    @app_commands.command(name='ask', description='Pose une question à GPT.')
-    async def ask_command(self, interaction: discord.Interaction, *, question: str):
+    @app_commands.command(name='ask', description='Ask something to GPT.')
+    async def ask(self, interaction: discord.Interaction, *, question: str) -> None:
         logger.info(f"Received 'ask' command in channel ID: {interaction.channel.id} | Expected channel ID: {CHANNEL_ID}")
 
         if interaction.channel.id == CHANNEL_ID:
@@ -72,15 +74,15 @@ class AskGPT(commands.Cog, name="askGPT"):
 
             try:
                 response = await self.get_gpt_response(question)
-                await self.send_long_message(interaction.channel, f"Réponse: {response}")
-                await interaction.followup.send("Réponse envoyée.", ephemeral=True)
+                await self.send_long_message(interaction.channel, f"Response: {response}")
+                await interaction.followup.send("Response sent.", ephemeral=True)
                 logger.info("Response sent successfully.")
             except Exception as e:
                 logger.error(f"Error processing 'ask' command: {e}")
-                await interaction.followup.send("Une erreur s'est produite lors du traitement de votre demande.", ephemeral=True)
+                await interaction.followup.send("An error occured while processing your request.", ephemeral=True)
         else:
-            await interaction.response.send_message("Désolé, je ne peux répondre que dans le canal désigné.", ephemeral=True)
+            await interaction.response.send_message("Sorry, I can only reply in the designated channel [ask-gpt]", ephemeral=True)
             logger.warning(f"Command issued in an unauthorized channel: {interaction.channel.id}")
 
-async def setup(bot: commands.Bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(AskGPT(bot))

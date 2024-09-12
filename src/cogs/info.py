@@ -1,24 +1,25 @@
+# info.py
+
 import discord
 from discord import app_commands
 from discord.ext import commands
-from utils.crypto_data import fetch_crypto_info
-from utils.autocomplete import get_crypto_autocomplete_choices
-from utils.embeds import error_embed
 import logging
 
-# Create a logger instance
+from utils.crypto_data import fetch_crypto_info
+from utils.autocomplete import crypto_autocomplete
+from utils.embeds import error_embed
+
 logger = logging.getLogger(__name__)
 
 class Info(commands.Cog):
-    def __init__(self, bot: commands.Bot):
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-        # self.crypto_map = load_crypto_list()  # Load the crypto map using the utility function
 
     @app_commands.command(name="info", description="Display comprehensive market information for a cryptocurrency.")
     @app_commands.rename(crypto="crypto")
     @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def info(self, interaction: discord.Interaction, crypto: str):
+    @app_commands.autocomplete(crypto=crypto_autocomplete)
+    async def info(self, interaction: discord.Interaction, crypto: str) -> None:
         """
         /info <crypto>: Display comprehensive market information for a cryptocurrency.
         """
@@ -71,5 +72,5 @@ class Info(commands.Cog):
         await interaction.response.send_message(embed=embed)
         logger.info(f"Displayed comprehensive market information for {crypto}.")
 
-async def setup(bot: commands.Bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Info(bot))

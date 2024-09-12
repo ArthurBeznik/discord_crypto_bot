@@ -1,10 +1,11 @@
 # autocomplete.py
 
 # TODO could become discord_helpers.py ?
-# TODO find soomething better for the crypto_map
+# TODO find something better for the crypto_map
 
 import discord
 import logging
+from discord import app_commands
 
 from utils.crypto_data import load_crypto_map
 
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 crypto_map = load_crypto_map()
 
-async def get_crypto_autocomplete_choices(interaction: discord.Interaction, input_value: str):
+async def crypto_autocomplete(interaction: discord.Interaction, input_value: str)-> (list | list[app_commands.Choice]):
     """_summary_
 
     Args:
@@ -32,8 +33,8 @@ async def get_crypto_autocomplete_choices(interaction: discord.Interaction, inpu
     last_input = input_value.split()[-1]
     
     # Search for matches for the last word in the crypto_map
-    choices = [discord.app_commands.Choice(name=key, value=key)
+    choices = [app_commands.Choice(name=key, value=key)
                for key in crypto_map if last_input.lower() in key.lower()]
     
-    # Return a maximum of 25 autocomplete choices
+    # Return a maximum of 25 autocomplete choices (discord limitations)
     return choices[:25]

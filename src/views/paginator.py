@@ -5,7 +5,7 @@ import discord
 class CryptoPaginator(discord.ui.View):
     def __init__(self, cryptos, per_page=15):
         # Adjust per_page to be a multiple of 3 since we want 3 columns
-        super().__init__(timeout=None)  # No timeout for the buttons
+        super().__init__(timeout=None) # No timeout for the buttons
         self.cryptos = cryptos
         self.per_page = per_page
         self.current_page = 0
@@ -31,7 +31,7 @@ class CryptoPaginator(discord.ui.View):
             embed.add_field(
                 name=f"{crypto['name']} ({crypto['symbol'].upper()})", 
                 value=f"ID: {crypto['id']}", 
-                inline=True  # Inline True to make them side by side
+                inline=True # Inline True to make them side by side
             )
         
         embed.set_footer(text=f"Page {self.current_page + 1}/{self.total_pages}")

@@ -1,4 +1,6 @@
-# embed.py
+# embeds.py
+
+# TODO change format?
 
 import discord
 

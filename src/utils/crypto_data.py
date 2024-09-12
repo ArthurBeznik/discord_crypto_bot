@@ -1,3 +1,5 @@
+# crypto_data.py
+
 import pandas as pd
 import requests
 import logging
@@ -10,7 +12,7 @@ logger = logging.getLogger(__name__)
 CACHE_DIR = "data"
 MAP_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_map.json")
 LIST_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_list.json")
-CACHE_DURATION = timedelta(days=1)  # Cache duration
+CACHE_DURATION = timedelta(days=1) # Cache duration
 
 API_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
 
@@ -43,15 +45,13 @@ def fetch_from_cache_or_api(cache_file, fetch_function):
     
     return data
 
-def load_crypto_map():
-    """
-    Load the cryptocurrency map from a cache file or fetch from the CoinGecko API.
-    
+def load_crypto_map() -> dict | None:
+    """_summary_
+
     Returns:
-        dict: Dictionary mapping names/symbols to cryptocurrency IDs.
+        dict | None: _description_
     """
     def fetch_crypto_map():
-        # url = f"{API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
         response = requests.get(API_URL)
         if response.status_code == 200:
             cryptos = response.json()
@@ -65,15 +65,13 @@ def load_crypto_map():
 
     return fetch_from_cache_or_api(MAP_CACHE_FILE, fetch_crypto_map)
 
-def load_crypto_list():
-    """
-    Load the list of cryptocurrencies from a cache file or fetch from the CoinGecko API.
-    
+def load_crypto_list() -> list[dict] | None:
+    """_summary_
+
     Returns:
-        list: List of dictionaries with cryptocurrency details.
+        list[dict] | None: _description_
     """
     def fetch_crypto_list():
-        # url = f"{API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
         response = requests.get(API_URL)
         if response.status_code == 200:
             cryptos = response.json()

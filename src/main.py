@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 import logging
 
-from database.__init__ import DatabaseManager
+from database.manager import DatabaseManager
 from utils.crypto_data import load_crypto_list, load_crypto_map
 from utils.errors import handle_check_failure
 
@@ -56,7 +56,7 @@ class CryptoBot(commands.Bot):
         Initialize the database connection and ensure tables are created.
         """
         self.db = DatabaseManager()
-        self.db.initialize()  # Ensure tables are created
+        self.db.initialize() # Ensure tables are created
 
     async def load_cogs(self) -> None:
         """
@@ -101,7 +101,6 @@ class CryptoBot(commands.Bot):
             logger.info(
                 f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs"
             )
-
 
 # Create bot instance and run it
 bot = CryptoBot()

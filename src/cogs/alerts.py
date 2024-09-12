@@ -1,35 +1,26 @@
+# alerts.py
+
 import discord
 from discord.ext import commands, tasks
 from discord import app_commands
 import logging
 import requests
-from utils.autocomplete import get_crypto_autocomplete_choices
+
+from utils.autocomplete import crypto_autocomplete
 
 logger = logging.getLogger(__name__)
 
 class Alert(commands.GroupCog, name="alert"):
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
         self.bot = bot
-        self.db = bot.db  # Access the DatabaseManager instance from the bot
-        if not self.db:
-            logger.error("DatabaseManager is not initialized")
-            raise RuntimeError("DatabaseManager is not initialized")
-        self.check_alerts.start()  # Start the task loop for checking alerts
+        self.check_alerts.start() # ! Start the task loop for checking alerts
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        # Ensure the database is initialized when the bot is ready
-        if not self.db:
-            logger.error("DatabaseManager is not initialized")
-            raise RuntimeError("DatabaseManager is not initialized")
-        self.db.initialize()
-
-    @tasks.loop(minutes=10)  # Check every 10 minute
-    async def check_alerts(self):
+    @tasks.loop(minutes=10) # ! Check every 10 minute => TO CONFIGURE
+    async def check_alerts(self) -> None:
         logger.info("Checking alerts...")
 
         try:
-            alerts = self.db.get_alerts()
+            alerts = self.bot.db.get_alerts()
             user_alerts = {}
             for user_id, crypto, threshold in alerts:
                 if user_id not in user_alerts:
@@ -50,7 +41,7 @@ class Alert(commands.GroupCog, name="alert"):
                                 logger.info(f"Sent alert to user: {user} for {crypto} at ${price:.2f}")
                                 
                                 self.db.remove_alert(user_id, crypto)
-                                logger.info('Removed alert from DB')
+                                logger.info("Removed alert from DB")
                     else:
                         logger.error(f"Error fetching price for {crypto}. Status code: {response.status_code}")
 
@@ -58,51 +49,54 @@ class Alert(commands.GroupCog, name="alert"):
             logger.error(f"Error in check_alerts task: {e}")
 
     @app_commands.command(name='create', description='Set a price alert for a cryptocurrency.')
-    @app_commands.describe(crypto='The cryptocurrency to set an alert for.', threshold='The price threshold for the alert.')
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def create_alert(self, interaction: discord.Interaction, crypto: str, threshold: float):
+    @app_commands.describe(crypto="Name or symbol of the cryptocurrency", threshold='The price threshold for the alert.')
+    @app_commands.autocomplete(crypto=crypto_autocomplete)
+    async def create_alert(self, interaction: discord.Interaction, crypto: str, threshold: float) -> None:
         try:
             # Resolve the cryptocurrency
             crypto_id = self.bot.crypto_map.get(crypto.lower())
-            logger.info(f"Resolved crypto: {crypto_id}")
+            # logger.info(f"Resolved crypto: {crypto_id}") # ? debug
 
             await interaction.response.defer(thinking=True)
-            self.db.add_alert(interaction.user.id, crypto_id, threshold)
+            self.bot.db.add_alert(interaction.user.id, crypto_id, threshold)
             await interaction.followup.send(f'Alert set for {crypto_id} at ${threshold:.2f}')
+            logger.info(f"Alert set for {interaction.user.name}")
         except Exception as e:
-            logger.error(f'Error creating alert: {e}')
             await interaction.followup.send(f'Failed to set alert: {e}')
+            logger.error(f'Error creating alert: {e}')
 
     @app_commands.command(name='cancel', description='Cancel a previously set price alert.')
     @app_commands.describe(crypto='The cryptocurrency of the alert to cancel.')
-    async def cancel_alert(self, interaction: discord.Interaction, crypto: str):
+    async def cancel_alert(self, interaction: discord.Interaction, crypto: str) -> None:
         try:
             # Resolve the cryptocurrency
             crypto_id = self.bot.crypto_map.get(crypto.lower())
             logger.info(f"Resolved crypto: {crypto_id}")
 
             await interaction.response.defer(thinking=True)
-            self.db.remove_alert(interaction.user.id, crypto_id)
+            self.bot.db.remove_alert(interaction.user.id, crypto_id)
             await interaction.followup.send(f'Alert for {crypto_id} has been canceled.')
+            logger.info(f"Alert canceled for {interaction.user.name}")
         except Exception as e:
-            logger.error(f'Error canceling alert: {e}')
             await interaction.followup.send(f'Failed to cancel alert: {e}')
+            logger.error(f'Error canceling alert: {e}')
 
     @app_commands.command(name='show', description='Show all active alerts for the user.')
-    async def show_alerts(self, interaction: discord.Interaction):
-        logger.info(f"Displaying alerts for {interaction.user.name}")
+    async def show_alerts(self, interaction: discord.Interaction) -> None:
         try:
-            alerts = self.db.get_alerts()
+            alerts = self.bot.db.get_alerts()
             user_alerts = [(crypto, threshold) for user_id, crypto, threshold in alerts if user_id == interaction.user.id]
 
             if user_alerts:
                 alert_list = '\n'.join([f'{crypto}: ${threshold:.2f}' for crypto, threshold in user_alerts])
                 await interaction.response.send_message(f'Your alerts:\n{alert_list}')
+                logger.info(f"Displayed alerts for {interaction.user.name}")
             else:
                 await interaction.response.send_message('You have no active alerts.')
+                logger.info(f"No alerts for {interaction.user.name}")
         except Exception as e:
-            logger.error(f'Error showing alerts: {e}')
             await interaction.response.send_message(f'Failed to fetch alerts: {e}')
+            logger.error(f'Error showing alerts: {e}')
 
-async def setup(bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Alert(bot))

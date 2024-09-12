@@ -1,29 +1,32 @@
+# analysis.py
+
+from typing import Literal
 import discord
 from discord import app_commands
 from discord.ext import commands
 import pandas as pd
 import ta
-from utils.autocomplete import get_crypto_autocomplete_choices
-from utils.embeds import error_embed, success_embed
-from utils.crypto_data import fetch_crypto_data
 import logging
 
-# Create a logger instance
+from utils.autocomplete import crypto_autocomplete
+from utils.embeds import error_embed, success_embed
+from utils.crypto_data import fetch_crypto_data
+
 logger = logging.getLogger(__name__)
 
-class TechnicalAnalysis(commands.GroupCog, name="analyse"):
-    def __init__(self, bot: commands.Bot):
+class Analysis(commands.Cog, name="analyse"):
+    def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
     # Helper function to calculate indicators
-    def calculate_indicators(self, df: pd.DataFrame):
+    def calculate_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
         df['rsi'] = ta.momentum.RSIIndicator(df['price']).rsi()
         df['macd'] = ta.trend.MACD(df['price']).macd()
         df['ema'] = ta.trend.EMAIndicator(df['price']).ema_indicator()
         return df
 
     # Helper function to generate response message based on analysis type
-    def generate_analysis_message(self, crypto: str, df: pd.DataFrame, analysis_type: str):
+    def generate_analysis_message(self, crypto: str, df: pd.DataFrame, analysis_type: str) -> str:
         message = ""
 
         # Basic analysis message
@@ -74,7 +77,7 @@ class TechnicalAnalysis(commands.GroupCog, name="analyse"):
         return message
 
     # Main analysis handler
-    async def perform_analysis(self, interaction: discord.Interaction, crypto: str, analysis_type: str):
+    async def perform_analysis(self, interaction: discord.Interaction, crypto: str, analysis_type: str) -> None:
         logger.info(f"Input crypto: {crypto}")
 
         # Resolve crypto ID
@@ -97,29 +100,12 @@ class TechnicalAnalysis(commands.GroupCog, name="analyse"):
         await interaction.response.send_message(embed=embed)
         logger.info(f"Performed {analysis_type} analysis for {crypto}.")
 
-    # Command for basic technical analysis
-    @app_commands.command(name="technical", description="Provide basic technical analysis.")
+    @app_commands.command(name="analyse", description="Provide basic technical analysis.")
     @app_commands.rename(crypto="crypto")
-    @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def technical_analysis(self, interaction: discord.Interaction, crypto: str):
-        await self.perform_analysis(interaction, crypto, "technical")
+    @app_commands.describe(type="The type of analysis to run", crypto="Name or symbol of the cryptocurrency")
+    @app_commands.autocomplete(crypto=crypto_autocomplete)
+    async def analyse(self, interaction: discord.Interaction, type: Literal['technical', 'advanced', 'full'], crypto: str) -> None:
+        await self.perform_analysis(interaction, crypto, type)
 
-    # Command for advanced analysis
-    @app_commands.command(name="advanced", description="Provide advanced analysis.")
-    @app_commands.rename(crypto="crypto")
-    @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def advanced_analysis(self, interaction: discord.Interaction, crypto: str):
-        await self.perform_analysis(interaction, crypto, "advanced")
-
-    # Command for full analysis
-    @app_commands.command(name="full", description="Provide a full technical analysis.")
-    @app_commands.rename(crypto="crypto")
-    @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def full_analysis(self, interaction: discord.Interaction, crypto: str):
-        await self.perform_analysis(interaction, crypto, "full")
-
-async def setup(bot: commands.Bot):
-    await bot.add_cog(TechnicalAnalysis(bot))
+async def setup(bot: commands.Bot) -> None:
+    await bot.add_cog(Analysis(bot))

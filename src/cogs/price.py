@@ -7,28 +7,29 @@ import logging
 import requests
 
 from utils.embeds import error_embed, success_embed
-from utils.autocomplete import get_crypto_autocomplete_choices
+from utils.autocomplete import crypto_autocomplete
 
 logger = logging.getLogger(__name__)
 
 class Price(commands.GroupCog, name="price"):
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
         self.bot = bot
 
     @app_commands.command(name="single", description="Get the price of a single cryptocurrency")
     @app_commands.rename(crypto="crypto")
     @app_commands.describe(crypto='Name or symbol of the cryptocurrency')
-    @app_commands.autocomplete(crypto=get_crypto_autocomplete_choices)
-    async def price_single(self, interaction: discord.Interaction, crypto: str):
-        """
-        /price single <crypto>
-        Fetches and returns the price of a single cryptocurrency.
+    @app_commands.autocomplete(crypto=crypto_autocomplete)
+    async def price_single(self, interaction: discord.Interaction, crypto: str) -> None:
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            crypto (str): _description_
         """
         try:
             logger.info(f'Input crypto: {crypto}')  # Debug log
 
             # Resolve the cryptocurrency
-            # crypto_id = self.crypto_map.get(crypto.lower())
             crypto_id = self.bot.crypto_map.get(crypto.lower())
             logger.info(f"Resolved crypto: {crypto_id}")
             
@@ -60,13 +61,15 @@ class Price(commands.GroupCog, name="price"):
     @app_commands.command(name="multiple", description="Get the price of multiple cryptocurrencies")
     @app_commands.rename(cryptos="cryptos")
     @app_commands.describe(cryptos='Names or symbols of the cryptocurrencies, separated by spaces')
-    async def price_multiple(self, interaction: discord.Interaction, cryptos: str):
-        """
-        /price multiple <crypto1> <crypto2> ...
-        Fetches and returns the price of multiple cryptocurrencies, shows errors for unrecognized ones.
+    async def price_multiple(self, interaction: discord.Interaction, cryptos: str) -> None:
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            cryptos (str): _description_
         """
         try:
-            logger.info(f'Input cryptos: {cryptos}')  # Debug log
+            logger.info(f'Input cryptos: {cryptos}') # ? debug
             logger.info(self.bot.crypto_map)
 
             # Split the input by spaces
@@ -78,9 +81,9 @@ class Price(commands.GroupCog, name="price"):
             for crypto in crypto_list_input:
                 crypto_id = self.bot.crypto_map.get(crypto.lower())
                 if crypto_id:
-                    resolved_cryptos.append((crypto, crypto_id))  # Store both the input and resolved id
+                    resolved_cryptos.append((crypto, crypto_id)) # Store both the input and resolved id
                 else:
-                    unrecognized_cryptos.append(crypto)  # Store unrecognized crypto
+                    unrecognized_cryptos.append(crypto) # Store unrecognized crypto
 
             # If no valid cryptos were found, return the error
             if not resolved_cryptos and unrecognized_cryptos:
@@ -113,12 +116,12 @@ class Price(commands.GroupCog, name="price"):
                 await interaction.response.send_message("\n".join(response_message))
 
             else:
-                logger.error(f"Error fetching prices for multiple cryptos. Status code: {response.status_code}")
                 await interaction.response.send_message("Error fetching the prices. Please try again.")
+                logger.error(f"Error fetching prices for multiple cryptos. Status code: {response.status_code}")
 
         except Exception as e:
             logger.error(f"Exception in price_multiple: {str(e)}")
             await interaction.response.send_message("An error occurred while fetching the prices. Please try again later.")
 
-async def setup(bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Price(bot))

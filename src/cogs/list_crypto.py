@@ -1,3 +1,5 @@
+# list_crypto.py
+
 import discord
 import os
 from discord.ext import commands
@@ -8,22 +10,19 @@ from dotenv import load_dotenv
 
 from views.paginator import CryptoPaginator
 
-# Load environment variables
 load_dotenv()
 GUILD_ID = os.getenv('DISCORD_GUILD_ID')
 BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 MY_GUILD = discord.Object(id=GUILD_ID)
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class ListCrypto(commands.Cog, name="listCrypto"):
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
         self.bot = bot
 
     @app_commands.command(name="list_crypto", description="Command to list available cryptocurrencies from the CoinGecko API.")
-    async def list_crypto(self, interaction: discord.Interaction):
+    async def list_crypto(self, interaction: discord.Interaction) -> None:
         """_summary_
 
         Args:
@@ -52,5 +51,5 @@ class ListCrypto(commands.Cog, name="listCrypto"):
             logger.error(f"Error fetching cryptocurrencies. Status code: {response.status_code}")
             await interaction.response.send_message("Error fetching the list of cryptocurrencies. Please try again later.")
 
-async def setup(bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(ListCrypto(bot))

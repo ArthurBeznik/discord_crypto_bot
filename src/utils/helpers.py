@@ -1,8 +1,10 @@
+# helpers.py
+
 import logging
 
 logger = logging.getLogger(__name__)
 
-def get_cogs_and_commands(bot):
+def get_cogs_and_commands(bot) -> dict:
     """
     Fetches all the cogs and their associated commands (including group commands) from the bot.
 

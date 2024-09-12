@@ -7,7 +7,7 @@ from utils.embeds import error_embed
 
 logger = logging.getLogger(__name__)
 
-async def handle_check_failure(interaction: discord.Interaction, error):
+async def handle_check_failure(interaction: discord.Interaction, error) -> None:
     embed = discord.Embed(color=discord.Color.red())
     embed.title = "Error"
 

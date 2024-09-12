@@ -1,3 +1,5 @@
+# help.py
+
 from typing import Literal
 import discord
 from discord.ext import commands
@@ -14,24 +16,38 @@ load_dotenv()
 MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
 class Help(commands.Cog, name="help"):
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
         self.bot = bot
     
-    async def command_autocomplete(self, interaction: discord.Interaction, current: str):
-        """Autocomplete for command names."""
+    async def get_command_autocomplete(self, interaction: discord.Interaction, current: str) -> list[app_commands.Choice]:
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            current (str): _description_
+
+        Returns:
+            _type_: _description_
+        """
         commands = [cmd.name for cmd in self.bot.tree.get_commands() if cmd.name.startswith(current.lower())]
         return [app_commands.Choice(name=cmd, value=cmd) for cmd in commands]
 
-    @app_commands.command(name="help", description="Displays information about commands or cogs")
+    @app_commands.command(name="help", description="Displays information about commands")
     @app_commands.describe(action="all/command", name="Name of the command")
-    @app_commands.autocomplete(name=command_autocomplete)
-    async def help(self, interaction: discord.Interaction, action: Literal['all', 'command'], name: str = None):
-        """Handles the /help command."""
-        logger.info(f"Action: {action}, Name: {name}")  # Debug
+    @app_commands.autocomplete(name=get_command_autocomplete)
+    async def help(self, interaction: discord.Interaction, action: Literal['all', 'command'], name: str = None) -> None:
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            action (Literal['all', 'command']): _description_
+            name (str, optional): _description_. Defaults to None.
+        """
+        logger.info(f"Action: {action}, Name: {name}") # ? debug
 
         # Fetch cogs and commands using the helper function
         cogs_and_commands = get_cogs_and_commands(self.bot)
-        logger.info(f"cogs cmds: {cogs_and_commands}")
+        # logger.info(f"cogs cmds: {cogs_and_commands}") # ? debug
 
         if action == 'all':
             # Display help for all commands
@@ -64,5 +80,5 @@ class Help(commands.Cog, name="help"):
         else:
             await interaction.response.send_message("Invalid usage. Please specify a valid command.", ephemeral=True)
 
-async def setup(bot):
+async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Help(bot))
