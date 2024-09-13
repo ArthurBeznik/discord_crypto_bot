@@ -6,11 +6,13 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 import requests
-import logging
+
+from utils.config import (
+    logging,
+    ALT_API_URL
+)
 
 logger = logging.getLogger(__name__)
-
-FEAR_GREED_API_URL = "https://api.alternative.me/fng/"
 
 class FearGreed(commands.Cog, name="feargreed"):
     def __init__(self, bot: commands.Bot) -> None:
@@ -24,7 +26,8 @@ class FearGreed(commands.Cog, name="feargreed"):
             dict: A dictionary containing the index value, classification, and other relevant data.
         """
         try:
-            response = requests.get(FEAR_GREED_API_URL)
+            url = ALT_API_URL
+            response = requests.get(url)
             if response.status_code == 200:
                 data = response.json()
                 if data and data.get('data'):

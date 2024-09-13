@@ -7,24 +7,17 @@ from discord import app_commands
 from discord.ext import commands
 import matplotlib.pyplot as plt
 from io import BytesIO
-import logging
 
 from utils.crypto_data import fetch_crypto_data
 from utils.autocomplete import crypto_autocomplete
 from utils.embeds import error_embed, success_embed
+from utils.config import (
+    logging,
+    PERIOD_MAP,
+    TIME_PERIOD,
+)
 
 logger = logging.getLogger(__name__)
-
-period_map = {
-            "1d": "1",
-            "1w": "7",
-            "1m": "30",
-            "3m": "90",
-            "6m": "180",
-            "1y": "365"
-        }
-
-time_period = "Time period (e.g. 1d, 1w, 1m, 3m, 6m or 1y)"
 
 class Graphs(commands.GroupCog, name="graph"):
     def __init__(self, bot: commands.Bot) -> None:
@@ -32,7 +25,7 @@ class Graphs(commands.GroupCog, name="graph"):
 
     @app_commands.command(name="graphic", description="Generate a graph with historical data for a cryptocurrency.")
     @app_commands.rename(crypto="crypto", period="period")
-    @app_commands.describe(crypto="Name or symbol of the cryptocurrency", period=time_period)
+    @app_commands.describe(crypto="Name or symbol of the cryptocurrency", period=TIME_PERIOD)
     @app_commands.autocomplete(crypto=crypto_autocomplete)
     async def graphic(self, interaction: discord.Interaction, crypto: str, period: str) -> None:
         """_summary_
@@ -46,7 +39,7 @@ class Graphs(commands.GroupCog, name="graph"):
         crypto_id = self.bot.crypto_map.get(crypto.lower())
         logger.info(f"Resolved crypto: {crypto_id}")
 
-        days = period_map.get(period, 30)
+        days = PERIOD_MAP.get(period, 30)
 
         # Fetch historical data
         df = fetch_crypto_data(crypto_id, days)
@@ -81,7 +74,7 @@ class Graphs(commands.GroupCog, name="graph"):
 
     @app_commands.command(name="history", description="Provide detailed historical data in tabular form.")
     @app_commands.rename(crypto="crypto", period="period")
-    @app_commands.describe(crypto="Name or symbol of the cryptocurrency", period=time_period)
+    @app_commands.describe(crypto="Name or symbol of the cryptocurrency", period=TIME_PERIOD)
     @app_commands.autocomplete(crypto=crypto_autocomplete)
     async def history(self, interaction: discord.Interaction, crypto: str, period: str) -> None:
         """_summary_
@@ -95,7 +88,7 @@ class Graphs(commands.GroupCog, name="graph"):
         crypto_id = self.bot.crypto_map.get(crypto.lower())
         logger.info(f"Resolved crypto: {crypto_id}")
 
-        days = period_map.get(period, 30)
+        days = PERIOD_MAP.get(period, 30)
         # logger.info(days) # ? debug
 
         # Fetch historical data

@@ -4,13 +4,15 @@ import discord
 from typing import Literal
 from discord import app_commands
 from discord.ext import commands
-import logging
 import pandas as pd
 import ta
 
 from utils.autocomplete import crypto_autocomplete
 from utils.crypto_data import fetch_crypto_data
 from utils.embeds import error_embed, success_embed
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
 

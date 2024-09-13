@@ -3,12 +3,14 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-import logging
 import os
 
-logger = logging.getLogger(__name__)
+from utils.config import (
+    logging,
+    TUTORIALS_FILE
+)
 
-TUTORIALS_FILE = "data/tutorials.txt" # Path to the file where tutorials are stored
+logger = logging.getLogger(__name__)
 
 class Tutorial(commands.Cog, name="tutorial"):
     def __init__(self, bot: commands.Bot) -> None:

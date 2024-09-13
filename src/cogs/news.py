@@ -3,22 +3,19 @@
 # TODO set return value
 
 import discord
-import os
 import requests
-import logging
 from typing import Literal
 from discord import app_commands
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from utils.autocomplete import crypto_autocomplete
-
-load_dotenv()
+from utils.config import (
+    logging,
+    NEWS_API_KEY,
+    NEWS_API_URL,
+)
 
 logger = logging.getLogger(__name__)
-
-NEWS_API_URL = "https://newsapi.org/v2/everything"
-NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 class News(commands.Cog, name="news"):
     def __init__(self, bot: commands.Bot) -> None:
@@ -48,7 +45,8 @@ class News(commands.Cog, name="news"):
             }
 
             # Make the API request to get the latest news
-            response = requests.get(NEWS_API_URL, params=params)
+            url = NEWS_API_URL
+            response = requests.get(url, params=params)
 
             # Check if the response is successful
             if response.status_code == 200:

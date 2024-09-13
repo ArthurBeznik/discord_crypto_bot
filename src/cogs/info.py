@@ -3,11 +3,13 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-import logging
 
 from utils.crypto_data import fetch_crypto_info
 from utils.autocomplete import crypto_autocomplete
 from utils.embeds import error_embed
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
 

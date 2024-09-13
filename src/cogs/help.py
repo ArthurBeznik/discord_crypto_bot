@@ -4,16 +4,13 @@ from typing import Literal
 import discord
 from discord.ext import commands
 from discord import app_commands
-import logging
-import os
-from dotenv import load_dotenv
 
 from utils.helpers import get_cogs_and_commands
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
-
-load_dotenv()
-MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
 class Help(commands.Cog, name="help"):
     def __init__(self, bot) -> None:

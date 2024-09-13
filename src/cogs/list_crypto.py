@@ -1,19 +1,15 @@
 # list_crypto.py
 
 import discord
-import os
 from discord.ext import commands
 from discord import app_commands
-import logging
 import requests
-from dotenv import load_dotenv
 
 from views.paginator import CryptoPaginator
-
-load_dotenv()
-GUILD_ID = os.getenv('DISCORD_GUILD_ID')
-BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
-MY_GUILD = discord.Object(id=GUILD_ID)
+from utils.config import (
+    logging,
+    CG_API_URL,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +26,7 @@ class ListCrypto(commands.Cog, name="listCrypto"):
         """
         logger.info(f"Listing available cryptos, author: {interaction.user.id}")
         
-        url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
+        url = CG_API_URL
         response = requests.get(url)
 
         if response.status_code == 200:

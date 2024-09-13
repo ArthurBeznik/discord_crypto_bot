@@ -4,14 +4,14 @@
 # TODO find something better for the crypto_map
 
 import discord
-import logging
 from discord import app_commands
 
 from utils.crypto_data import load_crypto_map
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
-
-crypto_map = load_crypto_map()
 
 async def crypto_autocomplete(interaction: discord.Interaction, input_value: str)-> (list | list[app_commands.Choice]):
     """_summary_
@@ -24,6 +24,8 @@ async def crypto_autocomplete(interaction: discord.Interaction, input_value: str
         _type_: _description_
     """
     logger.info(f"Input: {input_value} | user: {interaction.user.name}") # ? debug
+
+    crypto_map = load_crypto_map()
 
     # Ignore initial empty input
     if not input_value.strip():

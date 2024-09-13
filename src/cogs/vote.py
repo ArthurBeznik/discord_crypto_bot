@@ -1,10 +1,12 @@
+# vote.py
+
 import discord
 from discord.ext import commands
 from discord import app_commands
-import logging
-from dotenv import load_dotenv
 
-load_dotenv()
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
 

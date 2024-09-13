@@ -1,12 +1,18 @@
 # alerts.py
 
+# TODO configure alert check loop
+
 import discord
 from discord.ext import commands, tasks
 from discord import app_commands
-import logging
 import requests
 
 from utils.autocomplete import crypto_autocomplete
+from utils.config import (
+    logging,
+    LOOP_MINUTES
+)
+from utils.embeds import success_embed
 
 logger = logging.getLogger(__name__)
 
@@ -15,17 +21,19 @@ class Alert(commands.GroupCog, name="alert"):
         self.bot = bot
         self.check_alerts.start() # ! Start the task loop for checking alerts
 
-    @tasks.loop(minutes=10) # ! Check every 10 minute => TO CONFIGURE
+    @tasks.loop(minutes=LOOP_MINUTES)
     async def check_alerts(self) -> None:
         logger.info("Checking alerts...")
 
         try:
             alerts = self.bot.db.get_alerts()
+            # logger.info(f"alerts: {alerts}") # ? debug
             user_alerts = {}
             for user_id, crypto, threshold in alerts:
                 if user_id not in user_alerts:
                     user_alerts[user_id] = {}
                 user_alerts[user_id][crypto] = threshold
+            # logger.info(f"user_alerts: {user_alerts}") # ? debug
 
             for user_id, alerts in user_alerts.items():
                 for crypto, threshold in alerts.items():
@@ -40,7 +48,7 @@ class Alert(commands.GroupCog, name="alert"):
                                 await user.send(f"Alert: The price of {crypto} has reached ${price:.2f}.")
                                 logger.info(f"Sent alert to user: {user} for {crypto} at ${price:.2f}")
                                 
-                                self.db.remove_alert(user_id, crypto)
+                                self.bot.db.remove_alert(user_id, crypto)
                                 logger.info("Removed alert from DB")
                     else:
                         logger.error(f"Error fetching price for {crypto}. Status code: {response.status_code}")
@@ -59,7 +67,9 @@ class Alert(commands.GroupCog, name="alert"):
 
             await interaction.response.defer(thinking=True)
             self.bot.db.add_alert(interaction.user.id, crypto_id, threshold)
-            await interaction.followup.send(f'Alert set for {crypto_id} at ${threshold:.2f}')
+            embed=success_embed(f"Alert set for {crypto_id} at ${threshold:.2f}")
+            # await interaction.followup.send(f'Alert set for {crypto_id} at ${threshold:.2f}')
+            await interaction.followup.send(embed=embed)
             logger.info(f"Alert set for {interaction.user.name}")
         except Exception as e:
             await interaction.followup.send(f'Failed to set alert: {e}')

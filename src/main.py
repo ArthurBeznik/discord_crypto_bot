@@ -3,31 +3,18 @@
 import discord
 from discord.ext import commands
 import os
-from dotenv import load_dotenv
-import logging
 
 from database.manager import DatabaseManager
 from utils.crypto_data import load_crypto_list, load_crypto_map
 from utils.errors import handle_check_failure
-
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-    datefmt='%H:%M:%S',
-    handlers=[
-        logging.FileHandler("bot.log"),
-        logging.StreamHandler()
-    ]
+from utils.config import (
+    DISCORD_BOT_TOKEN,
+    DISCORD_GUILD_ID,
+    logging
 )
 
 logger = logging.getLogger(__name__)
-MY_GUILD = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
 
-# Load environment variables
-load_dotenv()
-
-# Define intents
 intents = discord.Intents(
     guilds=True, members=True, messages=True, reactions=True,
     presences=True, message_content=True
@@ -47,7 +34,7 @@ class CryptoBot(commands.Bot):
         # Initialize the database
         await self.init_db()
 
-        # Load cogs and sync the tree
+        # Load cogs and sync the command tree
         await self.load_cogs()
         await self.sync_tree()
 
@@ -55,8 +42,13 @@ class CryptoBot(commands.Bot):
         """
         Initialize the database connection and ensure tables are created.
         """
-        self.db = DatabaseManager()
-        self.db.initialize() # Ensure tables are created
+        try:
+            self.db = DatabaseManager()
+            self.db.initialize() # Ensure tables are created
+            logger.info("Database initialized successfully.")
+        except Exception as e:
+            logger.error(f"Failed to initialize database: {e}")
+            await self.close() # Close the bot if the database initialization fails.
 
     async def load_cogs(self) -> None:
         """
@@ -74,17 +66,20 @@ class CryptoBot(commands.Bot):
         """
         Sync the command tree with the guild.
         """
-        guild = discord.Object(id=os.getenv('DISCORD_GUILD_ID'))
-        self.tree.copy_global_to(guild=guild)
-        await self.tree.sync(guild=guild)
+        try:
+            guild = discord.Object(id=DISCORD_GUILD_ID)
+            self.tree.copy_global_to(guild=guild)
+            await self.tree.sync(guild=guild)
+            logger.info(f"Command tree synced with guild {DISCORD_GUILD_ID}.")
+        except Exception as e:
+            logger.error(f"Failed to sync command tree: {e}")
 
     async def on_ready(self) -> None:
         """
         Event called when the bot is ready.
         """
-        # Bot is ready
-        logger.info(f"Logged in as {self.user}")
-        # logger.info(self.tree.get_commands(guild=MY_GUILD))
+        logger.info(f"Logged in as {self.user} (ID: {self.user.id})")
+        logger.info(f"{self.user} is connected to {len(self.guilds)} guild(s)")
 
     async def on_app_command_completion(self, interaction: discord.Interaction, command) -> None:
         """
@@ -94,13 +89,19 @@ class CryptoBot(commands.Bot):
         split = full_command_name.split(" ")
         executed_command = str(split[0])
         if interaction.guild:
-            logger.info(
-                f"Executed command: {executed_command} in {interaction.guild.name} (ID: {interaction.guild.id}) by {interaction.user.name} (ID: {interaction.user.id})"
-            )
+            logger.info(f"Executed command: {executed_command} in {interaction.guild.name} (ID: {interaction.guild.id}) by {interaction.user.name} (ID: {interaction.user.id})")
         else:
-            logger.info(
-                f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs"
-            )
+            logger.info(f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs")
+
+    async def close(self) -> None:
+        """
+        Override the bot's close method to close the database connection when the bot shuts down.
+        """
+        logger.info("Shutting down bot...")
+        if self.db:
+            self.db.close() # Close the database connection
+        await super().close() # Call the original close method from commands.Bot
+
 
 # Create bot instance and run it
 bot = CryptoBot()
@@ -110,4 +111,5 @@ async def on_app_command_error(interaction: discord.Interaction, error: discord.
     logger.error(f"Error on command: {interaction.command.name}")
     await handle_check_failure(interaction, error)
 
-bot.run(os.getenv('DISCORD_BOT_TOKEN'))
+# Run the bot
+bot.run(DISCORD_BOT_TOKEN)

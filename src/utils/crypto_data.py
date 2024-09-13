@@ -2,19 +2,19 @@
 
 import pandas as pd
 import requests
-import logging
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 
+from utils.config import (
+    logging,
+    MAP_CACHE_FILE,
+    LIST_CACHE_FILE,
+    CACHE_DURATION,
+    CG_API_URL
+)
+
 logger = logging.getLogger(__name__)
-
-CACHE_DIR = "data"
-MAP_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_map.json")
-LIST_CACHE_FILE = os.path.join(CACHE_DIR, "crypto_list.json")
-CACHE_DURATION = timedelta(days=1) # Cache duration
-
-API_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1"
 
 def fetch_from_cache_or_api(cache_file, fetch_function):
     """
@@ -52,7 +52,8 @@ def load_crypto_map() -> dict | None:
         dict | None: _description_
     """
     def fetch_crypto_map():
-        response = requests.get(API_URL)
+        url = CG_API_URL
+        response = requests.get(url)
         if response.status_code == 200:
             cryptos = response.json()
             crypto_map = {}
@@ -72,7 +73,8 @@ def load_crypto_list() -> list[dict] | None:
         list[dict] | None: _description_
     """
     def fetch_crypto_list():
-        response = requests.get(API_URL)
+        url = CG_API_URL
+        response = requests.get(url)
         if response.status_code == 200:
             cryptos = response.json()
             return [{'id': crypto['id'], 'symbol': crypto['symbol'], 'name': crypto['name']} for crypto in cryptos]

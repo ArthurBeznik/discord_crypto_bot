@@ -3,11 +3,13 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-import logging
 import requests
 
 from utils.embeds import error_embed, success_embed
 from utils.autocomplete import crypto_autocomplete
+from utils.config import (
+    logging,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +29,7 @@ class Price(commands.GroupCog, name="price"):
             crypto (str): _description_
         """
         try:
-            logger.info(f'Input crypto: {crypto}')  # Debug log
+            logger.info(f'Input crypto: {crypto}') # ? debug
 
             # Resolve the cryptocurrency
             crypto_id = self.bot.crypto_map.get(crypto.lower())
@@ -70,7 +72,6 @@ class Price(commands.GroupCog, name="price"):
         """
         try:
             logger.info(f'Input cryptos: {cryptos}') # ? debug
-            logger.info(self.bot.crypto_map)
 
             # Split the input by spaces
             crypto_list_input = cryptos.split()
@@ -113,7 +114,8 @@ class Price(commands.GroupCog, name="price"):
                     logger.warning(f"Unrecognized cryptocurrencies: {', '.join(unrecognized_cryptos)}")
 
                 # Send the final message
-                await interaction.response.send_message("\n".join(response_message))
+                embed = success_embed("\n".join(response_message), '')
+                await interaction.response.send_message(embed=embed)
 
             else:
                 await interaction.response.send_message("Error fetching the prices. Please try again.")
