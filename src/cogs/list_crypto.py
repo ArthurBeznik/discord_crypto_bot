@@ -24,7 +24,7 @@ class ListCrypto(commands.Cog, name="listCrypto"):
         Args:
             interaction (discord.Interaction): _description_
         """
-        logger.info(f"Listing available cryptos, author: {interaction.user.id}")
+        logger.info(f"Listing available cryptos, user: {interaction.user} (ID: {interaction.user.id})")
         
         url = CG_API_URL
         response = requests.get(url)

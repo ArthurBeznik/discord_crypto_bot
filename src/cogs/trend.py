@@ -79,8 +79,8 @@ class TrendDetection(commands.Cog, name="trend"):
         await interaction.response.send_message(embed=embed)
 
     @app_commands.command(name="trend", description="Detect the current trend (bullish, bearish, or neutral) for a cryptocurrency.")
-    @app_commands.rename(crypto="symbol")
-    @app_commands.describe(crypto="The symbol of the cryptocurrency (e.g., BTC, ETH).")
+    @app_commands.rename(crypto="crypto")
+    @app_commands.describe(crypto='Name or symbol of the cryptocurrency')
     @app_commands.autocomplete(crypto=crypto_autocomplete)
     async def trend(self, interaction: discord.Interaction, crypto: str) -> None:
         """

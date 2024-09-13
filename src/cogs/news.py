@@ -61,9 +61,9 @@ class News(commands.Cog, name="news"):
             return None
         
     @app_commands.command(name="news", description="Display the latest global or specific cryptocurrency news.")
-    @app_commands.describe(action="Choose global for general cryptocurrency news or crypto for specific crypto news", crypto="Name or symbol of the cryptocurrency. Required if action is 'crypto'.")
+    @app_commands.describe(type="Displays global news on cryptocurrency or for one specific crypto", crypto="Name or symbol of the cryptocurrency. Required if action is 'crypto'.")
     @app_commands.autocomplete(crypto=crypto_autocomplete)
-    async def news(self, interaction: discord.Interaction, action: Literal['global', 'crypto'], crypto: str = None) -> None:
+    async def news(self, interaction: discord.Interaction, type: Literal['global', 'crypto'], crypto: str = None) -> None:
         """
         Fetch and display the latest cryptocurrency news.
         - If 'global' is selected, fetch global cryptocurrency news.
@@ -74,9 +74,14 @@ class News(commands.Cog, name="news"):
             action (Literal['global', 'crypto']): Action to fetch global or specific crypto news.
             crypto (str, optional): Cryptocurrency name or symbol. Required if action is 'crypto'.
         """
-        if action == 'global':
+        if crypto is not None:
+            # Resolve the cryptocurrency
+            crypto = self.bot.crypto_map.get(crypto.lower())
+            logger.info(f"Resolved crypto: {crypto}")
+
+        if type == 'global':
             news_list = await self.fetch_news("cryptocurrency")
-        elif action == 'crypto':
+        elif type == 'crypto':
             if crypto:
                 news_list = await self.fetch_news(crypto)
             else:
@@ -84,7 +89,7 @@ class News(commands.Cog, name="news"):
                 return
 
         if news_list:
-            if action == 'crypto' and crypto:
+            if type == 'crypto' and crypto:
                 news_message = [f"**Latest news for {crypto.upper()}:**\n"]
             else:
                 news_message = ["**Latest Global Cryptocurrency News:**\n"]
@@ -96,7 +101,7 @@ class News(commands.Cog, name="news"):
 
             await interaction.response.send_message('\n'.join(news_message))
         else:
-            if action == 'crypto' and crypto:
+            if type == 'crypto' and crypto:
                 await interaction.response.send_message(f"No news found for {crypto.upper()}. Please try again with a different cryptocurrency.")
             else:
                 await interaction.response.send_message("No global news found at the moment. Please try again later.")

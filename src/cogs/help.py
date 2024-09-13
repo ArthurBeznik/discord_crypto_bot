@@ -30,9 +30,9 @@ class Help(commands.Cog, name="help"):
         return [app_commands.Choice(name=cmd, value=cmd) for cmd in commands]
 
     @app_commands.command(name="help", description="Displays information about commands")
-    @app_commands.describe(action="all/command", name="Name of the command")
+    @app_commands.describe(type="Displays help for all commands or for one specific command", name="Name of the command")
     @app_commands.autocomplete(name=get_command_autocomplete)
-    async def help(self, interaction: discord.Interaction, action: Literal['all', 'command'], name: str = None) -> None:
+    async def help(self, interaction: discord.Interaction, type: Literal['all', 'command'], name: str = None) -> None:
         """_summary_
 
         Args:
@@ -40,13 +40,13 @@ class Help(commands.Cog, name="help"):
             action (Literal['all', 'command']): _description_
             name (str, optional): _description_. Defaults to None.
         """
-        logger.info(f"Action: {action}, Name: {name}") # ? debug
+        logger.info(f"Action: {type}, Name: {name}") # ? debug
 
         # Fetch cogs and commands using the helper function
         cogs_and_commands = get_cogs_and_commands(self.bot)
         # logger.info(f"cogs cmds: {cogs_and_commands}") # ? debug
 
-        if action == 'all':
+        if type == 'all':
             # Display help for all commands
             embed = discord.Embed(title="Help: All Commands", color=0x00A300)
             embed.add_field(name="For more details on a specific command", value="/help command", inline=False)
@@ -54,7 +54,7 @@ class Help(commands.Cog, name="help"):
                 embed.add_field(name=cog_name, value="\n".join(commands_list), inline=False)
             await interaction.response.send_message(embed=embed)
         
-        elif action == 'command' and name:
+        elif type == 'command' and name:
             # Try to find the command (could be a command or a command group)
             command = discord.utils.get(self.bot.tree.get_commands(), name=name.lower())
 

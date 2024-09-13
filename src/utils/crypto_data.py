@@ -93,25 +93,33 @@ def fetch_crypto_data(crypto_id: str, days: int = 30):
     Returns:
         pd.DataFrame: DataFrame with historical prices and volumes.
     """
+    logger.info(f"crypto_id: {crypto_id} | days: {days}") # ? debug
+
     url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart?vs_currency=usd&days={days}"
     response = requests.get(url)
-    data = response.json()
+    
+    if response.status_code == 200:
+        data = response.json()
 
-    if "prices" not in data or "total_volumes" not in data:
+        if "prices" not in data or "total_volumes" not in data:
+            return None
+
+        # Convert price and volume data to DataFrames
+        price_df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
+        price_df['timestamp'] = pd.to_datetime(price_df['timestamp'], unit='ms')
+        price_df.set_index('timestamp', inplace=True)
+
+        volume_df = pd.DataFrame(data['total_volumes'], columns=['timestamp', 'volume'])
+        volume_df['timestamp'] = pd.to_datetime(volume_df['timestamp'], unit='ms')
+        volume_df.set_index('timestamp', inplace=True)
+
+        # Merge DataFrames
+        price_df['volume'] = volume_df['volume']
+        return price_df
+    else:
+        logger.error(f"Error fetching data for {crypto_id} | days: {days}. Status code: {response.status_code}")
         return None
 
-    # Convert price and volume data to DataFrames
-    price_df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
-    price_df['timestamp'] = pd.to_datetime(price_df['timestamp'], unit='ms')
-    price_df.set_index('timestamp', inplace=True)
-
-    volume_df = pd.DataFrame(data['total_volumes'], columns=['timestamp', 'volume'])
-    volume_df['timestamp'] = pd.to_datetime(volume_df['timestamp'], unit='ms')
-    volume_df.set_index('timestamp', inplace=True)
-
-    # Merge DataFrames
-    price_df['volume'] = volume_df['volume']
-    return price_df
 
 def fetch_crypto_info(crypto_id: str):
     """

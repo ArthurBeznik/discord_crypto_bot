@@ -54,16 +54,15 @@ CALENDAR_API_KEY: str = os.getenv('CALENDAR_API_KEY')
 LOOP_MINUTES = 10
 
 # Graphs
+TIME_PERIOD = "Time period (e.g. 1d, 1w, 1m, 3m, 6m, or 1y)"
 PERIOD_MAP = {
             "1d": "1",
             "1w": "7",
             "1m": "30",
             "3m": "90",
             "6m": "180",
-            "1y": "365"
-        }
-
-TIME_PERIOD = "Time period (e.g. 1d, 1w, 1m, 3m, 6m or 1y)"
+            "1y": "365",
+}
 
 # TODO english?
 # GPT system message
