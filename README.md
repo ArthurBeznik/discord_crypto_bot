@@ -1,11 +1,9 @@
 
 # CryptoBot
 
-A simple crypto bot.
+A simple crypto bot doing cryto things.
 
 ## Installing
-
-## Run Locally
 
 Clone the project
 
@@ -19,27 +17,21 @@ Go to the project directory
   cd discord_crypto_bot
 ```
 
-Activate virtual environment
+Activate the virtual environment
 
 ```bash
   source venv/Scripts/activate
 ```
 
-Install dependencies
+Install required dependencies
 
 ```bash
   pip install -r requirements.txt
 ```
 
-Start the bot
+## Environment Variables
 
-```bash
-  python src/main.py
-```
-
-### Environment Variables
-
-To run this project, you will need to add the following environment variables to your ```.env``` file in the root of the project
+To run this project, you will need to add the following environment variables to your ```.env``` file in the root of the project (see .env-template)
 
 ```
 DISCORD_BOT_TOKEN       - Token of your Discord bot
@@ -52,15 +44,40 @@ CMC_API_KEY             - API key for https://coinmarketcap.com/
 CG_API_KEY              - API key for https://www.coingecko.com/
 ```
 
+## Run Locally
+
+Start the bot
+
+```bash
+  python src/main.py
+```
+Enjoy!
+
+
 ## Commands
 
-### Price related
+All the commands listed below are slash commands, and have their input(s) autocompleted upon typing.
+
+### Prices
 ```bash
   /price single <crypto>
-  /price multiple <crypto1> <crypto2> ...
+  /price multiple <crypto1> <crypto2> ...y
 ```
 
-###
+### Alerts
+```bash
+  /alert create <crypto> <treshold>
+  /alert cancel <crypto>
+  /alert show
+```
+
+### Analysis
+```bash
+  /analyse technical <crypto>
+  /analyse advanced <crypto>
+  /analyse full <crypto>
+```
+
 
 
 ## Authors
