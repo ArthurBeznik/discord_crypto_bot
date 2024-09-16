@@ -1,7 +1,7 @@
 
 # CryptoBot
 
-A silly crypto bot doing silly crypto bot things.
+A simple crypto bot.
 
 ## Installing
 
@@ -10,13 +10,19 @@ A silly crypto bot doing silly crypto bot things.
 Clone the project
 
 ```bash
-  git clone https://github.com/ArthurBeznik/discord_crypto_bot/tree/master
+  git clone https://github.com/ArthurBeznik/discord_crypto_bot/tree/main
 ```
 
 Go to the project directory
 
 ```bash
   cd discord_crypto_bot
+```
+
+Activate virtual environment
+
+```bash
+  source venv/Scripts/activate
 ```
 
 Install dependencies
@@ -28,51 +34,35 @@ Install dependencies
 Start the bot
 
 ```bash
-  chmod +x run.sh
-  ./run.sh
+  python src/main.py
 ```
 
 ### Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file in the root of the project
+To run this project, you will need to add the following environment variables to your ```.env``` file in the root of the project
 
-`DISCORD_BOT_TOKEN` - Token of your Discord bot
+```
+DISCORD_BOT_TOKEN       - Token of your Discord bot
+DISCORD_GUILD_ID        - ID of your discord server (aka guild)
+DATABASE_URL            - URL to your database
+CHATGPT_API_KEY         - API key for OpenAI
+ASK_CHAT_CHANNEL_ID     - ID of the channel to send ask commands
+NEWS_API_KEY            - API key for https://newsapi.org/
+CMC_API_KEY             - API key for https://coinmarketcap.com/
+CG_API_KEY              - API key for https://www.coingecko.com/
+```
 
-`ALERT_CHANNEL_ID` - ID of the Discord text channel to send alerts in
+## Commands
 
-`SURVEY_CHANNEL_ID` - ID of Discord text channel to send surveys in
+### Price related
+```bash
+  /price single <crypto>
+  /price multiple <crypto1> <crypto2> ...
+```
 
-`NEWS_API_KEY` - API key for https://newsapi.org/
+###
 
-`CMC_API_KEY` - API key for https://coinmarketcap.com/
-
-`REDDIT_CLIENT_ID` - ...
-
-`REDDIT_SECRET` - ...
-
-`REDDIT_USER_AGENT` - ...
-
-## Features
-
-- Real-time price commands
-- Price alerts
-- Simplified technical analysis
-- Historical data and charts
-- News and Trends
-- Crypto Comparator
-- Market Cap and Volume information
-- Portfolio tracking
-- Market Alerts (Global)
-- Crypto Events Calendar
-- Tips and tutorials
-- Regulatory News
-- Social features
-- Airdrops and ICOs
-- Sentiment Bot
-- Paper trading mode
-- Automatic updates
-- Education support
 
 ## Authors
 
-- [@ArthurBeznik](https://github.com/ArthurBeznik)
+[@ArthurBeznik](https://github.com/ArthurBeznik)
