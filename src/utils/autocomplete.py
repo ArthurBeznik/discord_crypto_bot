@@ -7,13 +7,14 @@ import discord
 from discord import app_commands
 
 from utils.crypto_data import load_crypto_map
-from utils.config import (
-    logging,
-)
+from utils.logger import logging
 
 logger = logging.getLogger(__name__)
 
-async def crypto_autocomplete(interaction: discord.Interaction, input_value: str)-> (list | list[app_commands.Choice]):
+
+async def crypto_autocomplete(
+    interaction: discord.Interaction, input_value: str
+) -> list | list[app_commands.Choice]:
     """_summary_
 
     Args:
@@ -23,7 +24,7 @@ async def crypto_autocomplete(interaction: discord.Interaction, input_value: str
     Returns:
         _type_: _description_
     """
-    logger.info(f"Input: {input_value} | user: {interaction.user.name}") # ? debug
+    logger.info(f"Input: {input_value} | user: {interaction.user.name}")  # ? debug
 
     crypto_map = load_crypto_map()
 
@@ -33,10 +34,13 @@ async def crypto_autocomplete(interaction: discord.Interaction, input_value: str
 
     # Split the input by spaces, autocomplete only for the last part
     last_input = input_value.split()[-1]
-    
+
     # Search for matches for the last word in the crypto_map
-    choices = [app_commands.Choice(name=key, value=key)
-               for key in crypto_map if last_input.lower() in key.lower()]
-    
+    choices = [
+        app_commands.Choice(name=key, value=key)
+        for key in crypto_map
+        if last_input.lower() in key.lower()
+    ]
+
     # Return a maximum of 25 autocomplete choices (discord limitations)
     return choices[:25]

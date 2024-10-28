@@ -1,12 +1,12 @@
 # helpers.py
 
-from utils.config import (
-    logging,
-)
+from bot import CryptoBot
+from utils.logger import logging
 
 logger = logging.getLogger(__name__)
 
-def get_cogs_and_commands(bot) -> dict:
+
+def get_cogs_and_commands(bot: CryptoBot) -> dict:
     """
     Fetches all the cogs and their associated commands (including group commands) from the bot.
 

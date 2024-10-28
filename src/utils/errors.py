@@ -3,11 +3,10 @@
 import discord
 
 from utils.embeds import error_embed
-from utils.config import (
-    logging,
-)
+from utils.logger import logging
 
 logger = logging.getLogger(__name__)
+
 
 async def handle_check_failure(interaction: discord.Interaction, error) -> None:
     embed = discord.Embed(color=discord.Color.red())
@@ -28,5 +27,5 @@ async def handle_check_failure(interaction: discord.Interaction, error) -> None:
     else:
         embed = error_embed("An unexpected error occurred.", str(error))
         logger.error(f"Unexpected error: {error}", exc_info=True)
-    
+
     await interaction.response.send_message(embed=embed, ephemeral=True)

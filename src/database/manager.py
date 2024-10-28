@@ -1,11 +1,13 @@
 # manager.py
 
+from datetime import datetime
+from typing import List, Tuple
 import psycopg2
 
 from utils.config import (
-    logging,
     DATABASE_URL,
 )
+from utils.logger import logging
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +91,7 @@ class DatabaseManager:
             logger.error(f"Error removing alert: {e}")
             self.conn.rollback()
 
-    def get_alerts(self):
+    def get_alerts(self) -> List[Tuple[int, str, float]]:
         """
         Fetches all the active alerts.
 
@@ -130,7 +132,7 @@ class DatabaseManager:
             logger.error(f"Error adding prediction: {e}")
             self.conn.rollback()
 
-    def get_predictions(self, user_id: int = None):
+    def get_predictions(self, user_id: int = None) -> List[Tuple[int, int, str, datetime, float]]:
         """
         Fetches predictions from the database. Can fetch for all users or a specific user.
 
@@ -138,12 +140,12 @@ class DatabaseManager:
             user_id (int, optional): The user ID to filter predictions. Defaults to None.
 
         Returns:
-            list: A list of predictions.
+            list: A list of predictions (id, user_id, crypto, prediction_date, predicted_price).
         """
         logger.info("Getting predictions")
 
         if user_id:
-            query = "SELECT id, crypto, prediction_date, predicted_price FROM predictions WHERE user_id = %s"
+            query = "SELECT id, user_id, crypto, prediction_date, predicted_price FROM predictions WHERE user_id = %s"
             params = (user_id,)
         else:
             query = "SELECT id, user_id, crypto, prediction_date, predicted_price FROM predictions"
@@ -169,7 +171,7 @@ class DatabaseManager:
             with self.conn.cursor() as cursor:
                 cursor.execute(query, (user_id,))
             self.conn.commit()
-            logger.info(f"All predictions removed for user {user_id}.")
+            logger.info(f"All predictions removed for user [{user_id}]")
         except Exception as e:
             logger.error(f"Error clearing predictions: {e}")
             self.conn.rollback()
@@ -190,7 +192,7 @@ class DatabaseManager:
             with self.conn.cursor() as cursor:
                 cursor.execute(query, (user_id, prediction_id))
             self.conn.commit()
-            logger.info(f"Prediction ID {prediction_id} removed for user {user_id}.")
+            logger.info(f"Prediction [{prediction_id}] removed for user [{user_id}]")
             return cursor.rowcount > 0  # Return True if a row was deleted
         except Exception as e:
             logger.error(f"Error removing prediction: {e}")

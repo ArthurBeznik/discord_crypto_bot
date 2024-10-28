@@ -4,15 +4,15 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from bot import CryptoBot
 from utils.embeds import misc_embed, success_embed
-from utils.config import (
-    logging,
-)
+from utils.logger import logging
 
 logger = logging.getLogger(__name__)
 
+
 class Misc(commands.Cog, name="misc"):
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: CryptoBot) -> None:
         self.bot = bot
 
     @app_commands.command(name="greetings", description="Say hello!")
@@ -20,6 +20,8 @@ class Misc(commands.Cog, name="misc"):
         """
         Greets the user.
         """
+        raise ValueError("This is a test error")
+        raise discord.app_commands.AppCommandError("This is a test error.")  # Simulate an error
         embed = success_embed(f"Hello there, {interaction.user.name}!", "")
         await interaction.response.send_message(embed=embed)
         logger.info(f"Sent greetings to {interaction.user.name}")
@@ -38,7 +40,11 @@ class Misc(commands.Cog, name="misc"):
         """
         Flemme
         """
-        embed = misc_embed("", "", "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWphbGZ5bmxqd3IzdGU5OGo2c3NodTkxYnkycmJmbTRod294anhwbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YuexGWhubkGX4I0Q6j/giphy.gif")
+        embed = misc_embed(
+            "",
+            "",
+            "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWphbGZ5bmxqd3IzdGU5OGo2c3NodTkxYnkycmJmbTRod294anhwbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YuexGWhubkGX4I0Q6j/giphy.gif",
+        )
         await interaction.response.send_message(embed=embed)
         logger.info(f"Sent flemme to {interaction.user.name}")
 
@@ -47,7 +53,9 @@ class Misc(commands.Cog, name="misc"):
         """
         Coffee
         """
-        embed = misc_embed("", "", "https://c.tenor.com/QrDVGQ9cnsMAAAAC/coffee-creamer.gif")
+        embed = misc_embed(
+            "", "", "https://c.tenor.com/QrDVGQ9cnsMAAAAC/coffee-creamer.gif"
+        )
         await interaction.response.send_message(embed=embed)
 
     @app_commands.command(name="mingati", description="C'est un gâté")
@@ -55,8 +63,13 @@ class Misc(commands.Cog, name="misc"):
         """
         C'est un gâté
         """
-        embed = misc_embed("", "", "https://media1.tenor.com/m/6DqObjgpaNQAAAAd/sch-cest-un-g%C3%A2t%C3%A9.gif")
+        embed = misc_embed(
+            "",
+            "",
+            "https://media1.tenor.com/m/6DqObjgpaNQAAAAd/sch-cest-un-g%C3%A2t%C3%A9.gif",
+        )
         await interaction.response.send_message(embed=embed)
 
-async def setup(bot: commands.Bot) -> None:
+
+async def setup(bot: CryptoBot) -> None:
     await bot.add_cog(Misc(bot))

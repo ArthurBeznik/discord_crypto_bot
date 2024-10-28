@@ -1,7 +1,6 @@
 # config.py
 
 import os
-import logging
 from dotenv import load_dotenv
 from datetime import timedelta
 import discord
@@ -10,9 +9,15 @@ import discord
 # Paths
 # ########################################################################################
 DATA_PATH = "data"
+LOGS_PATH = "logs"
+
+os.makedirs(DATA_PATH, exist_ok=True)
+os.makedirs(LOGS_PATH, exist_ok=True)
+
 TUTORIALS_FILE = os.path.join(DATA_PATH, "tutorials.txt")
 MAP_CACHE_FILE = os.path.join(DATA_PATH, "crypto_map.json")
 LIST_CACHE_FILE = os.path.join(DATA_PATH, "crypto_list.json")
+LOGS_FILE = os.path.join(LOGS_PATH, "bot.log")
 CACHE_DURATION = timedelta(days=1)
 
 # ########################################################################################
@@ -84,17 +89,3 @@ Tu portes attention au timing et à la rapidité d’exécution, et tu conseille
 En fonction d'un graphique donné par l'utilisateur (par exemple, une image), tu devras analyser ce graphique et fournir les meilleurs prix d'entrée, stop-loss, et take-profit en fonction des données techniques visibles. Si l'analyse du graphique montre qu'il serait pertinent d'obtenir une autre image avec une autre timeframe, tu devras le suggérer afin de fournir le prix d'entrée, le stop-loss, et le take-profit les plus fiables possibles.
 
 Ton ton est professionnel mais accessible, tu prends une « respiration métaphorique » avant chaque réponse pour garantir la précision, et tu offres des conseils basés sur des données tout en évitant de donner des recommandations financières directes."""
-
-
-# ########################################################################################
-# Logging
-# ########################################################################################
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-    datefmt='%H:%M:%S',
-    handlers=[
-        logging.FileHandler("logs/bot.log"),
-        logging.StreamHandler()
-    ]
-)

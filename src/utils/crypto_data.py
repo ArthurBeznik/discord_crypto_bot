@@ -7,12 +7,13 @@ from datetime import datetime
 import os
 
 from utils.config import (
-    logging,
     MAP_CACHE_FILE,
     LIST_CACHE_FILE,
     CACHE_DURATION,
     CG_API_URL,
 )
+from utils.logger import logging
+
 
 logger = logging.getLogger(__name__)
 

@@ -6,27 +6,31 @@ from discord import app_commands
 from discord.ext import commands
 import pandas as pd
 import ta
-import logging
 
+from bot import CryptoBot
+from utils.logger import logging
 from utils.autocomplete import crypto_autocomplete
 from utils.embeds import error_embed, success_embed
 from utils.crypto_data import fetch_crypto_data
 
 logger = logging.getLogger(__name__)
 
+
 class Analysis(commands.Cog, name="analyse"):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: CryptoBot) -> None:
         self.bot = bot
 
     # Helper function to calculate indicators
     def calculate_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
-        df['rsi'] = ta.momentum.RSIIndicator(df['price']).rsi()
-        df['macd'] = ta.trend.MACD(df['price']).macd()
-        df['ema'] = ta.trend.EMAIndicator(df['price']).ema_indicator()
+        df["rsi"] = ta.momentum.RSIIndicator(df["price"]).rsi()
+        df["macd"] = ta.trend.MACD(df["price"]).macd()
+        df["ema"] = ta.trend.EMAIndicator(df["price"]).ema_indicator()
         return df
 
     # Helper function to generate response message based on analysis type
-    def generate_analysis_message(self, crypto: str, df: pd.DataFrame, analysis_type: str) -> str:
+    def generate_analysis_message(
+        self, crypto: str, df: pd.DataFrame, analysis_type: str
+    ) -> str:
         message = ""
 
         # Basic analysis message
@@ -39,9 +43,15 @@ class Analysis(commands.Cog, name="analyse"):
 
         # Advanced analysis message
         elif analysis_type == "advanced":
-            support = df['price'].min()
-            resistance = df['price'].max()
-            recommendation = "Buy" if df['rsi'].iloc[-1] < 30 else "Sell" if df['rsi'].iloc[-1] > 70 else "Hold"
+            support = df["price"].min()
+            resistance = df["price"].max()
+            recommendation = (
+                "Buy"
+                if df["rsi"].iloc[-1] < 30
+                else "Sell"
+                if df["rsi"].iloc[-1] > 70
+                else "Hold"
+            )
             message += (
                 f"RSI (14): {df['rsi'].iloc[-1]:.2f}\n"
                 f"MACD: {df['macd'].iloc[-1]:.2f}\n"
@@ -53,16 +63,18 @@ class Analysis(commands.Cog, name="analyse"):
 
         # Full analysis message
         elif analysis_type == "full":
-            ma50 = df['price'].rolling(window=50).mean().iloc[-1]
-            ma200 = df['price'].rolling(window=200).mean().iloc[-1]
-            current_price = df['price'].iloc[-1]
+            ma50 = df["price"].rolling(window=50).mean().iloc[-1]
+            ma200 = df["price"].rolling(window=200).mean().iloc[-1]
+            current_price = df["price"].iloc[-1]
 
-            bollinger = ta.volatility.BollingerBands(df['price'])
+            bollinger = ta.volatility.BollingerBands(df["price"])
             upper_band = bollinger.bollinger_hband().iloc[-1]
             lower_band = bollinger.bollinger_lband().iloc[-1]
-            price_band_position = (current_price - lower_band) / (upper_band - lower_band) * 100
+            price_band_position = (
+                (current_price - lower_band) / (upper_band - lower_band) * 100
+            )
 
-            logger.info('here')
+            logger.info("here")
             message += (
                 f"**Analyse Technique Complète pour {crypto.upper()} (Intervalle : 1D)**\n"
                 f"- **RSI** : {df['rsi'].iloc[-1]:.2f} (Neutre)\n"
@@ -77,7 +89,9 @@ class Analysis(commands.Cog, name="analyse"):
         return message
 
     # Main analysis handler
-    async def perform_analysis(self, interaction: discord.Interaction, crypto: str, analysis_type: str) -> None:
+    async def perform_analysis(
+        self, interaction: discord.Interaction, crypto: str, analysis_type: str
+    ) -> None:
         logger.info(f"Input crypto: {crypto}")
 
         # Resolve crypto ID
@@ -87,7 +101,9 @@ class Analysis(commands.Cog, name="analyse"):
         # Fetch crypto data
         df = fetch_crypto_data(crypto_id)
         if df is None:
-            embed = error_embed("Error Fetching Data", "Error fetching data. Please try again.")
+            embed = error_embed(
+                "Error Fetching Data", "Error fetching data. Please try again."
+            )
             await interaction.response.send_message(embed=embed, ephemeral=True)
             return
 
@@ -96,16 +112,29 @@ class Analysis(commands.Cog, name="analyse"):
 
         # Generate the appropriate analysis message
         response_message = self.generate_analysis_message(crypto, df, analysis_type)
-        embed = success_embed(f"{analysis_type.capitalize()} Analysis for {crypto}", response_message)
+        embed = success_embed(
+            f"{analysis_type.capitalize()} Analysis for {crypto}", response_message
+        )
         await interaction.response.send_message(embed=embed)
         logger.info(f"Performed {analysis_type} analysis for {crypto}.")
 
-    @app_commands.command(name="analyse", description="Provide basic technical analysis.")
+    @app_commands.command(
+        name="analyse", description="Provide basic technical analysis."
+    )
     @app_commands.rename(crypto="crypto")
-    @app_commands.describe(type="The type of analysis to run", crypto="Name or symbol of the cryptocurrency")
+    @app_commands.describe(
+        type="The type of analysis to run",
+        crypto="Name or symbol of the cryptocurrency",
+    )
     @app_commands.autocomplete(crypto=crypto_autocomplete)
-    async def analyse(self, interaction: discord.Interaction, type: Literal['technical', 'advanced', 'full'], crypto: str) -> None:
+    async def analyse(
+        self,
+        interaction: discord.Interaction,
+        type: Literal["technical", "advanced", "full"],
+        crypto: str,
+    ) -> None:
         await self.perform_analysis(interaction, crypto, type)
 
-async def setup(bot: commands.Bot) -> None:
+
+async def setup(bot: CryptoBot) -> None:
     await bot.add_cog(Analysis(bot))
