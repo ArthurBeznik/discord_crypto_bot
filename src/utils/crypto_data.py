@@ -11,10 +11,11 @@ from utils.config import (
     MAP_CACHE_FILE,
     LIST_CACHE_FILE,
     CACHE_DURATION,
-    CG_API_URL
+    CG_API_URL,
 )
 
 logger = logging.getLogger(__name__)
+
 
 def fetch_from_cache_or_api(cache_file, fetch_function):
     """
@@ -31,19 +32,21 @@ def fetch_from_cache_or_api(cache_file, fetch_function):
         file_mod_time = datetime.fromtimestamp(os.path.getmtime(cache_file))
         if datetime.now() - file_mod_time < CACHE_DURATION:
             logger.info(f"Loading data from cache: {cache_file}")
-            with open(cache_file, 'r') as f:
+            with open(cache_file, "r") as f:
                 return json.load(f)
-    
-    logger.info(f"Fetching data from API: {cache_file}")
+
+    logger.info(f"Fetching data from API into {cache_file}")
     data = fetch_function()
+    logger.info(data)
     if data:
-        with open(cache_file, 'w') as f:
+        with open(cache_file, "w") as f:
             json.dump(data, f)
         logger.info(f"Cached {len(data)} items.")
     else:
         logger.error(f"Failed to fetch data for {cache_file}.")
-    
+
     return data
+
 
 def load_crypto_map() -> dict | None:
     """_summary_
@@ -51,6 +54,7 @@ def load_crypto_map() -> dict | None:
     Returns:
         dict | None: _description_
     """
+
     def fetch_crypto_map():
         url = CG_API_URL
         response = requests.get(url)
@@ -58,13 +62,14 @@ def load_crypto_map() -> dict | None:
             cryptos = response.json()
             crypto_map = {}
             for crypto in cryptos:
-                crypto_map[crypto['id']] = crypto['id']
-                crypto_map[crypto['name'].lower()] = crypto['id']
-                crypto_map[crypto['symbol'].lower()] = crypto['id']
+                crypto_map[crypto["id"]] = crypto["id"]
+                crypto_map[crypto["name"].lower()] = crypto["id"]
+                crypto_map[crypto["symbol"].lower()] = crypto["id"]
             return crypto_map
         return None
 
     return fetch_from_cache_or_api(MAP_CACHE_FILE, fetch_crypto_map)
+
 
 def load_crypto_list() -> list[dict] | None:
     """_summary_
@@ -72,15 +77,20 @@ def load_crypto_list() -> list[dict] | None:
     Returns:
         list[dict] | None: _description_
     """
+
     def fetch_crypto_list():
         url = CG_API_URL
         response = requests.get(url)
         if response.status_code == 200:
             cryptos = response.json()
-            return [{'id': crypto['id'], 'symbol': crypto['symbol'], 'name': crypto['name']} for crypto in cryptos]
+            return [
+                {"id": crypto["id"], "symbol": crypto["symbol"], "name": crypto["name"]}
+                for crypto in cryptos
+            ]
         return None
 
     return fetch_from_cache_or_api(LIST_CACHE_FILE, fetch_crypto_list)
+
 
 def fetch_crypto_data(crypto_id: str, days: int = 30):
     """
@@ -93,11 +103,11 @@ def fetch_crypto_data(crypto_id: str, days: int = 30):
     Returns:
         pd.DataFrame: DataFrame with historical prices and volumes.
     """
-    logger.info(f"crypto_id: {crypto_id} | days: {days}") # ? debug
+    logger.info(f"crypto_id: {crypto_id} | days: {days}")  # ? debug
 
     url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/market_chart?vs_currency=usd&days={days}"
     response = requests.get(url)
-    
+
     if response.status_code == 200:
         data = response.json()
 
@@ -105,19 +115,21 @@ def fetch_crypto_data(crypto_id: str, days: int = 30):
             return None
 
         # Convert price and volume data to DataFrames
-        price_df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
-        price_df['timestamp'] = pd.to_datetime(price_df['timestamp'], unit='ms')
-        price_df.set_index('timestamp', inplace=True)
+        price_df = pd.DataFrame(data["prices"], columns=["timestamp", "price"])
+        price_df["timestamp"] = pd.to_datetime(price_df["timestamp"], unit="ms")
+        price_df.set_index("timestamp", inplace=True)
 
-        volume_df = pd.DataFrame(data['total_volumes'], columns=['timestamp', 'volume'])
-        volume_df['timestamp'] = pd.to_datetime(volume_df['timestamp'], unit='ms')
-        volume_df.set_index('timestamp', inplace=True)
+        volume_df = pd.DataFrame(data["total_volumes"], columns=["timestamp", "volume"])
+        volume_df["timestamp"] = pd.to_datetime(volume_df["timestamp"], unit="ms")
+        volume_df.set_index("timestamp", inplace=True)
 
         # Merge DataFrames
-        price_df['volume'] = volume_df['volume']
+        price_df["volume"] = volume_df["volume"]
         return price_df
     else:
-        logger.error(f"Error fetching data for {crypto_id} | days: {days}. Status code: {response.status_code}")
+        logger.error(
+            f"Error fetching data for {crypto_id} | days: {days}. Status code: {response.status_code}"
+        )
         return None
 
 

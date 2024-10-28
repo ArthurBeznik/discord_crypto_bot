@@ -7,18 +7,20 @@ import os
 from database.manager import DatabaseManager
 from utils.crypto_data import load_crypto_list, load_crypto_map
 from utils.errors import handle_check_failure
-from utils.config import (
-    DISCORD_BOT_TOKEN,
-    DISCORD_GUILD_ID,
-    logging
-)
+from utils.config import DISCORD_BOT_TOKEN, DISCORD_GUILD_ID, logging
 
 logger = logging.getLogger(__name__)
 
-intents = discord.Intents(
-    guilds=True, members=True, messages=True, reactions=True,
-    presences=True, message_content=True
-)
+# intents = discord.Intents(
+#     guilds=True,
+#     members=True,
+#     messages=True,
+#     reactions=True,
+#     presences=True,
+#     message_content=True,
+# )
+intents = discord.Intents(guilds=True, messages=True, message_content=True,) #TODO testing
+
 
 class CryptoBot(commands.Bot):
     def __init__(self) -> None:
@@ -44,11 +46,11 @@ class CryptoBot(commands.Bot):
         """
         try:
             self.db = DatabaseManager()
-            self.db.initialize() # Ensure tables are created
+            self.db.initialize()
             logger.info("Database initialized successfully.")
         except Exception as e:
             logger.error(f"Failed to initialize database: {e}")
-            await self.close() # Close the bot if the database initialization fails.
+            await self.close()
 
     async def load_cogs(self) -> None:
         """
@@ -81,7 +83,9 @@ class CryptoBot(commands.Bot):
         logger.info(f"Logged in as {self.user} (ID: {self.user.id})")
         logger.info(f"{self.user} is connected to {len(self.guilds)} guild(s)")
 
-    async def on_app_command_completion(self, interaction: discord.Interaction, command) -> None:
+    async def on_app_command_completion(
+        self, interaction: discord.Interaction, command
+    ) -> None:
         """
         Event called when a command is successfully executed.
         """
@@ -89,9 +93,13 @@ class CryptoBot(commands.Bot):
         split = full_command_name.split(" ")
         executed_command = str(split[0])
         if interaction.guild:
-            logger.info(f"Executed command: {executed_command} in {interaction.guild.name} (ID: {interaction.guild.id}) by {interaction.user.name} (ID: {interaction.user.id})")
+            logger.info(
+                f"Executed command: {executed_command} in {interaction.guild.name} (ID: {interaction.guild.id}) by {interaction.user.name} (ID: {interaction.user.id})"
+            )
         else:
-            logger.info(f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs")
+            logger.info(
+                f"Executed command: {executed_command} by {interaction.user.name} (ID: {interaction.user.id}) in DMs"
+            )
 
     async def close(self) -> None:
         """
@@ -99,17 +107,21 @@ class CryptoBot(commands.Bot):
         """
         logger.info("Shutting down bot...")
         if self.db:
-            self.db.close() # Close the database connection
-        await super().close() # Call the original close method from commands.Bot
+            self.db.close()
+        await super().close()
 
 
 # Create bot instance and run it
 bot = CryptoBot()
 
+
 @bot.tree.error
-async def on_app_command_error(interaction: discord.Interaction, error: discord.app_commands.AppCommandError) -> None:
+async def on_app_command_error(
+    interaction: discord.Interaction, error: discord.app_commands.AppCommandError
+) -> None:
     logger.error(f"Error on command: {interaction.command.name}")
     await handle_check_failure(interaction, error)
+
 
 # Run the bot
 bot.run(DISCORD_BOT_TOKEN)
