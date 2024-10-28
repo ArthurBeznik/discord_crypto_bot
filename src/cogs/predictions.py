@@ -2,6 +2,7 @@
 
 # TODO formatting of table?
 
+from typing import Literal
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -97,7 +98,7 @@ class Prediction(commands.GroupCog, name="prediction"):
             user_scores = {}
             current_date = datetime.now().date()
 
-            for user_id, crypto, prediction_date, predicted_price in predictions:
+            for id, user_id, crypto, prediction_date, predicted_price in predictions:
                 if prediction_date > current_date:
                     # Skip predictions where the date is in the future
                     continue
@@ -111,6 +112,7 @@ class Prediction(commands.GroupCog, name="prediction"):
                         user_scores[user_id] = []
                     user_scores[user_id].append((crypto, predicted_price, actual_price, accuracy, prediction_date))
 
+            logger.info(user_scores)
             # Average accuracy for each user
             user_avg_accuracy = {user_id: sum(acc[3] for acc in accs) / len(accs) for user_id, accs in user_scores.items()}
 
@@ -143,6 +145,53 @@ class Prediction(commands.GroupCog, name="prediction"):
         except Exception as e:
             logger.error(f"Error fetching leaderboard: {e}")
             await interaction.followup.send(f"Failed to display leaderboard: {e}")
+
+    @app_commands.command(name="list", description="List all your predictions.")
+    async def list_predictions(self, interaction: discord.Interaction) -> None:
+        try:
+            user_id = interaction.user.id
+            predictions = self.bot.db.get_predictions(user_id)
+
+            if not predictions:
+                await interaction.response.send_message("You have no predictions recorded.")
+                return
+
+            # Prepare the predictions message
+            predictions_message = "Your Predictions:\n"
+            for id, crypto, prediction_date, predicted_price in predictions:
+                formatted_date = prediction_date.strftime('%d-%m-%Y')
+                predictions_message += (f"[**{id}**] **{crypto}** on **{formatted_date}**: **${predicted_price}**\n")
+
+            await interaction.response.send_message(predictions_message)
+
+        except Exception as e:
+            logger.error(f"Error listing predictions: {e}")
+            await interaction.response.send_message("An error occurred while fetching your predictions.")
+
+    @app_commands.command(name="clear", description="Remove your predictions")
+    @app_commands.describe(type="Removes all your predictions or a specific one", prediction_id="ID of the prediction to remove (optional)")
+    async def clear_predictions(self, interaction: discord.Interaction, type: Literal['all', 'ID'], prediction_id: int = None) -> None:
+        try:
+            user_id = interaction.user.id
+
+            if type == 'all':
+                self.bot.db.clear_predictions(user_id)
+                await interaction.response.send_message("All your predictions have been removed.")
+                return
+            
+            elif type == 'ID' and prediction_id:
+                # Remove a specific prediction
+                result = self.bot.db.remove_prediction(user_id, prediction_id)
+                if result:
+                    await interaction.response.send_message(f"Prediction ID **{prediction_id}** has been removed.")
+                else:
+                    await interaction.response.send_message(f"No prediction found for ID **{prediction_id}**.")
+            else:
+                await interaction.response.send_message("You need to specify a prediction ID to remove a specific prediction.")
+
+        except Exception as e:
+            logger.error(f"Error clearing predictions: {e}")
+            await interaction.response.send_message("An error occurred while clearing your predictions.")
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Prediction(bot))

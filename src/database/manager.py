@@ -143,10 +143,10 @@ class DatabaseManager:
         logger.info("Getting predictions")
 
         if user_id:
-            query = "SELECT crypto, prediction_date, predicted_price FROM predictions WHERE user_id = %s"
+            query = "SELECT id, crypto, prediction_date, predicted_price FROM predictions WHERE user_id = %s"
             params = (user_id,)
         else:
-            query = "SELECT user_id, crypto, prediction_date, predicted_price FROM predictions"
+            query = "SELECT id, user_id, crypto, prediction_date, predicted_price FROM predictions"
             params = ()
 
         try:
@@ -156,6 +156,46 @@ class DatabaseManager:
         except Exception as e:
             logger.error(f"Error fetching predictions: {e}")
             return []
+        
+    def clear_predictions(self, user_id: int) -> None:
+        """
+        Removes all predictions for a specific user.
+
+        Args:
+            user_id (int): The ID of the user.
+        """
+        query = "DELETE FROM predictions WHERE user_id = %s"
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(query, (user_id,))
+            self.conn.commit()
+            logger.info(f"All predictions removed for user {user_id}.")
+        except Exception as e:
+            logger.error(f"Error clearing predictions: {e}")
+            self.conn.rollback()
+
+    def remove_prediction(self, user_id: int, prediction_id: int) -> bool:
+        """
+        Removes a specific prediction for a user.
+
+        Args:
+            user_id (int): The ID of the user.
+            prediction_id (int): The ID of the prediction.
+        
+        Returns:
+            bool: True if a prediction was removed, False otherwise.
+        """
+        query = "DELETE FROM predictions WHERE user_id = %s AND id = %s"
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(query, (user_id, prediction_id))
+            self.conn.commit()
+            logger.info(f"Prediction ID {prediction_id} removed for user {user_id}.")
+            return cursor.rowcount > 0  # Return True if a row was deleted
+        except Exception as e:
+            logger.error(f"Error removing prediction: {e}")
+            self.conn.rollback()
+            return False
 
     def close(self) -> None:
         """
