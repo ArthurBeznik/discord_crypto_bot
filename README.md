@@ -29,6 +29,14 @@ Install required dependencies
   pip install -r requirements.txt
 ```
 
+### Docker Installation
+
+Build the dockerized prokect
+
+```bash
+  docker-compose build
+```
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your ```.env``` file in the root of the project (see .env-template)
@@ -52,6 +60,25 @@ Start the bot
   python src/main.py
 ```
 Enjoy!
+
+## Using Docker
+
+Start the containers
+
+```bash
+  docker-compose up
+```
+
+Stop the containers
+
+```bash
+  docker-compose stop
+```
+
+Stop and remove containers
+```bash
+  docker-compose down
+```
 
 
 ## Commands
