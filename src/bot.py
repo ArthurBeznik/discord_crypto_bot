@@ -4,7 +4,7 @@ import os
 import discord
 from discord.ext import commands
 
-from database.manager import DatabaseManager
+from database.db_manager import DatabaseManager
 from utils.crypto_data import load_crypto_list, load_crypto_map
 from utils.config import DISCORD_GUILD_ID
 from utils.logger import logging
@@ -44,7 +44,7 @@ class CryptoBot(commands.Bot):
         """
         try:
             self.db = DatabaseManager()
-            self.db.initialize()
+            self.db.initializer.initialize()  # Initialize database schema
             logger.info("Database initialized successfully.")
         except Exception as e:
             logger.error(f"Failed to initialize database: {e}")
@@ -63,6 +63,7 @@ class CryptoBot(commands.Bot):
                     logger.info(f"Loaded extension: {filename}")
                 except Exception as e:
                     logger.error(f"Failed to load extension {filename}: {e}")
+        logger.info("Loaded all extensions successfully")
 
     async def sync_tree(self) -> None:
         """

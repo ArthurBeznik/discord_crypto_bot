@@ -20,8 +20,6 @@ class Misc(commands.Cog, name="misc"):
         """
         Greets the user.
         """
-        raise ValueError("This is a test error")
-        raise discord.app_commands.AppCommandError("This is a test error.")  # Simulate an error
         embed = success_embed(f"Hello there, {interaction.user.name}!", "")
         await interaction.response.send_message(embed=embed)
         logger.info(f"Sent greetings to {interaction.user.name}")

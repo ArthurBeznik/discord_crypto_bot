@@ -5,7 +5,7 @@
 from typing import Dict, List, Tuple
 import discord
 from discord.ext import commands, tasks
-from discord import app_commands
+from discord import Embed, app_commands
 import requests
 
 from bot import CryptoBot
@@ -22,18 +22,18 @@ UserAlertsType = Dict[int, Dict[str, float]]
 class Alert(commands.GroupCog, name="alert"):
     def __init__(self, bot: CryptoBot) -> None:
         self.bot = bot
-        self.check_alerts.start()  # ! Start the task loop for checking alerts
+        # self.check_alerts.start()  # ! Start the task loop for checking alerts
 
     @tasks.loop(minutes=LOOP_MINUTES)
     async def check_alerts(self) -> None:
         logger.info("Checking alerts...")
 
         try:
-            alerts: List[Tuple[int, str, float]] = self.bot.db.get_alerts()
+            alerts: List[Tuple[int, str, float]] = self.bot.db.alerts.get_alerts()
 
             logger.debug(f"alerts: {alerts}")  # ? debug
 
-            # TODO fix, this is overwritting if there are multiple alerts for the same crypto
+            # TODO bug: this is overwritting if there are multiple alerts for the same crypto
             user_alerts: UserAlertsType = {}
             for user_id, crypto, threshold in alerts:
                 if user_id not in user_alerts:
@@ -63,7 +63,7 @@ class Alert(commands.GroupCog, name="alert"):
                                     f"Sent alert to user: {user} for {crypto} at ${price:.2f}"
                                 )
 
-                                self.db.remove_alert(user_id, crypto)
+                                self.bot.db.remove_alert(user_id, crypto)
                                 logger.info("Removed alert from DB")
                     else:
                         logger.error(
@@ -90,7 +90,7 @@ class Alert(commands.GroupCog, name="alert"):
             # logger.info(f"Resolved crypto: {crypto_id}") # ? debug
 
             await interaction.response.defer(thinking=True)
-            self.bot.db.add_alert(interaction.user.id, crypto_id, threshold)
+            self.bot.db.alerts.add_alert(interaction.user.id, crypto_id, threshold)
             embed = success_embed(f"Alert set for {crypto_id} at ${threshold:.2f}")
             await interaction.followup.send(embed=embed)
             logger.info(f"Alert set for {interaction.user.name}")
@@ -109,7 +109,7 @@ class Alert(commands.GroupCog, name="alert"):
             logger.info(f"Resolved crypto: {crypto_id}")
 
             await interaction.response.defer(thinking=True)
-            self.bot.db.remove_alert(interaction.user.id, crypto_id)
+            self.bot.db.alerts.remove_alert(interaction.user.id, crypto_id)
             await interaction.followup.send(f"Alert for {crypto_id} has been canceled.")
             logger.info(f"Alert canceled for {interaction.user.name}")
         except Exception as e:
@@ -121,7 +121,7 @@ class Alert(commands.GroupCog, name="alert"):
     )
     async def show_alerts(self, interaction: discord.Interaction) -> None:
         try:
-            alerts = self.bot.db.get_alerts()
+            alerts = self.bot.db.alerts.get_alerts()
             user_alerts = [
                 (crypto, threshold)
                 for user_id, crypto, threshold in alerts
@@ -132,7 +132,14 @@ class Alert(commands.GroupCog, name="alert"):
                 alert_list = "\n".join(
                     [f"{crypto}: ${threshold:.2f}" for crypto, threshold in user_alerts]
                 )
-                await interaction.response.send_message(f"Your alerts:\n{alert_list}")
+
+                embed: Embed = Embed(
+                    title="Your Alerts",
+                    description=alert_list,
+                    color=discord.Color.green(),
+                )
+                await interaction.response.send_message(embed=embed)
+
                 logger.info(f"Displayed alerts for {interaction.user.name}")
             else:
                 await interaction.response.send_message("You have no active alerts.")

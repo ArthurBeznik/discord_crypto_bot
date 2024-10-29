@@ -34,7 +34,7 @@ class FearGreed(commands.Cog, name="feargreed"):
                     return data["data"][0]  # Get the most recent index data
             else:
                 logger.error(
-                    f"Error fetching Fear and Greed Index: {response.status_code}"
+                    f"Error fetching Fear and Greed Index. Status code: {response.status_code}"
                 )
                 return None
         except Exception as e:
