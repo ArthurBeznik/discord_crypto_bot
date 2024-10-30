@@ -1,7 +1,6 @@
 # predictions.py
 
 from datetime import datetime
-from decimal import Decimal
 from typing import Literal
 import discord
 from discord.ext import commands, tasks
@@ -56,7 +55,7 @@ class Prediction(commands.GroupCog, name="prediction"):
                 # Update the actual price in the database if fetched successfully
                 if actual_price is not None:
                     accuracy = calculate_prediction_accuracy(
-                        predicted_price, Decimal(actual_price)
+                        predicted_price, actual_price
                     )
                     logger.debug(f"accuracy: {accuracy}")  # ? debug
 
@@ -101,10 +100,12 @@ class Prediction(commands.GroupCog, name="prediction"):
 
             # If the date is today or earlier, fetch the actual price immediately
             actual_price = None
+            accuracy = None
             if prediction_date <= datetime.now().date():
                 actual_price = await fetch_actual_price(
                     self.bot, crypto, prediction_date
                 )
+                accuracy = calculate_prediction_accuracy(prediction, actual_price)
 
             # Record the prediction in the database with the actual price if available
             self.bot.db.predictions.add_prediction(
@@ -112,7 +113,8 @@ class Prediction(commands.GroupCog, name="prediction"):
                 crypto_id,
                 prediction_date,
                 prediction,
-                actual_price=actual_price,
+                actual_price,
+                accuracy
             )
 
             # Send a confirmation message
@@ -122,6 +124,9 @@ class Prediction(commands.GroupCog, name="prediction"):
                 color=discord.Color.green(),
             )
             await interaction.response.send_message(embed=embed)
+            logger.info(
+                f"Successfully created and displayed prediction to user [{interaction.user.id}]"
+            )
 
         except ValueError:
             await interaction.response.send_message(
@@ -163,6 +168,9 @@ class Prediction(commands.GroupCog, name="prediction"):
             logger.debug(f"leaderboard_message: {leaderboard_message}")  # ? debug
 
             await interaction.followup.send(leaderboard_message)
+            logger.info(
+                f"Successfully displayed leaderboard to user [{interaction.user.id}]"
+            )
 
         except Exception as e:
             logger.error(f"Error fetching leaderboard: {e}")

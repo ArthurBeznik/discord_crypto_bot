@@ -48,6 +48,7 @@ async def fetch_actual_price(
         logger.error(f"Error fetching price for {crypto} on {prediction_date}: {e}")
         return None
 
+
 # TODO still in use?
 # def format_user_scores(
 #     user_id: int,
@@ -260,7 +261,7 @@ def format_predictions_table(
 
 
 def calculate_prediction_accuracy(
-    predicted_price: Decimal, actual_price: Decimal
+    predicted_price: Decimal | float, actual_price: Decimal | float
 ) -> Decimal:
     """Calculates the accuracy of a prediction.
 
@@ -274,11 +275,17 @@ def calculate_prediction_accuracy(
     Returns:
         Decimal: _description_
     """
+    logger.info(
+        f"Calculating prediction accuracy: predicted price [{predicted_price}] | actual price [{actual_price}]"
+    )
+
     if predicted_price is None or actual_price is None:
         raise ValueError("Both predicted_price and actual_price must be provided.")
 
     # Calculate the accuracy as a decimal value
-    accuracy = Decimal(1) - abs(predicted_price - actual_price) / actual_price
+    accuracy = Decimal(1) - abs(
+        Decimal(predicted_price) - Decimal(actual_price)
+    ) / Decimal(actual_price)
 
     # Clamp the accuracy to a range of [0, 1] to handle any edge cases
     return max(Decimal(0), min(accuracy, Decimal(1)))

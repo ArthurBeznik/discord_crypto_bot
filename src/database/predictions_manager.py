@@ -21,6 +21,7 @@ class PredictionsDatabaseManager:
         prediction_date: str,
         predicted_price: float,
         actual_price: float,
+        accuracy: Decimal
     ) -> None:
         logger.info(f"Adding prediction to DB for user [{user_id}]")
 
@@ -77,7 +78,7 @@ class PredictionsDatabaseManager:
             with self.conn.cursor() as cursor:
                 cursor.execute(query, (date,))
                 results = cursor.fetchall()
-                logger.info(f"Found {len(results)} pending predictions")
+                logger.info(f"Found [{len(results)}] pending predictions")
                 return results
         except Exception as e:
             logger.error(f"Error fetching pending predictions: {e}")
@@ -97,7 +98,7 @@ class PredictionsDatabaseManager:
             with self.conn.cursor() as cursor:
                 cursor.execute(query)
                 results = cursor.fetchall()
-                logger.info(f"Found {len(results)} completed predictions")
+                logger.info(f"Found [{len(results)}] completed predictions")
                 return results
         except Exception as e:
             logger.error(f"Error fetching completed predictions: {e}")

@@ -2,7 +2,7 @@
 
 # TODO configure alert check loop
 
-from typing import Dict, List, Tuple
+from typing import Dict
 import discord
 from discord.ext import commands, tasks
 from discord import Embed, app_commands
@@ -29,8 +29,7 @@ class Alert(commands.GroupCog, name="alert"):
         logger.info("Checking alerts...")
 
         try:
-            alerts: List[Tuple[int, str, float]] = self.bot.db.alerts.get_alerts()
-
+            alerts = self.bot.db.alerts.get_alerts()
             logger.debug(f"alerts: {alerts}")  # ? debug
 
             # TODO bug: this is overwritting if there are multiple alerts for the same crypto
@@ -39,7 +38,6 @@ class Alert(commands.GroupCog, name="alert"):
                 if user_id not in user_alerts:
                     user_alerts[user_id] = {}
                 user_alerts[user_id][crypto] = threshold
-
             logger.debug(f"user_alerts: {user_alerts}")  # ? debug
 
             for user_id, alerts in user_alerts.items():
@@ -60,18 +58,24 @@ class Alert(commands.GroupCog, name="alert"):
                                     f"Alert: The price of {crypto} has reached ${price:.2f}."
                                 )
                                 logger.info(
-                                    f"Sent alert to user: {user} for {crypto} at ${price:.2f}"
+                                    f"Sent alert to user [{user.id}] for {crypto} at ${price:.2f}"
                                 )
 
-                                self.bot.db.remove_alert(user_id, crypto)
-                                logger.info("Removed alert from DB")
+                                self.bot.db.alerts.remove_alert(user_id, crypto)
+                                logger.info("Successfully removed alert from DB")
                     else:
                         logger.error(
-                            f"Error fetching price for {crypto}. Status code: {response.status_code}"
+                            f"Error fetching price for [{crypto}]. Status code: {response.status_code}"
                         )
 
         except Exception as e:
             logger.error(f"Error in check_alerts task: {e}")
+
+    @check_alerts.before_loop
+    async def before_check_alerts(self):
+        await (
+            self.bot.wait_until_ready()
+        )  # Ensures the bot is ready before starting the loop
 
     @app_commands.command(
         name="create", description="Set a price alert for a cryptocurrency."
@@ -84,16 +88,20 @@ class Alert(commands.GroupCog, name="alert"):
     async def create_alert(
         self, interaction: discord.Interaction, crypto: str, threshold: float
     ) -> None:
+        logger.info(
+            f"Creating alert for user [{interaction.user.id}] on [{crypto}] at [{threshold}]"
+        )
+
         try:
             # Resolve the cryptocurrency
             crypto_id = self.bot.crypto_map.get(crypto.lower())
-            # logger.info(f"Resolved crypto: {crypto_id}") # ? debug
+            logger.debug(f"Resolved crypto: {crypto_id}")  # ? debug
 
             await interaction.response.defer(thinking=True)
             self.bot.db.alerts.add_alert(interaction.user.id, crypto_id, threshold)
             embed = success_embed(f"Alert set for {crypto_id} at ${threshold:.2f}")
             await interaction.followup.send(embed=embed)
-            logger.info(f"Alert set for {interaction.user.name}")
+            logger.info(f"Successfully set alert for user [{interaction.user.id}]")
         except Exception as e:
             await interaction.followup.send(f"Failed to set alert: {e}")
             logger.error(f"Error creating alert: {e}")
@@ -103,15 +111,19 @@ class Alert(commands.GroupCog, name="alert"):
     )
     @app_commands.describe(crypto="The cryptocurrency of the alert to cancel.")
     async def cancel_alert(self, interaction: discord.Interaction, crypto: str) -> None:
+        logger.info(f"Cancelling alert for user [{interaction.user.id}] for [{crypto}]")
+
         try:
             # Resolve the cryptocurrency
             crypto_id = self.bot.crypto_map.get(crypto.lower())
-            logger.info(f"Resolved crypto: {crypto_id}")
+            logger.debug(f"Resolved crypto: {crypto_id}")  # ? debug
 
             await interaction.response.defer(thinking=True)
             self.bot.db.alerts.remove_alert(interaction.user.id, crypto_id)
-            await interaction.followup.send(f"Alert for {crypto_id} has been canceled.")
-            logger.info(f"Alert canceled for {interaction.user.name}")
+            await interaction.followup.send(f"Alert for {crypto_id} has been canceled")
+            logger.info(
+                f"Successfully canceled alert for user [{interaction.user.id}]"
+            )
         except Exception as e:
             await interaction.followup.send(f"Failed to cancel alert: {e}")
             logger.error(f"Error canceling alert: {e}")
@@ -120,6 +132,8 @@ class Alert(commands.GroupCog, name="alert"):
         name="show", description="Show all active alerts for the user."
     )
     async def show_alerts(self, interaction: discord.Interaction) -> None:
+        logger.info(f"Showing alerts of user [{interaction.user.id}]")
+
         try:
             alerts = self.bot.db.alerts.get_alerts()
             user_alerts = [
@@ -140,10 +154,12 @@ class Alert(commands.GroupCog, name="alert"):
                 )
                 await interaction.response.send_message(embed=embed)
 
-                logger.info(f"Displayed alerts for {interaction.user.name}")
+                logger.info(
+                    f"Successfully displayed alerts for [{interaction.user.id}]"
+                )
             else:
-                await interaction.response.send_message("You have no active alerts.")
-                logger.info(f"No alerts for {interaction.user.name}")
+                await interaction.response.send_message("You have no active alerts")
+                logger.info(f"No alerts for {interaction.user.id}")
         except Exception as e:
             await interaction.response.send_message(f"Failed to fetch alerts: {e}")
             logger.error(f"Error showing alerts: {e}")
