@@ -1,21 +1,19 @@
 # predictions.py
 
-# TODO formatting of table?
-
 from datetime import datetime
 from decimal import Decimal
-from typing import Dict, List, Literal, Tuple
+from typing import Literal
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord import Embed, app_commands
 
 from bot import CryptoBot
 from utils.prediction_helpers import (
-    calculate_user_scores,
+    calculate_prediction_accuracy,
+    fetch_actual_price,
     format_leaderboard_table,
     format_predictions_table,
 )
-
 from utils.autocomplete import crypto_autocomplete
 from utils.logger import logging
 
@@ -25,6 +23,55 @@ logger = logging.getLogger(__name__)
 class Prediction(commands.GroupCog, name="prediction"):
     def __init__(self, bot: CryptoBot) -> None:
         self.bot = bot
+        self.check_pending_predictions.start()  # Start the task to fetch prices for future predictions
+
+    @tasks.loop(hours=24)
+    async def check_pending_predictions(self):
+        """
+        This background task runs every 24 hours to check for predictions with future dates
+        and updates the actual prices once those dates pass.
+        """
+        logger.info("Checking for pending predictions")
+
+        try:
+            # Get all predictions that need an actual price and have a past date
+            pending_predictions = self.bot.db.predictions.get_pending_predictions(
+                datetime.now().date()
+            )
+            logger.debug(f"pending_predictions: {pending_predictions}")  # ? debug
+
+            for prediction in pending_predictions:
+                (
+                    prediction_id,
+                    crypto_id,
+                    prediction_date,
+                    predicted_price,
+                    actual_price,
+                ) = prediction
+                actual_price = await fetch_actual_price(
+                    self.bot, crypto_id, prediction_date
+                )
+                logger.debug(f"actual_price: {actual_price}")  # ? debug
+
+                # Update the actual price in the database if fetched successfully
+                if actual_price is not None:
+                    accuracy = calculate_prediction_accuracy(
+                        predicted_price, Decimal(actual_price)
+                    )
+                    logger.debug(f"accuracy: {accuracy}")  # ? debug
+
+                    self.bot.db.predictions.update_pending_prediction(
+                        prediction_id, actual_price, accuracy
+                    )
+
+        except Exception as e:
+            logger.error(f"Error in scheduled check_pending_predictions task: {e}")
+
+    @check_pending_predictions.before_loop
+    async def before_check_pending_predictions(self):
+        await (
+            self.bot.wait_until_ready()
+        )  # Ensures the bot is ready before starting the loop
 
     @app_commands.command(
         name="create",
@@ -41,6 +88,10 @@ class Prediction(commands.GroupCog, name="prediction"):
         date: str,
         prediction: float,
     ) -> None:
+        logger.info(
+            f"Creating prediction for user [{interaction.user.id}] for [{crypto}] on [{date}], predicted price: [{prediction}]"
+        )
+
         try:
             # Resolve the cryptocurrency
             crypto_id: str = self.bot.crypto_map.get(crypto.lower())
@@ -48,9 +99,20 @@ class Prediction(commands.GroupCog, name="prediction"):
             # Validate the date format
             prediction_date: datetime = datetime.strptime(date, "%d-%m-%Y").date()
 
-            # Record the prediction in the database
+            # If the date is today or earlier, fetch the actual price immediately
+            actual_price = None
+            if prediction_date <= datetime.now().date():
+                actual_price = await fetch_actual_price(
+                    self.bot, crypto, prediction_date
+                )
+
+            # Record the prediction in the database with the actual price if available
             self.bot.db.predictions.add_prediction(
-                interaction.user.id, crypto_id, prediction_date, prediction
+                interaction.user.id,
+                crypto_id,
+                prediction_date,
+                prediction,
+                actual_price=actual_price,
             )
 
             # Send a confirmation message
@@ -77,43 +139,27 @@ class Prediction(commands.GroupCog, name="prediction"):
         description="Display a leaderboard of users ranked by their most accurate predictions.",
     )
     async def leaderboard(self, interaction: discord.Interaction) -> None:
+        logger.info(f"Displaying leaderboard for user [{interaction.user.id}]")
+
         try:
             await interaction.response.defer(thinking=True)
 
-            # Fetch all predictions from the database
-            predictions: List[Tuple[int, int, str, datetime, float]] = (
-                self.bot.db.predictions.get_predictions()
-            )
-
+            # Fetch all completed predictions from the database
+            predictions = self.bot.db.predictions.get_completed_predictions()
             logger.debug(f"predictions: {predictions}")  # ? debug
 
             if not predictions:
-                await interaction.followup.send("No predictions found.")
+                await interaction.followup.send("No predictions found")
                 return
 
-            # Calculate accuracy for each user's predictions
-            user_scores: Dict[int, List[Tuple[str, float, float, float, datetime]]] = {}
-            current_date: datetime = datetime.now().date()
+            # Sort the predictions by most accurate
+            sorted_predictions = sorted(predictions, key=lambda x: x[5], reverse=True)
+            logger.debug(f"Sorted predictions: {sorted_predictions}")  # ? debug
 
-            user_scores, user_avg_accuracy = await calculate_user_scores(
-                self.bot, predictions, current_date
-            )
-
-            logger.debug(f"user_scores: {user_scores}")
-            logger.debug(f"user_avg_accuracy: {user_avg_accuracy}")
-
-            # Sort users by their average accuracy
-            leaderboard: List[Tuple[int, float]] = sorted(
-                user_avg_accuracy.items(), key=lambda x: x[1], reverse=True
-            )
-
-            logger.debug(f"leaderboard: {leaderboard}")  # ? debug
-
-            # Use the helper function to format the leaderboard as a table
+            # Format the leaderboard message
             leaderboard_message = await format_leaderboard_table(
-                leaderboard, user_scores, interaction
+                sorted_predictions, interaction
             )
-
             logger.debug(f"leaderboard_message: {leaderboard_message}")  # ? debug
 
             await interaction.followup.send(leaderboard_message)
@@ -124,28 +170,26 @@ class Prediction(commands.GroupCog, name="prediction"):
 
     @app_commands.command(name="list", description="List all your predictions.")
     async def list_predictions(self, interaction: discord.Interaction) -> None:
+        logger.info(f"Listing predictions of user [{interaction.user.id}]")
+
         try:
             user_id: int = interaction.user.id
 
-            predictions: List[Tuple[int, int, str, datetime, Decimal]] = (
-                self.bot.db.predictions.get_predictions(user_id)
-            )
+            predictions = self.bot.db.predictions.get_predictions(user_id)
+            logger.debug(f"predictions: {predictions}")  # ? debug
 
             if not predictions:
                 await interaction.response.send_message(
-                    "You have no predictions recorded."
+                    "You have no predictions recorded"
                 )
                 return
 
             # Use the helper function to format the predictions as a table
             predictions_message = format_predictions_table(predictions)
+            logger.debug(f"predictions_message: {predictions_message}")  # ? debug
 
-            embed: Embed = Embed(
-                title="Your Predictions",
-                description=predictions_message,
-                color=discord.Color.green(),
-            )
-            await interaction.response.send_message(embed=embed)
+            await interaction.response.send_message(predictions_message)
+            logger.info(f"Successfully listed predictions of user [{user_id}]")
 
         except Exception as e:
             logger.error(f"Error listing predictions: {e}")
@@ -161,41 +205,54 @@ class Prediction(commands.GroupCog, name="prediction"):
     async def clear_predictions(
         self,
         interaction: discord.Interaction,
-        type: Literal["all", "ID"],
+        type: Literal["all", "Prediction ID"],
         prediction_id: int = None,
     ) -> None:
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            type (Literal[&quot;all&quot;, &quot;Prediction ID&quot;]): _description_
+            prediction_id (int, optional): _description_. Defaults to None.
+        """
         try:
             user_id: int = interaction.user.id
 
             if type == "all":
+                logger.info(f"Clearing all predictions of user [{user_id}]")
+
                 self.bot.db.predictions.clear_predictions(user_id)
                 await interaction.response.send_message(
-                    "All your predictions have been removed."
+                    "All your predictions have been removed successfully"
                 )
                 return
 
-            elif type == "ID" and prediction_id:
+            elif type == "Prediction ID" and prediction_id:
+                logger.info(
+                    f"Clearing prediction [{prediction_id}] of user [{user_id}]"
+                )
+
                 # Remove a specific prediction
                 result = self.bot.db.predictions.remove_prediction(
                     user_id, prediction_id
                 )
                 if result:
                     await interaction.response.send_message(
-                        f"Prediction ID **{prediction_id}** has been removed."
+                        f"Prediction ID **{prediction_id}** has been removed"
                     )
                 else:
                     await interaction.response.send_message(
-                        f"No prediction found for ID **{prediction_id}**."
+                        f"No prediction found for ID **{prediction_id}**"
                     )
             else:
                 await interaction.response.send_message(
-                    "You need to specify a prediction ID to remove a specific prediction."
+                    "You need to specify a prediction ID to remove a specific prediction"
                 )
 
         except Exception as e:
             logger.error(f"Error clearing predictions: {e}")
             await interaction.response.send_message(
-                "An error occurred while clearing your predictions."
+                "An error occurred while clearing your predictions"
             )
 
 
