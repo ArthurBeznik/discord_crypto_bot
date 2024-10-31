@@ -7,7 +7,7 @@ from discord.ext import commands, tasks
 from discord import Embed, app_commands
 
 from bot import CryptoBot
-from utils.prediction_helpers import (
+from utils.predictions_helpers import (
     calculate_prediction_accuracy,
     fetch_actual_price,
     format_leaderboard_table,
@@ -28,7 +28,7 @@ class Prediction(commands.GroupCog, name="prediction"):
     async def check_pending_predictions(self):
         """
         This background task runs every 24 hours to check for predictions with future dates
-        and updates the actual prices once those dates pass.
+        and updates the actual prices and accuracy once those dates pass.
         """
         logger.info("Checking for pending predictions")
 
@@ -47,20 +47,35 @@ class Prediction(commands.GroupCog, name="prediction"):
                     predicted_price,
                     actual_price,
                 ) = prediction
-                actual_price = await fetch_actual_price(
-                    self.bot, crypto_id, prediction_date
-                )
-                logger.debug(f"actual_price: {actual_price}")  # ? debug
 
-                # Update the actual price in the database if fetched successfully
-                if actual_price is not None:
-                    accuracy = calculate_prediction_accuracy(
-                        predicted_price, actual_price
+                try:
+                    actual_price = await fetch_actual_price(
+                        self.bot, crypto_id, prediction_date
                     )
-                    logger.debug(f"accuracy: {accuracy}")  # ? debug
+                    logger.debug(f"actual_price: {actual_price}")  # ? debug
 
-                    self.bot.db.predictions.update_pending_prediction(
-                        prediction_id, actual_price, accuracy
+                    # Update the actual price in the database if fetched successfully
+                    if actual_price is not None:
+                        accuracy = calculate_prediction_accuracy(
+                            predicted_price, actual_price
+                        )
+                        logger.debug(f"accuracy: {accuracy}")  # ? debug
+
+                        updated = self.bot.db.predictions.update_pending_prediction(
+                            prediction_id, actual_price, accuracy
+                        )
+                        if updated:
+                            logger.info(
+                                f"Updated prediction [{prediction_id}] with actual price [${actual_price}] and accuracy [{accuracy:.2f}%]"
+                            )
+                        else:
+                            logger.warning(
+                                f"Prediction [{prediction_id}] already updated or does not exist"
+                            )
+
+                except Exception as e:
+                    logger.error(
+                        f"Error processing prediction [{prediction_id}] for [{crypto_id}]: {e}"
                     )
 
         except Exception as e:
@@ -87,6 +102,18 @@ class Prediction(commands.GroupCog, name="prediction"):
         date: str,
         prediction: float,
     ) -> None:
+        """
+        Records a new cryptocurrency price prediction made by the user for a specified future date.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+            crypto (str): The cryptocurrency symbol for which the prediction is made.
+            date (str): Date for the prediction in DD-MM-YYYY format.
+            prediction (float): Predicted price of the cryptocurrency.
+
+        Returns:
+            None
+        """
         logger.info(
             f"Creating prediction for user [{interaction.user.id}] for [{crypto}] on [{date}], predicted price: [{prediction}]"
         )
@@ -108,13 +135,13 @@ class Prediction(commands.GroupCog, name="prediction"):
                 accuracy = calculate_prediction_accuracy(prediction, actual_price)
 
             # Record the prediction in the database with the actual price if available
-            self.bot.db.predictions.add_prediction(
+            self.bot.db.predictions.create_prediction(
                 interaction.user.id,
                 crypto_id,
                 prediction_date,
                 prediction,
                 actual_price,
-                accuracy
+                accuracy,
             )
 
             # Send a confirmation message
@@ -128,9 +155,9 @@ class Prediction(commands.GroupCog, name="prediction"):
                 f"Successfully created and displayed prediction to user [{interaction.user.id}]"
             )
 
-        except ValueError:
+        except ValueError as e:
             await interaction.response.send_message(
-                "Invalid date format. Please use DD-MM-YYYY.", ephemeral=True
+                f"An error occured: {e}", ephemeral=True
             )
         except Exception as e:
             logger.error(f"Error in /prediction command: {e}")
@@ -144,6 +171,15 @@ class Prediction(commands.GroupCog, name="prediction"):
         description="Display a leaderboard of users ranked by their most accurate predictions.",
     )
     async def leaderboard(self, interaction: discord.Interaction) -> None:
+        """
+        Displays a leaderboard showing users ranked by prediction accuracy.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+
+        Returns:
+            None
+        """
         logger.info(f"Displaying leaderboard for user [{interaction.user.id}]")
 
         try:
@@ -178,6 +214,15 @@ class Prediction(commands.GroupCog, name="prediction"):
 
     @app_commands.command(name="list", description="List all your predictions.")
     async def list_predictions(self, interaction: discord.Interaction) -> None:
+        """
+        Lists all predictions made by the user.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+
+        Returns:
+            None
+        """
         logger.info(f"Listing predictions of user [{interaction.user.id}]")
 
         try:
@@ -216,12 +261,16 @@ class Prediction(commands.GroupCog, name="prediction"):
         type: Literal["all", "Prediction ID"],
         prediction_id: int = None,
     ) -> None:
-        """_summary_
+        """
+        Clears one or all predictions made by the user based on the provided type.
 
         Args:
-            interaction (discord.Interaction): _description_
-            type (Literal[&quot;all&quot;, &quot;Prediction ID&quot;]): _description_
-            prediction_id (int, optional): _description_. Defaults to None.
+            interaction (discord.Interaction): The interaction that triggered this command.
+            type (Literal["all", "Prediction ID"]): Indicates whether to delete all predictions or a specific one.
+            prediction_id (int, optional): The ID of the specific prediction to delete.
+
+        Returns:
+            None
         """
         try:
             user_id: int = interaction.user.id

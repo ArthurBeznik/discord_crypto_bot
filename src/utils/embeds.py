@@ -15,7 +15,7 @@ def error_embed(title: str, description: str) -> discord.Embed:
     """
     embed = discord.Embed(
         title=title,
-        description=f"**{description}**",
+        description=f"{description}",
         color=discord.Color.red()
     )
     return embed

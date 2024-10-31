@@ -5,14 +5,15 @@
 from typing import Dict
 import discord
 from discord.ext import commands, tasks
-from discord import Embed, app_commands
+from discord import app_commands
 import requests
 
 from bot import CryptoBot
+from utils.alerts_helpers import format_alerts_table
 from utils.autocomplete import crypto_autocomplete
 from utils.config import LOOP_MINUTES
 from utils.logger import logging
-from utils.embeds import success_embed
+from utils.embeds import error_embed, success_embed
 
 logger = logging.getLogger(__name__)
 
@@ -88,6 +89,7 @@ class Alert(commands.GroupCog, name="alert"):
     async def create_alert(
         self, interaction: discord.Interaction, crypto: str, threshold: float
     ) -> None:
+        """"""
         logger.info(
             f"Creating alert for user [{interaction.user.id}] on [{crypto}] at [{threshold}]"
         )
@@ -98,61 +100,60 @@ class Alert(commands.GroupCog, name="alert"):
             logger.debug(f"Resolved crypto: {crypto_id}")  # ? debug
 
             await interaction.response.defer(thinking=True)
-            self.bot.db.alerts.add_alert(interaction.user.id, crypto_id, threshold)
-            embed = success_embed(f"Alert set for {crypto_id} at ${threshold:.2f}")
+            self.bot.db.alerts.create_alert(interaction.user.id, crypto_id, threshold)
+            embed = success_embed(
+                f"Alert for [{crypto_id}] at [${threshold:.2f}] has been created"
+            )
             await interaction.followup.send(embed=embed)
-            logger.info(f"Successfully set alert for user [{interaction.user.id}]")
+            logger.info(f"Successfully created alert for user [{interaction.user.id}]")
         except Exception as e:
-            await interaction.followup.send(f"Failed to set alert: {e}")
+            await interaction.followup.send(f"Error creating alert: {e}")
             logger.error(f"Error creating alert: {e}")
 
     @app_commands.command(
         name="cancel", description="Cancel a previously set price alert."
     )
-    @app_commands.describe(crypto="The cryptocurrency of the alert to cancel.")
-    async def cancel_alert(self, interaction: discord.Interaction, crypto: str) -> None:
-        logger.info(f"Cancelling alert for user [{interaction.user.id}] for [{crypto}]")
+    @app_commands.describe(alert_id="The ID of the alert to cancel.")
+    async def cancel_alert(
+        self, interaction: discord.Interaction, alert_id: int
+    ) -> None:
+        logger.info(f"Cancelling alert [{alert_id}] for user [{interaction.user.id}]")
 
         try:
-            # Resolve the cryptocurrency
-            crypto_id = self.bot.crypto_map.get(crypto.lower())
-            logger.debug(f"Resolved crypto: {crypto_id}")  # ? debug
-
             await interaction.response.defer(thinking=True)
-            self.bot.db.alerts.remove_alert(interaction.user.id, crypto_id)
-            await interaction.followup.send(f"Alert for {crypto_id} has been canceled")
-            logger.info(
-                f"Successfully canceled alert for user [{interaction.user.id}]"
+            self.bot.db.alerts.remove_alert(interaction.user.id, alert_id)
+            embed = success_embed(
+                "Alert canceled", f"Alert with ID [{alert_id}] has been canceled"
             )
+            await interaction.followup.send(embed=embed)
+            logger.info(
+                f"Successfully canceled alert [**{alert_id}**] for user [{interaction.user.id}]"
+            )
+
+        except ValueError as ve:
+            embed = error_embed("Failed to cancel alert", f"{ve}")
+            await interaction.followup.send(embed=embed)
+            logger.error(f"Error canceling alert [{alert_id}]: {ve}")
+
         except Exception as e:
             await interaction.followup.send(f"Failed to cancel alert: {e}")
-            logger.error(f"Error canceling alert: {e}")
+            logger.error(f"Error canceling alert [{alert_id}]: {e}")
 
     @app_commands.command(
-        name="show", description="Show all active alerts for the user."
+        name="list", description="List all active alerts for the user."
     )
-    async def show_alerts(self, interaction: discord.Interaction) -> None:
-        logger.info(f"Showing alerts of user [{interaction.user.id}]")
+    async def list_alerts(self, interaction: discord.Interaction) -> None:
+        logger.info(f"Listing alerts of user [{interaction.user.id}]")
 
         try:
-            alerts = self.bot.db.alerts.get_alerts()
-            user_alerts = [
-                (crypto, threshold)
-                for user_id, crypto, threshold in alerts
-                if user_id == interaction.user.id
-            ]
+            alerts = self.bot.db.alerts.get_alerts(interaction.user.id)
+            logger.debug(f"alerts: {alerts}")  # ? debug
 
-            if user_alerts:
-                alert_list = "\n".join(
-                    [f"{crypto}: ${threshold:.2f}" for crypto, threshold in user_alerts]
-                )
+            if alerts:
+                alert_table = format_alerts_table(alerts)
+                logger.debug(f"alert_table: {alert_table}")  # ? debug
 
-                embed: Embed = Embed(
-                    title="Your Alerts",
-                    description=alert_list,
-                    color=discord.Color.green(),
-                )
-                await interaction.response.send_message(embed=embed)
+                await interaction.response.send_message(alert_table)
 
                 logger.info(
                     f"Successfully displayed alerts for [{interaction.user.id}]"
@@ -161,8 +162,8 @@ class Alert(commands.GroupCog, name="alert"):
                 await interaction.response.send_message("You have no active alerts")
                 logger.info(f"No alerts for {interaction.user.id}")
         except Exception as e:
-            await interaction.response.send_message(f"Failed to fetch alerts: {e}")
-            logger.error(f"Error showing alerts: {e}")
+            await interaction.response.send_message(f"Error listing alerts: {e}")
+            logger.error(f"Error listing alerts: {e}")
 
 
 async def setup(bot: CryptoBot) -> None:
