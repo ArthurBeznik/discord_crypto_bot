@@ -7,6 +7,7 @@ from discord.ext import commands, tasks
 from discord import Embed, app_commands
 
 from bot import CryptoBot
+from utils.embeds import error_embed, success_embed
 from utils.predictions_helpers import (
     calculate_prediction_accuracy,
     fetch_actual_price,
@@ -145,10 +146,9 @@ class Prediction(commands.GroupCog, name="prediction"):
             )
 
             # Send a confirmation message
-            embed: Embed = discord.Embed(
+            embed: Embed = success_embed(
                 title="Prediction Recorded",
                 description=f"Your prediction for **{crypto_id}** on **{date}** is **${prediction}**.",
-                color=discord.Color.green(),
             )
             await interaction.response.send_message(embed=embed)
             logger.info(
@@ -238,7 +238,7 @@ class Prediction(commands.GroupCog, name="prediction"):
                 return
 
             # Use the helper function to format the predictions as a table
-            predictions_message = format_predictions_table(predictions)
+            predictions_message = await format_predictions_table(predictions)
             logger.debug(f"predictions_message: {predictions_message}")  # ? debug
 
             await interaction.response.send_message(predictions_message)
@@ -279,9 +279,11 @@ class Prediction(commands.GroupCog, name="prediction"):
                 logger.info(f"Clearing all predictions of user [{user_id}]")
 
                 self.bot.db.predictions.clear_predictions(user_id)
-                await interaction.response.send_message(
-                    "All your predictions have been removed successfully"
+                embed: Embed = success_embed(
+                    "Predictions removed",
+                    "All your predictions have been removed successfully",
                 )
+                await interaction.response.send_message(embed=embed)
                 return
 
             elif type == "Prediction ID" and prediction_id:
@@ -294,23 +296,31 @@ class Prediction(commands.GroupCog, name="prediction"):
                     user_id, prediction_id
                 )
                 if result:
-                    await interaction.response.send_message(
-                        f"Prediction ID **{prediction_id}** has been removed"
+                    embed: Embed = success_embed(
+                        "Prediction removed",
+                        f"Successfully removed prediction [{prediction_id}]",
                     )
+                    await interaction.response.send_message(embed=embed)
                 else:
-                    await interaction.response.send_message(
-                        f"No prediction found for ID **{prediction_id}**"
+                    embed: Embed = error_embed(
+                        "Unknown prediction",
+                        f"Prediction [{prediction_id}] not found",
                     )
+                    await interaction.response.send_message(embed=embed)
             else:
-                await interaction.response.send_message(
-                    "You need to specify a prediction ID to remove a specific prediction"
+                embed: Embed = error_embed(
+                    "Error removing prediction",
+                    "You need to specify a prediction ID to remove a specific prediction",
                 )
+                await interaction.response.send_message(embed=embed)
 
         except Exception as e:
             logger.error(f"Error clearing predictions: {e}")
-            await interaction.response.send_message(
-                "An error occurred while clearing your predictions"
+            embed: Embed = error_embed(
+                "Error removing prediction",
+                "An error occurred while clearing your predictions",
             )
+            await interaction.response.send_message(embed=embed)
 
 
 async def setup(bot: CryptoBot) -> None:

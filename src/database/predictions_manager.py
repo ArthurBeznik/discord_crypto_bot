@@ -75,7 +75,7 @@ class PredictionsDatabaseManager:
         Returns:
             List[PredictionType]: A list of prediction records from the database.
         """
-        if user_id:
+        if user_id is not None:
             logger.info(f"Getting predictions from DB for user [{user_id}]")
             query = """
                 SELECT id, user_id, crypto, prediction_date, predicted_price, actual_price, accuracy 
@@ -217,28 +217,40 @@ class PredictionsDatabaseManager:
     # ########################################################################################
     # DELETE
     # ########################################################################################
-    def clear_predictions(self, user_id: int) -> None:
-        """Clears all predictions from the database for a specific user.
+    def clear_predictions(self, user_id: int = None) -> None:
+        """Clears all predictions from the database for a specific user or all users if no user_id is provided.
 
         Args:
-            user_id (int): The ID of the user whose predictions to clear.
+            user_id (int, optional): The ID of the user whose predictions to clear. If None, clears predictions for all users.
         """
-        logger.info(f"Clearing predictions from DB for user [{user_id}]")
+        if user_id is not None:
+            logger.info(f"Clearing predictions from DB for user [{user_id}]")
+            query = """
+                DELETE FROM predictions WHERE user_id = %s
+            """
+            params = (user_id,)
+        else:
+            logger.info("Clearing all predictions from DB for all users")
+            query = """
+                DELETE FROM predictions
+            """
+            params = ()
 
-        query = """
-            DELETE FROM predictions WHERE user_id = %s
-        """
-        params = (user_id,)
         logger.debug(f"Executing query: {query} with parameters: {params}")  # ? debug
 
         try:
             with self.conn.cursor() as cursor:
                 cursor.execute(query, params)
             self.conn.commit()
-            logger.info(f"Successfully removed all predictions for user [{user_id}]")
+
+            if user_id is not None:
+                logger.info(f"Successfully removed all predictions for user [{user_id}]")
+            else:
+                logger.info("Successfully removed all predictions for all users")
         except Exception as e:
             logger.error(f"Error clearing predictions: {e}")
             self.conn.rollback()
+
 
     def remove_prediction(self, user_id: int, prediction_id: int) -> bool:
         """Removes a specific prediction for a user from the database.

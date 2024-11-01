@@ -100,8 +100,9 @@ async def format_leaderboard_table(
     return leaderboard_message
 
 
-def format_predictions_table(
+async def format_predictions_table(
     predictions: List[Tuple[int, int, str, datetime, Decimal, Decimal, Decimal]],
+    interaction: discord.Interaction = None,
 ) -> str:
     """Formats a list of predictions into a readable table format.
 
@@ -116,12 +117,16 @@ def format_predictions_table(
     logger.info("Formatting predictions table")
 
     table_message = "```\n"
-    table_message += f"{'ID':<5} {'Crypto':<15} {'Date':<15} {'Predicted Price':<15} {'Actual Price':<15} {'Accuracy':<10}\n"
-    table_message += "-" * 80 + "\n"
+    if interaction is not None:
+        table_message += f"{'ID':<5} {'User':<15} {'Crypto':<15} {'Date':<15} {'Predicted Price':<15} {'Actual Price':<15} {'Accuracy':<10}\n"
+        table_message += "-" * 100 + "\n"
+    else:
+        table_message += f"{'ID':<5} {'Crypto':<15} {'Date':<15} {'Predicted Price':<15} {'Actual Price':<15} {'Accuracy':<10}\n"
+        table_message += "-" * 80 + "\n"
 
     for (
         id,
-        _,
+        user_id,
         crypto,
         prediction_date,
         predicted_price,
@@ -136,10 +141,18 @@ def format_predictions_table(
         )
         accuracy_str = f"{accuracy:<.2%}" if accuracy is not None else "N/A"
 
-        table_message += (
-            f"{id:<5} {crypto:<15} {formatted_date:<15} ${predicted_price:<15.2f} "
-            f"{actual_price_str:<15} {accuracy_str:<10}\n"
-        )
+        if interaction is not None:
+            user: User = await interaction.client.fetch_user(user_id)
+            username = user.name if user else f"User {user_id}"
+            table_message += (
+                f"{id:<5} {username:<15} {crypto:<15} {formatted_date:<15} ${predicted_price:<15.2f} "
+                f"{actual_price_str:<15} {accuracy_str:<10}\n"
+            )
+        else:
+            table_message += (
+                f"{id:<5} {crypto:<15} {formatted_date:<15} ${predicted_price:<15.2f} "
+                f"{actual_price_str:<15} {accuracy_str:<10}\n"
+            )
         logger.debug(f"table_message: {table_message}")  # ? debug
 
     table_message += "```"

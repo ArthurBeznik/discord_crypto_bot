@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from bot import CryptoBot
+from utils.predictions_helpers import format_predictions_table
 from utils.config import (
     DISCORD_GUILD_OBJ,
 )
@@ -95,6 +96,66 @@ class Admin(commands.Cog, name="admin"):
         except Exception as e:
             await interaction.response.send_message(f"Error syncing commands: {e}")
             logger.error(f"Failed to clear commands: {e}")
+
+    @app_commands.command(
+        name="clear_all_predictions", description="Clear all predictions for all users"
+    )
+    @app_commands.default_permissions(administrator=True)
+    async def clear_all_predictions(self, interaction: discord.Interaction) -> None:
+        """
+        Clears all predictions made by all users.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+
+        Returns:
+            None
+        """
+        try:
+            logger.info("Admin is clearing all predictions for all users")
+            self.bot.db.predictions.clear_predictions()
+            await interaction.response.send_message(
+                "All predictions for all users have been removed successfully."
+            )
+            logger.info("Successfully cleared all predictions for all users.")
+        except Exception as e:
+            await interaction.response.send_message(f"Error clearing predictions: {e}")
+            logger.error(f"Failed to clear all predictions: {e}")
+
+    @app_commands.command(
+        name="get_all_predictions", description="Get all predictions for all users"
+    )
+    @app_commands.default_permissions(administrator=True)
+    async def get_all_predictions(self, interaction: discord.Interaction) -> None:
+        """
+        Clears all predictions made by all users.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+
+        Returns:
+            None
+        """
+        try:
+            logger.info("Admin is getting all predictions for all users")
+            predictions = self.bot.db.predictions.get_predictions()
+            logger.debug(f"predictions: {predictions}")  # ? debug
+
+            if not predictions:  # Check if the predictions list is empty
+                logger.warning("No predictions found in the database.")
+                await interaction.response.send_message(
+                    "No predictions found for any users."
+                )
+                return
+
+            predictions_message = await format_predictions_table(
+                predictions, interaction
+            )
+            await interaction.response.send_message(predictions_message)
+            logger.info("Successfully fetched all predictions for all users.")
+        except Exception as e:
+            await interaction.response.send_message(f"Error fetching predictions: {e}")
+            logger.error(f"Failed to fetch all predictions: {e}")
 
 
 async def setup(bot: CryptoBot) -> None:

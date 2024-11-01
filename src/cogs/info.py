@@ -25,8 +25,11 @@ class Info(commands.Cog):
     @app_commands.describe(crypto="Name or symbol of the cryptocurrency")
     @app_commands.autocomplete(crypto=crypto_autocomplete)
     async def info(self, interaction: discord.Interaction, crypto: str) -> None:
-        """
-        /info <crypto>: Display comprehensive market information for a cryptocurrency.
+        """_summary_
+
+        Args:
+            interaction (discord.Interaction): _description_
+            crypto (str): _description_
         """
         # Resolve the cryptocurrency
         crypto_id = self.bot.crypto_map.get(crypto.lower())

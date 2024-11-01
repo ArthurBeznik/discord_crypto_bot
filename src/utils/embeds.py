@@ -5,51 +5,58 @@
 
 import discord
 
+
 def error_embed(title: str, description: str) -> discord.Embed:
     """
-    Create a formatted error embed.
+    Creates an error-styled embed with a red color theme.
 
-    :param title: The title of the embed.
-    :param description: The description of the embed, typically the error message.
-    :return: A discord.Embed instance.
+    Args:
+        title (str): The title of the embed message, indicating the type of error.
+        description (str): A detailed message or description explaining the error.
+
+    Returns:
+        discord.Embed: A Discord embed object styled with a red color to signify an error.
     """
     embed = discord.Embed(
-        title=title,
-        description=f"{description}",
-        color=discord.Color.red()
+        title=title, description=f"{description}", color=discord.Color.red()
     )
     return embed
 
+
 def success_embed(title: str, description: str = None) -> discord.Embed:
     """
-    Create a formatted success embed.
+    Creates a success-styled embed with a green color theme.
 
-    :param title: The title of the embed.
-    :param description: The description of the embed, typically the success message.
-    :return: A discord.Embed instance.
+    Args:
+        title (str): The title of the embed message, indicating successful operation.
+        description (str, optional): A message or description providing details of the success. Defaults to an empty string if not provided.
+
+    Returns:
+        discord.Embed: A Discord embed object styled with a green color to signify success.
     """
     if description is None:
         description = ""
 
     embed = discord.Embed(
-        title=title,
-        description=f"{description}",
-        color=discord.Color.green()
+        title=title, description=f"{description}", color=discord.Color.green()
     )
     return embed
 
+
 def misc_embed(title: str, description: str, image_url: str = None) -> discord.Embed:
     """
-    Create a formatted success embed.
+    Creates a miscellaneous-styled embed with an orange color theme, optionally including an image.
 
-    :param title: The title of the embed.
-    :param description: The description of the embed, typically the success message.
-    :return: A discord.Embed instance.
+    Args:
+        title (str): The title of the embed message, providing the main topic.
+        description (str): A message or description providing further details.
+        image_url (str, optional): URL of an image/gif/etc to be embedded. If not provided, no image is included.
+
+    Returns:
+        discord.Embed: A Discord embed object styled with an orange color, with an optional image if provided.
     """
     embed = discord.Embed(
-        title=title,
-        description=f"{description}",
-        color=discord.Color.orange()
+        title=title, description=f"{description}", color=discord.Color.orange()
     )
 
     # Optionally add an image if image_url is provided

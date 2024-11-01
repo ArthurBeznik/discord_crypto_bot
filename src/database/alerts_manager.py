@@ -1,6 +1,8 @@
 # alerts_manager.py
 
 from typing import List, Tuple
+
+from psycopg2 import DatabaseError
 from utils.logger import logging
 
 logger = logging.getLogger(__name__)
@@ -47,6 +49,7 @@ class AlertsDatabaseManager:
         except Exception as e:
             logger.error(f"Error adding alert: {e}")
             self.conn.rollback()
+            raise DatabaseError(f"{e}")
 
     # ########################################################################################
     # READ
@@ -88,7 +91,7 @@ class AlertsDatabaseManager:
                 return cursor.fetchall()
         except Exception as e:
             logger.error(f"Error fetching alerts: {e}")
-            return []
+            raise DatabaseError(f"{e}")
 
     # ########################################################################################
     # DELETE
@@ -97,13 +100,16 @@ class AlertsDatabaseManager:
         self,
         user_id: int,
         alert_id: int,
-    ) -> None:
+    ) -> bool:
         """
         Removes an existing alert based on its unique alert ID.
 
         Args:
             alert_id (int): The ID of the alert to be removed.
             user_id (int): The ID of the user attempting to remove the alert.
+
+        Returns:
+            bool: True if the alert was successfully removed, False if the alert was not found.
 
         Raises:
             Exception: Logs an error and rolls back the transaction if deletion fails.
@@ -129,11 +135,13 @@ class AlertsDatabaseManager:
                 logger.info(
                     f"Successfully removed alert [{alert_id}] for user [{user_id}]"
                 )
+                return True
             else:
-                error_message = f"Error finding alert [{alert_id}] for user [{user_id}]"
-                logger.warning(error_message)
-                raise ValueError(error_message)
+                logger.warning(
+                    f"Failed to remove or find alert [{alert_id}] for user [{user_id}]"
+                )
+                return False
         except Exception as e:
             logger.error(f"Error removing alert [{alert_id}]: {e}")
             self.conn.rollback()
-            raise
+            raise DatabaseError(f"{e}")
