@@ -32,7 +32,7 @@ class CryptoBot(commands.Bot):
         This method is called when the bot starts up.
         """
         # Initialize the database
-        await self.init_db()
+        # await self.init_db()
 
         # Load cogs and sync the command tree
         await self.load_cogs()

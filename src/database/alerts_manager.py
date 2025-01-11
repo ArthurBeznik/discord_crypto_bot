@@ -62,9 +62,11 @@ class AlertsDatabaseManager:
             user_id (int, optional): The ID of the user whose alerts to retrieve.
 
         Returns:
-            List[Tuple[int, int, str, float]]: A list of tuples, each containing alert_id,
-            user_id, cryptocurrency symbol, and the threshold price for an alert.
-
+            List[Tuple[int, int, str, float]]: A list of tuples (i.e. alerts), where each tuple contains:
+                - alert_id (int): The unique identifier for the alert.
+                - user_id (int): The ID of the user who set the alert.
+                - crypto (str): The symbol of the cryptocurrency for the alert.
+                - threshold (float): The price threshold for the alert.
         Raises:
             Exception: Logs an error if retrieval fails and returns an empty list.
         """

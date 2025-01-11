@@ -2,6 +2,7 @@
 
 # TODO does it make sense having the client in get_gpt_response ?
 
+from typing import Literal
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -86,6 +87,23 @@ class AskGPT(commands.Cog, name="askGPT"):
             logger.warning(
                 f"Command issued in an unauthorized channel: {interaction.channel.id}"
             )
+
+    @app_commands.command(
+        name="ask_test", description="Ask something to a specific GPT assistant."
+    )
+    @app_commands.rename()
+    async def ask_test(
+        self,
+        interaction: discord.Interaction,
+        type: Literal["assistant A", "assistant B", "assistant C"],
+        question: str,
+    ) -> None:
+        if type == "assistant A":
+            await interaction.response.send_message("TODO implement Assistant A...")
+        elif type == "assistant B":
+            await interaction.response.send_message("TODO implement Assistant B...")
+        elif type == "assistant C":
+            await interaction.response.send_message("TODO implement Assistant C...")
 
 
 async def setup(bot: CryptoBot) -> None:

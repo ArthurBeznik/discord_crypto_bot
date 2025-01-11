@@ -4,7 +4,10 @@ from datetime import datetime
 from decimal import Decimal
 from typing import List, Tuple
 
+from psycopg2 import DatabaseError
+
 from custom_types.predictions_types import PredictionType
+from utils.exceptions import DatabaseOperationException
 from utils.logger import logging
 
 logger = logging.getLogger(__name__)
@@ -41,6 +44,7 @@ class PredictionsDatabaseManager:
         query = """
             INSERT INTO predictions (user_id, crypto, prediction_date, predicted_price, actual_price, accuracy)
             VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """
         params = (
             user_id,
@@ -62,6 +66,8 @@ class PredictionsDatabaseManager:
         except Exception as e:
             logger.error(f"Error adding prediction: {e}")
             self.conn.rollback()
+            raise DatabaseOperationException("create_prediction", str(e))
+            raise DatabaseError(f"{e}")
 
     # ########################################################################################
     # READ

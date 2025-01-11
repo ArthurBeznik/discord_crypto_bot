@@ -110,3 +110,9 @@ All the commands listed below are slash commands, and have their input(s) autoco
 ## Authors
 
 [@ArthurBeznik](https://github.com/ArthurBeznik)
+
+
+
+## Version
+
+v1.0.1

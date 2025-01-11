@@ -166,7 +166,7 @@ class Alert(commands.GroupCog, name="alert"):
             raise
         except Exception as e:
             await send_error_response(
-                interaction, "Error creating alert", "An unknown error occured."
+                interaction, "Error creating alert", "An unexpected error occured."
             )
             logger.error(f"Error creating alert: {e}")
             raise
@@ -221,7 +221,7 @@ class Alert(commands.GroupCog, name="alert"):
             await send_error_response(
                 interaction,
                 "Error canceling alert",
-                "An unknown error occured.",
+                "An unexpected error occured.",
             )
             logger.error(
                 f"Error canceling alert [{alert_id}] for user [{interaction.user.id}]: {e}"

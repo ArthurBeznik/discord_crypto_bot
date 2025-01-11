@@ -5,8 +5,11 @@ from typing import Literal
 import discord
 from discord.ext import commands, tasks
 from discord import Embed, app_commands
+from psycopg2 import DatabaseError
+import requests
 
 from bot import CryptoBot
+from utils.response_helpers import send_error_response, send_success_response
 from utils.embeds import error_embed, success_embed
 from utils.predictions_helpers import (
     calculate_prediction_accuracy,
@@ -122,6 +125,14 @@ class Prediction(commands.GroupCog, name="prediction"):
         try:
             # Resolve the cryptocurrency
             crypto_id: str = self.bot.crypto_map.get(crypto.lower())
+            if crypto_id is None:
+                await send_error_response(
+                    interaction,
+                    "Error resolving crypto",
+                    f"Could not find crypto **{crypto}**",
+                )
+                return
+                raise ValueError(f"Could not resolve crypto **{crypto}**")
 
             # Validate the date format
             prediction_date: datetime = datetime.strptime(date, "%d-%m-%Y").date()
@@ -146,24 +157,41 @@ class Prediction(commands.GroupCog, name="prediction"):
             )
 
             # Send a confirmation message
-            embed: Embed = success_embed(
-                title="Prediction Recorded",
-                description=f"Your prediction for **{crypto_id}** on **{date}** is **${prediction}**.",
+            await send_success_response(
+                interaction,
+                "Prediction Recorded",
+                f"Your prediction for **{crypto_id}** on **{date}** is **${prediction}**.",
             )
-            await interaction.response.send_message(embed=embed)
             logger.info(
                 f"Successfully created and displayed prediction to user [{interaction.user.id}]"
             )
 
+        except requests.HTTPError as e:
+            logger.error(f"Error creating prediction: {e}")
+            await send_error_response(
+                interaction, "Error creating prediction", f"HTTPError: {e}"
+            )
+            # raise
         except ValueError as e:
-            await interaction.response.send_message(
-                f"An error occured: {e}", ephemeral=True
+            logger.error(f"Error creating prediction: {e}")
+            await send_error_response(
+                interaction, "Error creating prediction", f"ValueError: {e}"
+            )
+        except TypeError as e:
+            logger.error(f"Error creating prediction: {e}")
+            await send_error_response(
+                interaction, "Error creating prediction", f"TypeError: {e}"
+            )
+        except DatabaseError as e:
+            logger.error(f"Error creating prediction: {e}")
+            await send_error_response(
+                interaction, "Error creating prediction", "A database error occured."
             )
         except Exception as e:
-            logger.error(f"Error in /prediction command: {e}")
-            await interaction.response.send_message(
-                "An error occurred while recording your prediction. Please try again later.",
-                ephemeral=True,
+            logger.debug(f"type of error: {type(e)}")  # ? debug
+            logger.error(f"Error creating prediction: {e}")
+            await send_error_response(
+                interaction, "Error creating prediction", "An unexpected error occured."
             )
 
     @app_commands.command(

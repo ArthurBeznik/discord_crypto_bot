@@ -26,7 +26,7 @@ async def fetch_actual_price(
         float: The actual price of the cryptocurrency in USD, or None if not found.
     """
     try:
-        logger.info(f"Fetching actual price for {crypto} at {prediction_date}")
+        logger.info(f"Fetching actual price for [{crypto}] at [{prediction_date}]")
 
         # Resolve the cryptocurrency
         crypto_id = bot.crypto_map.get(crypto.lower())
@@ -35,16 +35,23 @@ async def fetch_actual_price(
         url = f"https://api.coingecko.com/api/v3/coins/{crypto_id}/history?date={formatted_date}"
 
         response = requests.get(url)
+        response.raise_for_status()  # Automatically raises requests.HTTPError if status is not 2xx
+
         if response.status_code == 200:
             data = response.json()
             return data.get("market_data", {}).get("current_price", {}).get("usd", None)
-        else:
-            logger.error(
-                f"Error fetching actual price. Status code: [{response.status_code}]"
-            )
-            return None
+
+    except (ValueError, KeyError) as e:
+        logger.error(f"Data retrieval issue for [{crypto}] on [{prediction_date}]: {e}")
+        raise
+    except requests.HTTPError as e:
+        logger.error(
+            f"HTTP error while fetching price for [{crypto}] on [{prediction_date}]: {e}"
+        )
+        raise
     except Exception as e:
         logger.error(f"Error fetching price for [{crypto}] on [{prediction_date}]: {e}")
+        raise
         return None
 
 
@@ -168,18 +175,17 @@ def calculate_prediction_accuracy(
         predicted_price (Decimal | float): The predicted price of the cryptocurrency.
         actual_price (Decimal | float): The actual price of the cryptocurrency on the prediction date.
 
-    Raises:
-        ValueError: If either predicted_price or actual_price is not provided.
-
     Returns:
         Decimal: Accuracy value between 0 and 1 representing the accuracy of the prediction.
+
+    Raises:
+        ValueError: If either predicted_price or actual_price is not provided.
     """
     logger.info(
         f"Calculating prediction accuracy: predicted price [{predicted_price}] | actual price [{actual_price}]"
     )
-
-    if predicted_price is None or actual_price is None:
-        raise ValueError("Both predicted_price and actual_price must be provided")
+    # if predicted_price is None or actual_price is None:
+    #     raise ValueError("Both predicted_price and actual_price must be provided")
 
     accuracy = Decimal(1) - abs(
         Decimal(predicted_price) - Decimal(actual_price)
