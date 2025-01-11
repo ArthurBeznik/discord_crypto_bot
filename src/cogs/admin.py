@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from bot import CryptoBot
+from utils.response_helpers import send_error_response, send_success_response
 from utils.predictions_helpers import format_predictions_table
 from utils.config import (
     DISCORD_GUILD_OBJ,
@@ -156,6 +157,49 @@ class Admin(commands.Cog, name="admin"):
         except Exception as e:
             await interaction.response.send_message(f"Error fetching predictions: {e}")
             logger.error(f"Failed to fetch all predictions: {e}")
+
+    @app_commands.command(
+        name="list_users",
+        description="List all users with their entry date, roles, and number of roles",
+    )
+    async def list_users(self, interaction: discord.Interaction) -> None:
+        logger.info("Listing all users and their information")
+
+        try:
+            guild = interaction.guild
+            logger.debug(f"guild: {guild}")  # ? debug
+
+            if guild is None:
+                await send_error_response(
+                    interaction, "Error", "This command must be used in a guild."
+                )
+                return
+
+            # Ensure the bot fetches all members if they are not cached
+            guild.fetch_members()
+            logger.debug(f"guild members: {guild.members}")  # ? debug
+
+            users_data = []
+            # async for member in guild.fetch_members(): # ? is this better?
+            for member in guild.members:
+                logger.debug(f"member: {member}")  # ? debug
+
+                join_date = member.joined_at.strftime("%Y-%m-%d %H:%M:%S")
+                roles = [role.name for role in member.roles if role.name != "@everyone"]
+                roles_display = ", ".join(roles) if roles else "No Roles"
+                users_data.append(
+                    f"**{member.name} | {member.global_name or ''}**\n"
+                    f"Joined: {join_date}\n"
+                    f"Roles ({len(roles)}): {roles_display}\n"
+                )
+
+            await send_success_response(
+                interaction, "Server Members", "\n\n".join(users_data)
+            )
+
+        except Exception as e:
+            await send_error_response(interaction, "Error listing users", f"{e}")
+            logger.error(f"Error listing users: {e}")
 
 
 async def setup(bot: CryptoBot) -> None:

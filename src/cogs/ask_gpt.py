@@ -89,21 +89,39 @@ class AskGPT(commands.Cog, name="askGPT"):
             )
 
     @app_commands.command(
-        name="ask_test", description="Ask something to a specific GPT assistant."
+        name="ask_assistant", description="Ask something to a specific GPT assistant."
     )
     @app_commands.rename()
     async def ask_test(
         self,
         interaction: discord.Interaction,
-        type: Literal["assistant A", "assistant B", "assistant C"],
+        type: Literal[
+            "Fraud Detection",
+            "News and Trends",
+            "Fiscality",
+            "Technical Analysis",
+            "SPOT",
+        ],
         question: str,
     ) -> None:
-        if type == "assistant A":
-            await interaction.response.send_message("TODO implement Assistant A...")
-        elif type == "assistant B":
-            await interaction.response.send_message("TODO implement Assistant B...")
-        elif type == "assistant C":
-            await interaction.response.send_message("TODO implement Assistant C...")
+        if type == "Fraud Detection":
+            await interaction.response.send_message(
+                "TODO implement Assistant Fraud Detection..."
+            )
+        elif type == "News and Trends":
+            await interaction.response.send_message(
+                "TODO implement Assistant News and Trends..."
+            )
+        elif type == "Fiscality":
+            await interaction.response.send_message(
+                "TODO implement Assistant Fiscality..."
+            )
+        elif type == "Technical Analysis":
+            await interaction.response.send_message(
+                "TODO implement Assistant Technical Analysis..."
+            )
+        elif type == "SPOT":
+            await interaction.response.send_message("TODO implement Assistant SPOT...")
 
 
 async def setup(bot: CryptoBot) -> None:

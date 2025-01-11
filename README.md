@@ -115,4 +115,4 @@ All the commands listed below are slash commands, and have their input(s) autoco
 
 ## Version
 
-v1.0.1
+v1.0.2

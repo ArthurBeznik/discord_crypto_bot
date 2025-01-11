@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 async def send_to_interaction(
-    interaction: discord.Interaction, embed: discord.Embed
+    interaction: discord.Interaction, embed: discord.Embed, ephemeral: bool
 ) -> None:
     """
     Sends an embed message to a specified Discord interaction, either as a response or as a follow-up if the initial response has already been completed.
@@ -20,14 +20,14 @@ async def send_to_interaction(
     # raise discord.InteractionResponded #? testing
     if not interaction.response.is_done():
         # await interaction.response.send_message(embed=embed, ephemeral=True)
-        await interaction.response.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed, ephemeral=ephemeral)
     else:
         # await interaction.followup.send(embed=embed, ephemeral=True)
-        await interaction.followup.send(embed=embed)
+        await interaction.followup.send(embed=embed, ephemeral=ephemeral)
 
 
 async def send_success_response(
-    interaction: discord.Interaction, title: str, message: str
+    interaction: discord.Interaction, title: str, message: str, ephemeral: bool = False
 ) -> None:
     """
     Sends an ***embed*** **success** message to the interaction.
@@ -42,7 +42,7 @@ async def send_success_response(
     """
     try:
         embed = success_embed(title, message)
-        await send_to_interaction(interaction, embed)
+        await send_to_interaction(interaction, embed, ephemeral)
         logger.info(f"Success message sent: {message}")
     except Exception as e:
         logger.debug(f"exception type: {type(e)}")  # ? debug
@@ -50,7 +50,7 @@ async def send_success_response(
 
 
 async def send_error_response(
-    interaction: discord.Interaction, title: str, message: str
+    interaction: discord.Interaction, title: str, message: str, ephemeral: bool = False
 ) -> None:
     """
     Sends an ***embed*** **error** message to the interaction.
@@ -65,7 +65,7 @@ async def send_error_response(
     """
     try:
         embed = error_embed(title, message)
-        await send_to_interaction(interaction, embed)
+        await send_to_interaction(interaction, embed, ephemeral)
         logger.info(f"Error message sent: {message}")
     except Exception as e:
         logger.debug(f"exception type: {type(e)}")  # ? debug
@@ -77,6 +77,7 @@ async def send_misc_response(
     title: str,
     message: str,
     image_url: str = None,
+    ephemeral: bool = False,
 ) -> None:
     """
     Sends an ***embed*** **misc** message to the interaction.
@@ -92,7 +93,7 @@ async def send_misc_response(
     """
     try:
         embed = misc_embed(title, message, image_url)
-        await send_to_interaction(interaction, embed)
+        await send_to_interaction(interaction, embed, ephemeral)
         logger.info(f"Misc message sent: {message}")
     except Exception as e:
         logger.debug(f"exception type: {type(e)}")  # ? debug
