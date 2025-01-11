@@ -1,0 +1,29 @@
+[wallet]
+A wallet is a digital tool that allows you to store and manage your cryptocurrencies. 
+There are different types of wallets such as hardware wallets, software wallets, and paper wallets.
+
+Steps to use a wallet:
+1. Install a software wallet or get a hardware wallet.
+2. Generate a new wallet address.
+3. Secure your private keys or recovery phrase.
+4. Transfer your crypto to the wallet by sending it to your address.
+
+[technical analysis]
+Technical analysis involves analyzing past price movements to predict future trends.
+Common tools used include:
+- RSI (Relative Strength Index): Measures momentum.
+- MACD (Moving Average Convergence Divergence): Helps to identify changes in momentum.
+- Bollinger Bands: Measure market volatility.
+
+Basic steps:
+1. Choose an indicator to analyze the price chart.
+2. Look for trends or patterns (e.g., moving averages).
+3. Make informed decisions based on the chart analysis.
+
+[blockchain]
+A blockchain is a decentralized ledger of all transactions across a network. It is secure and immutable due to its structure.
+
+Steps to understand blockchain:
+1. Learn the basics of decentralization.
+2. Understand how transactions are grouped into blocks.
+3. Learn about consensus mechanisms like Proof of Work (PoW) and Proof of Stake (PoS).

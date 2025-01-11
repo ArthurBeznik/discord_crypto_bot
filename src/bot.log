@@ -1,0 +1,4 @@
+20:25:57 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+20:25:57 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json
+20:27:30 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+20:27:30 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json

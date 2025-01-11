@@ -1,0 +1,2371 @@
+17:18:41 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:18:41 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json
+17:18:41 [INFO] utils.crypto_data: Cached 578 items.
+17:18:41 [INFO] utils.crypto_data: Fetching data from API: data/crypto_list.json
+17:18:42 [INFO] utils.crypto_data: Cached 250 items.
+17:18:42 [INFO] discord.client: logging in using static token
+17:18:42 [INFO] database.manager: Database connection established successfully.
+17:18:42 [INFO] database.manager: Executed statement successfully.
+17:18:42 [INFO] database.manager: Executed statement successfully.
+17:18:42 [INFO] __main__: Database initialized successfully.
+17:18:42 [INFO] __main__: Loaded extension: alerts.py
+17:18:42 [INFO] __main__: Loaded extension: analysis.py
+17:18:42 [INFO] __main__: Loaded extension: misc.py
+17:18:42 [INFO] __main__: Loaded extension: news.py
+17:18:43 [INFO] matplotlib.font_manager: generated new fontManager
+17:18:44 [INFO] __main__: Loaded extension: graphs.py
+17:18:44 [INFO] __main__: Loaded extension: vote.py
+17:18:44 [INFO] __main__: Loaded extension: price.py
+17:18:44 [INFO] __main__: Loaded extension: calendar.py
+17:18:44 [INFO] __main__: Loaded extension: info.py
+17:18:44 [INFO] __main__: Loaded extension: help.py
+17:18:44 [INFO] __main__: Loaded extension: admin.py
+17:18:44 [INFO] __main__: Loaded extension: tutorials.py
+17:18:44 [INFO] __main__: Loaded extension: list_crypto.py
+17:18:44 [INFO] __main__: Loaded extension: ask_gpt.py
+17:18:44 [INFO] __main__: Loaded extension: feargreed.py
+17:18:44 [INFO] __main__: Loaded extension: predictions.py
+17:18:44 [INFO] __main__: Loaded extension: trend.py
+17:18:44 [INFO] cogs.alerts: Checking alerts...
+17:18:44 [INFO] database.manager: Getting alerts
+17:18:44 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:18:45 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1e4747fd5dc657d148d15c962e296d49).
+17:18:47 [INFO] __main__: Logged in as ChatGPT#3529 (ID: 1281290611625820293)
+17:18:47 [INFO] __main__: ChatGPT#3529 is connected to 2 guild(s)
+17:20:10 [INFO] discord.gateway: Shard ID None session has been invalidated.
+17:20:16 [INFO] __main__: Shutting down bot...
+17:20:16 [INFO] database.manager: Database connection closed.
+17:21:30 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:21:30 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:21:30 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:21:30 [INFO] discord.client: logging in using static token
+17:21:31 [INFO] __main__: Shutting down bot...
+17:22:26 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:22:26 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:22:26 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:22:26 [INFO] discord.client: logging in using static token
+17:22:27 [INFO] database.manager: Database connection established successfully.
+17:22:27 [INFO] database.manager: Executed statement successfully.
+17:22:27 [INFO] database.manager: Executed statement successfully.
+17:22:27 [INFO] __main__: Database initialized successfully.
+17:22:27 [INFO] __main__: Loaded extension: alerts.py
+17:22:27 [INFO] __main__: Loaded extension: analysis.py
+17:22:27 [INFO] __main__: Loaded extension: misc.py
+17:22:27 [INFO] __main__: Loaded extension: news.py
+17:22:27 [INFO] __main__: Loaded extension: graphs.py
+17:22:27 [INFO] __main__: Loaded extension: vote.py
+17:22:27 [INFO] __main__: Loaded extension: price.py
+17:22:27 [INFO] __main__: Loaded extension: calendar.py
+17:22:27 [INFO] __main__: Loaded extension: info.py
+17:22:27 [INFO] __main__: Loaded extension: help.py
+17:22:27 [INFO] __main__: Loaded extension: admin.py
+17:22:27 [INFO] __main__: Loaded extension: tutorials.py
+17:22:27 [INFO] __main__: Loaded extension: list_crypto.py
+17:22:28 [INFO] __main__: Loaded extension: ask_gpt.py
+17:22:28 [INFO] __main__: Loaded extension: feargreed.py
+17:22:28 [INFO] __main__: Loaded extension: predictions.py
+17:22:28 [INFO] __main__: Loaded extension: trend.py
+17:22:28 [INFO] cogs.alerts: Checking alerts...
+17:22:28 [INFO] database.manager: Getting alerts
+17:22:28 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:22:28 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 07c61729bafafd0f51f25165f22e18a1).
+17:22:30 [INFO] __main__: Logged in as ChatGPT#3529 (ID: 1281290611625820293)
+17:22:30 [INFO] __main__: ChatGPT#3529 is connected to 2 guild(s)
+17:24:35 [INFO] utils.autocomplete: Input:  | user: gulyzm
+17:24:35 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:24:36 [INFO] utils.autocomplete: Input: b | user: gulyzm
+17:24:36 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:24:36 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+17:24:36 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:24:40 [INFO] cogs.price: Input crypto: btc
+17:24:40 [INFO] cogs.price: Resolved crypto: bitcoin
+17:24:40 [INFO] cogs.price: Price fetched successfully for btc: $67343
+17:24:40 [INFO] __main__: Executed command: single in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:26:44 [INFO] __main__: Shutting down bot...
+17:26:44 [INFO] database.manager: Database connection closed.
+17:27:04 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:27:04 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:27:04 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:27:04 [INFO] discord.client: logging in using static token
+17:27:04 [INFO] database.manager: Database connection established successfully.
+17:27:04 [INFO] database.manager: Executed statement successfully.
+17:27:04 [INFO] database.manager: Executed statement successfully.
+17:27:05 [INFO] __main__: Database initialized successfully.
+17:27:05 [INFO] __main__: Loaded extension: alerts.py
+17:27:05 [INFO] __main__: Loaded extension: analysis.py
+17:27:05 [INFO] __main__: Loaded extension: misc.py
+17:27:05 [INFO] __main__: Loaded extension: news.py
+17:27:05 [INFO] __main__: Loaded extension: graphs.py
+17:27:05 [INFO] __main__: Loaded extension: vote.py
+17:27:05 [INFO] __main__: Loaded extension: price.py
+17:27:05 [INFO] __main__: Loaded extension: calendar.py
+17:27:05 [INFO] __main__: Loaded extension: info.py
+17:27:05 [INFO] __main__: Loaded extension: help.py
+17:27:05 [INFO] __main__: Loaded extension: admin.py
+17:27:05 [INFO] __main__: Loaded extension: tutorials.py
+17:27:05 [INFO] __main__: Loaded extension: list_crypto.py
+17:27:05 [INFO] __main__: Loaded extension: ask_gpt.py
+17:27:05 [INFO] __main__: Loaded extension: feargreed.py
+17:27:05 [INFO] __main__: Loaded extension: predictions.py
+17:27:05 [INFO] __main__: Loaded extension: trend.py
+17:27:05 [INFO] cogs.alerts: Checking alerts...
+17:27:05 [INFO] database.manager: Getting alerts
+17:27:06 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:27:06 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8b199432f6a31f811f16b393ef935593).
+17:27:08 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+17:27:08 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+17:27:16 [INFO] utils.autocomplete: Input:  | user: gulyzm
+17:27:16 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:27:16 [INFO] utils.autocomplete: Input: n | user: gulyzm
+17:27:16 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:27:17 [INFO] utils.autocomplete: Input: ntc | user: gulyzm
+17:27:17 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:28:33 [INFO] utils.autocomplete: Input:  | user: gulyzm
+17:28:33 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:28:34 [INFO] utils.autocomplete: Input: n | user: gulyzm
+17:28:34 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:28:35 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+17:28:35 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:28:38 [INFO] cogs.price: Input crypto: btc
+17:28:38 [INFO] cogs.price: Resolved crypto: bitcoin
+17:28:38 [INFO] cogs.price: Price fetched successfully for btc: $67494
+17:28:38 [INFO] __main__: Executed command: single in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:28:50 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1284922714775093338 | Expected channel ID: 1284922714775093338
+17:28:50 [WARNING] cogs.ask_gpt: Command issued in an unauthorized channel: 1284922714775093338
+17:28:50 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:30:06 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1284922714775093338
+17:30:07 [WARNING] cogs.ask_gpt: Command issued in an unauthorized channel: 1299047160184045608
+17:30:07 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:30:17 [INFO] __main__: Shutting down bot...
+17:30:17 [INFO] database.manager: Database connection closed.
+17:30:20 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:30:20 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:30:20 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:30:20 [INFO] discord.client: logging in using static token
+17:30:21 [INFO] database.manager: Database connection established successfully.
+17:30:21 [INFO] database.manager: Executed statement successfully.
+17:30:21 [INFO] database.manager: Executed statement successfully.
+17:30:21 [INFO] __main__: Database initialized successfully.
+17:30:21 [INFO] __main__: Loaded extension: alerts.py
+17:30:21 [INFO] __main__: Loaded extension: analysis.py
+17:30:21 [INFO] __main__: Loaded extension: misc.py
+17:30:21 [INFO] __main__: Loaded extension: news.py
+17:30:21 [INFO] __main__: Loaded extension: graphs.py
+17:30:21 [INFO] __main__: Loaded extension: vote.py
+17:30:21 [INFO] __main__: Loaded extension: price.py
+17:30:21 [INFO] __main__: Loaded extension: calendar.py
+17:30:21 [INFO] __main__: Loaded extension: info.py
+17:30:21 [INFO] __main__: Loaded extension: help.py
+17:30:21 [INFO] __main__: Loaded extension: admin.py
+17:30:21 [INFO] __main__: Loaded extension: tutorials.py
+17:30:21 [INFO] __main__: Loaded extension: list_crypto.py
+17:30:22 [INFO] __main__: Loaded extension: ask_gpt.py
+17:30:22 [INFO] __main__: Loaded extension: feargreed.py
+17:30:22 [INFO] __main__: Loaded extension: predictions.py
+17:30:22 [INFO] __main__: Loaded extension: trend.py
+17:30:22 [INFO] cogs.alerts: Checking alerts...
+17:30:22 [INFO] database.manager: Getting alerts
+17:30:22 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:30:22 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: f38ed7f3e3ea606175589a56c8fa3a40).
+17:30:24 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+17:30:24 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+17:30:40 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+17:30:41 [WARNING] cogs.ask_gpt: Command issued in an unauthorized channel: 1299047160184045608
+17:30:41 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:31:29 [INFO] __main__: Shutting down bot...
+17:31:29 [INFO] database.manager: Database connection closed.
+17:32:21 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:32:21 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:32:21 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:32:21 [INFO] discord.client: logging in using static token
+17:32:22 [INFO] database.manager: Database connection established successfully.
+17:32:22 [INFO] database.manager: Executed statement successfully.
+17:32:22 [INFO] database.manager: Executed statement successfully.
+17:32:22 [INFO] __main__: Database initialized successfully.
+17:32:22 [INFO] __main__: Loaded extension: alerts.py
+17:32:22 [INFO] __main__: Loaded extension: analysis.py
+17:32:22 [INFO] __main__: Loaded extension: misc.py
+17:32:22 [INFO] __main__: Loaded extension: news.py
+17:32:23 [INFO] __main__: Loaded extension: graphs.py
+17:32:23 [INFO] __main__: Loaded extension: vote.py
+17:32:23 [INFO] __main__: Loaded extension: price.py
+17:32:23 [INFO] __main__: Loaded extension: calendar.py
+17:32:23 [INFO] __main__: Loaded extension: info.py
+17:32:23 [INFO] __main__: Loaded extension: help.py
+17:32:23 [INFO] __main__: Loaded extension: admin.py
+17:32:23 [INFO] __main__: Loaded extension: tutorials.py
+17:32:23 [INFO] __main__: Loaded extension: list_crypto.py
+17:32:23 [INFO] __main__: Loaded extension: ask_gpt.py
+17:32:23 [INFO] __main__: Loaded extension: feargreed.py
+17:32:23 [INFO] __main__: Loaded extension: predictions.py
+17:32:23 [INFO] __main__: Loaded extension: trend.py
+17:32:23 [INFO] cogs.alerts: Checking alerts...
+17:32:23 [INFO] database.manager: Getting alerts
+17:32:23 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:32:24 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 347531bf9695e19b2d94087ebb35a581).
+17:32:26 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+17:32:26 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+17:32:37 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+17:32:37 [INFO] cogs.ask_gpt: Processing the ask command.
+17:32:37 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+17:32:37 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+17:32:37 [ERROR] cogs.ask_gpt: Error in get_gpt_response: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-************************************************************************************************************************ouwA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+17:32:37 [INFO] cogs.ask_gpt: Sending long message.
+17:32:38 [INFO] cogs.ask_gpt: Message sent successfully.
+17:32:38 [INFO] cogs.ask_gpt: Response sent successfully.
+17:32:38 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:36:23 [INFO] __main__: Shutting down bot...
+17:36:23 [INFO] database.manager: Database connection closed.
+17:36:26 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:36:26 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:36:26 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:36:26 [INFO] discord.client: logging in using static token
+17:36:26 [INFO] __main__: Shutting down bot...
+17:36:41 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:36:41 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:36:41 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:36:41 [INFO] discord.client: logging in using static token
+17:36:42 [INFO] __main__: Shutting down bot...
+17:37:49 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:37:49 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:37:49 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:37:49 [INFO] discord.client: logging in using static token
+17:37:50 [INFO] database.manager: Database connection established successfully.
+17:37:50 [INFO] database.manager: Executed statement successfully.
+17:37:50 [INFO] database.manager: Executed statement successfully.
+17:37:50 [INFO] __main__: Database initialized successfully.
+17:37:50 [INFO] __main__: Loaded extension: alerts.py
+17:37:50 [INFO] __main__: Loaded extension: analysis.py
+17:37:50 [INFO] __main__: Loaded extension: misc.py
+17:37:50 [INFO] __main__: Loaded extension: news.py
+17:37:50 [INFO] __main__: Loaded extension: graphs.py
+17:37:50 [INFO] __main__: Loaded extension: vote.py
+17:37:50 [INFO] __main__: Loaded extension: price.py
+17:37:50 [INFO] __main__: Loaded extension: calendar.py
+17:37:50 [INFO] __main__: Loaded extension: info.py
+17:37:50 [INFO] __main__: Loaded extension: help.py
+17:37:50 [INFO] __main__: Loaded extension: admin.py
+17:37:50 [INFO] __main__: Loaded extension: tutorials.py
+17:37:50 [INFO] __main__: Loaded extension: list_crypto.py
+17:37:51 [INFO] __main__: Loaded extension: ask_gpt.py
+17:37:51 [INFO] __main__: Loaded extension: feargreed.py
+17:37:51 [INFO] __main__: Loaded extension: predictions.py
+17:37:51 [INFO] __main__: Loaded extension: trend.py
+17:37:51 [INFO] cogs.alerts: Checking alerts...
+17:37:51 [INFO] database.manager: Getting alerts
+17:37:51 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:37:52 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8e6bd761e411697602e9c6852c283357).
+17:37:54 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+17:37:54 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+17:38:07 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1284922714775093338
+17:38:07 [WARNING] cogs.ask_gpt: Command issued in an unauthorized channel: 1299047160184045608
+17:38:07 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:38:32 [INFO] __main__: Shutting down bot...
+17:38:32 [INFO] database.manager: Database connection closed.
+17:38:36 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+17:38:36 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:38:36 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+17:38:36 [INFO] discord.client: logging in using static token
+17:38:37 [INFO] database.manager: Database connection established successfully.
+17:38:37 [INFO] database.manager: Executed statement successfully.
+17:38:37 [INFO] database.manager: Executed statement successfully.
+17:38:37 [INFO] __main__: Database initialized successfully.
+17:38:37 [INFO] __main__: Loaded extension: alerts.py
+17:38:37 [INFO] __main__: Loaded extension: analysis.py
+17:38:37 [INFO] __main__: Loaded extension: misc.py
+17:38:37 [INFO] __main__: Loaded extension: news.py
+17:38:37 [INFO] __main__: Loaded extension: graphs.py
+17:38:37 [INFO] __main__: Loaded extension: vote.py
+17:38:37 [INFO] __main__: Loaded extension: price.py
+17:38:37 [INFO] __main__: Loaded extension: calendar.py
+17:38:37 [INFO] __main__: Loaded extension: info.py
+17:38:37 [INFO] __main__: Loaded extension: help.py
+17:38:37 [INFO] __main__: Loaded extension: admin.py
+17:38:37 [INFO] __main__: Loaded extension: tutorials.py
+17:38:37 [INFO] __main__: Loaded extension: list_crypto.py
+17:38:38 [INFO] __main__: Loaded extension: ask_gpt.py
+17:38:38 [INFO] __main__: Loaded extension: feargreed.py
+17:38:38 [INFO] __main__: Loaded extension: predictions.py
+17:38:38 [INFO] __main__: Loaded extension: trend.py
+17:38:38 [INFO] cogs.alerts: Checking alerts...
+17:38:38 [INFO] database.manager: Getting alerts
+17:38:38 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+17:38:38 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 87861d5c51d89aab50ce2a752de90e02).
+17:38:40 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+17:38:40 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+17:38:57 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+17:38:58 [INFO] cogs.ask_gpt: Processing the ask command.
+17:38:58 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+17:39:13 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+17:39:13 [INFO] cogs.ask_gpt: Successfully received GPT response.
+17:39:13 [INFO] cogs.ask_gpt: Sending long message.
+17:39:13 [INFO] cogs.ask_gpt: Message sent successfully.
+17:39:14 [INFO] cogs.ask_gpt: Response sent successfully.
+17:39:14 [INFO] __main__: Executed command: ask in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:40:01 [INFO] utils.autocomplete: Input:  | user: gulyzm
+17:40:01 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:40:02 [INFO] utils.autocomplete: Input: b | user: gulyzm
+17:40:02 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:40:02 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+17:40:02 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+17:40:04 [INFO] cogs.price: Input crypto: btc
+17:40:04 [INFO] cogs.price: Resolved crypto: bitcoin
+17:40:04 [INFO] cogs.price: Price fetched successfully for btc: $67753
+17:40:04 [INFO] __main__: Executed command: single in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+17:48:38 [INFO] cogs.alerts: Checking alerts...
+17:48:38 [INFO] database.manager: Getting alerts
+17:58:38 [INFO] cogs.alerts: Checking alerts...
+17:58:38 [INFO] database.manager: Getting alerts
+18:08:38 [INFO] cogs.alerts: Checking alerts...
+18:08:38 [INFO] database.manager: Getting alerts
+18:18:38 [INFO] cogs.alerts: Checking alerts...
+18:18:38 [INFO] database.manager: Getting alerts
+18:28:38 [INFO] cogs.alerts: Checking alerts...
+18:28:38 [INFO] database.manager: Getting alerts
+18:38:38 [INFO] cogs.alerts: Checking alerts...
+18:38:38 [INFO] database.manager: Getting alerts
+18:48:38 [INFO] cogs.alerts: Checking alerts...
+18:48:38 [INFO] database.manager: Getting alerts
+18:58:38 [INFO] cogs.alerts: Checking alerts...
+18:58:38 [INFO] database.manager: Getting alerts
+19:08:38 [INFO] cogs.alerts: Checking alerts...
+19:08:38 [INFO] database.manager: Getting alerts
+19:18:38 [INFO] cogs.alerts: Checking alerts...
+19:18:38 [INFO] database.manager: Getting alerts
+19:28:38 [INFO] cogs.alerts: Checking alerts...
+19:28:38 [INFO] database.manager: Getting alerts
+19:30:51 [INFO] discord.gateway: Shard ID None has successfully RESUMED session 87861d5c51d89aab50ce2a752de90e02.
+19:38:38 [INFO] cogs.alerts: Checking alerts...
+19:38:38 [INFO] database.manager: Getting alerts
+19:48:38 [INFO] cogs.alerts: Checking alerts...
+19:48:38 [INFO] database.manager: Getting alerts
+20:42:06 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+20:42:06 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+20:42:06 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+20:42:06 [INFO] discord.client: logging in using static token
+20:42:07 [INFO] database.manager: Database connection established successfully.
+20:42:07 [INFO] database.manager: Executed statement successfully.
+20:42:07 [INFO] database.manager: Executed statement successfully.
+20:42:07 [INFO] __main__: Database initialized successfully.
+20:42:07 [INFO] __main__: Loaded extension: alerts.py
+20:42:07 [INFO] __main__: Loaded extension: analysis.py
+20:42:07 [INFO] __main__: Loaded extension: misc.py
+20:42:07 [INFO] __main__: Loaded extension: news.py
+20:42:08 [INFO] __main__: Loaded extension: graphs.py
+20:42:08 [INFO] __main__: Loaded extension: vote.py
+20:42:08 [INFO] __main__: Loaded extension: price.py
+20:42:08 [INFO] __main__: Loaded extension: calendar.py
+20:42:08 [INFO] __main__: Loaded extension: info.py
+20:42:08 [INFO] __main__: Loaded extension: help.py
+20:42:08 [INFO] __main__: Loaded extension: admin.py
+20:42:08 [INFO] __main__: Loaded extension: tutorials.py
+20:42:08 [INFO] __main__: Loaded extension: list_crypto.py
+20:42:08 [INFO] __main__: Loaded extension: ask_gpt.py
+20:42:08 [INFO] __main__: Loaded extension: feargreed.py
+20:42:08 [INFO] __main__: Loaded extension: predictions.py
+20:42:08 [INFO] __main__: Loaded extension: trend.py
+20:42:08 [INFO] cogs.alerts: Checking alerts...
+20:42:08 [INFO] database.manager: Getting alerts
+20:42:08 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+20:42:09 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 2a1e138096d8ff9c6ed50e302dd73d73).
+20:42:11 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+20:42:11 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+20:42:38 [INFO] cogs.help: Action: all, Name: None
+20:42:38 [INFO] __main__: Executed command: help in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+20:43:04 [INFO] cogs.list_crypto: Listing available cryptos, user: gulyzm (ID: 243051996200828929)
+20:43:05 [INFO] __main__: Executed command: list_crypto in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+20:43:08 [INFO] utils.autocomplete: Input:  | user: gulyzm
+20:43:08 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+20:43:09 [INFO] utils.autocomplete: Input: b | user: gulyzm
+20:43:09 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+20:43:10 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+20:43:10 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+20:43:17 [INFO] cogs.price: Input crypto: btc
+20:43:17 [INFO] cogs.price: Resolved crypto: bitcoin
+20:43:17 [INFO] cogs.price: Price fetched successfully for btc: $68050
+20:43:17 [INFO] __main__: Executed command: single in HODLmyBeer (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+20:52:08 [INFO] cogs.alerts: Checking alerts...
+20:52:08 [INFO] database.manager: Getting alerts
+21:02:08 [INFO] cogs.alerts: Checking alerts...
+21:02:08 [INFO] database.manager: Getting alerts
+21:12:08 [INFO] cogs.alerts: Checking alerts...
+21:12:08 [INFO] database.manager: Getting alerts
+21:22:08 [INFO] cogs.alerts: Checking alerts...
+21:22:08 [INFO] database.manager: Getting alerts
+21:32:08 [INFO] cogs.alerts: Checking alerts...
+21:32:08 [INFO] database.manager: Getting alerts
+21:42:08 [INFO] cogs.alerts: Checking alerts...
+21:42:08 [INFO] database.manager: Getting alerts
+21:44:48 [INFO] __main__: Shutting down bot...
+21:44:48 [INFO] database.manager: Database connection closed.
+12:43:49 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+12:43:49 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:43:49 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+12:43:49 [INFO] discord.client: logging in using static token
+12:43:50 [INFO] database.manager: Database connection established successfully.
+12:43:50 [INFO] database.manager: Executed statement successfully.
+12:43:50 [INFO] database.manager: Executed statement successfully.
+12:43:50 [INFO] __main__: Database initialized successfully.
+12:43:50 [INFO] __main__: Loaded extension: alerts.py
+12:43:50 [INFO] __main__: Loaded extension: analysis.py
+12:43:50 [INFO] __main__: Loaded extension: misc.py
+12:43:50 [INFO] __main__: Loaded extension: news.py
+12:43:50 [INFO] __main__: Loaded extension: graphs.py
+12:43:50 [INFO] __main__: Loaded extension: vote.py
+12:43:50 [INFO] __main__: Loaded extension: price.py
+12:43:50 [INFO] __main__: Loaded extension: calendar.py
+12:43:50 [INFO] __main__: Loaded extension: info.py
+12:43:50 [INFO] __main__: Loaded extension: help.py
+12:43:50 [INFO] __main__: Loaded extension: admin.py
+12:43:50 [INFO] __main__: Loaded extension: tutorials.py
+12:43:50 [INFO] __main__: Loaded extension: list_crypto.py
+12:43:51 [INFO] __main__: Loaded extension: ask_gpt.py
+12:43:51 [INFO] __main__: Loaded extension: feargreed.py
+12:43:51 [INFO] __main__: Loaded extension: predictions.py
+12:43:51 [INFO] __main__: Loaded extension: trend.py
+12:43:51 [INFO] cogs.alerts: Checking alerts...
+12:43:51 [INFO] database.manager: Getting alerts
+12:43:51 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+12:43:51 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: f027292f89dadbef3f3864b9de0a656f).
+12:43:53 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+12:43:53 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+12:44:07 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+12:44:08 [INFO] cogs.ask_gpt: Processing the ask command.
+12:44:08 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+12:44:22 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+12:44:22 [INFO] cogs.ask_gpt: Successfully received GPT response.
+12:44:22 [INFO] cogs.ask_gpt: Sending long message.
+12:44:22 [INFO] cogs.ask_gpt: Long message sent in parts.
+12:44:22 [INFO] cogs.ask_gpt: Response sent successfully.
+12:44:22 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:44:38 [INFO] utils.autocomplete: Input:  | user: gulyzm
+12:44:38 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:44:39 [INFO] utils.autocomplete: Input: b | user: gulyzm
+12:44:39 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:44:42 [INFO] cogs.price: Input crypto: bitcoin
+12:44:42 [INFO] cogs.price: Resolved crypto: harrypotterobamasonic10in
+12:44:42 [INFO] cogs.price: Price fetched successfully for bitcoin: $0.267035
+12:44:42 [INFO] __main__: Executed command: single in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:44:46 [INFO] utils.autocomplete: Input:  | user: gulyzm
+12:44:46 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:44:47 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+12:44:47 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:44:49 [INFO] cogs.price: Input crypto: btc
+12:44:49 [INFO] cogs.price: Resolved crypto: bitcoin
+12:44:49 [INFO] cogs.price: Price fetched successfully for btc: $67919
+12:44:50 [INFO] __main__: Executed command: single in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:44:56 [INFO] cogs.price: Input cryptos: btc
+12:44:56 [INFO] cogs.price: Price fetched successfully for btc: $67919
+12:44:56 [INFO] __main__: Executed command: multiple in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:45:04 [INFO] cogs.price: Input cryptos: btc eth
+12:45:04 [INFO] cogs.price: Price fetched successfully for btc: $67973
+12:45:04 [INFO] cogs.price: Price fetched successfully for eth: $2541.25
+12:45:05 [INFO] __main__: Executed command: multiple in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:45:13 [INFO] utils.autocomplete: Input:  | user: gulyzm
+12:45:13 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:45:15 [INFO] utils.autocomplete: Input: b | user: gulyzm
+12:45:15 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:45:15 [INFO] utils.autocomplete: Input: btc | user: gulyzm
+12:45:15 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:53:51 [INFO] cogs.alerts: Checking alerts...
+12:53:51 [INFO] database.manager: Getting alerts
+13:03:51 [INFO] cogs.alerts: Checking alerts...
+13:03:51 [INFO] database.manager: Getting alerts
+13:13:51 [INFO] cogs.alerts: Checking alerts...
+13:13:51 [INFO] database.manager: Getting alerts
+13:23:51 [INFO] cogs.alerts: Checking alerts...
+13:23:51 [INFO] database.manager: Getting alerts
+13:33:51 [INFO] cogs.alerts: Checking alerts...
+13:33:51 [INFO] database.manager: Getting alerts
+13:43:51 [INFO] cogs.alerts: Checking alerts...
+13:43:51 [INFO] database.manager: Getting alerts
+13:53:51 [INFO] cogs.alerts: Checking alerts...
+13:53:51 [INFO] database.manager: Getting alerts
+14:03:51 [INFO] cogs.alerts: Checking alerts...
+14:03:51 [INFO] database.manager: Getting alerts
+14:13:51 [INFO] cogs.alerts: Checking alerts...
+14:13:51 [INFO] database.manager: Getting alerts
+14:20:27 [INFO] __main__: Shutting down bot...
+14:20:27 [INFO] database.manager: Database connection closed.
+18:24:38 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+18:24:38 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json
+18:24:40 [INFO] utils.crypto_data: Cached 578 items.
+18:24:40 [INFO] utils.crypto_data: Fetching data from API: data/crypto_list.json
+18:24:41 [INFO] utils.crypto_data: Cached 250 items.
+18:24:41 [INFO] discord.client: logging in using static token
+18:24:50 [INFO] database.manager: Database connection established successfully.
+18:24:51 [INFO] database.manager: Executed statement successfully.
+18:24:51 [INFO] database.manager: Executed statement successfully.
+18:24:51 [INFO] __main__: Database initialized successfully.
+18:24:51 [INFO] __main__: Loaded extension: alerts.py
+18:24:51 [INFO] __main__: Loaded extension: analysis.py
+18:24:51 [INFO] __main__: Loaded extension: misc.py
+18:24:51 [INFO] __main__: Loaded extension: news.py
+18:24:51 [INFO] __main__: Loaded extension: graphs.py
+18:24:51 [INFO] __main__: Loaded extension: vote.py
+18:24:51 [INFO] __main__: Loaded extension: price.py
+18:24:51 [INFO] __main__: Loaded extension: calendar.py
+18:24:51 [INFO] __main__: Loaded extension: info.py
+18:24:51 [INFO] __main__: Loaded extension: help.py
+18:24:51 [INFO] __main__: Loaded extension: admin.py
+18:24:51 [INFO] __main__: Loaded extension: tutorials.py
+18:24:51 [INFO] __main__: Loaded extension: list_crypto.py
+18:24:51 [INFO] __main__: Loaded extension: ask_gpt.py
+18:24:51 [INFO] __main__: Loaded extension: feargreed.py
+18:24:51 [INFO] __main__: Loaded extension: predictions.py
+18:24:51 [INFO] __main__: Loaded extension: trend.py
+18:24:51 [INFO] cogs.alerts: Checking alerts...
+18:24:51 [INFO] database.manager: Getting alerts
+18:24:52 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+18:24:53 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: f937cb47512c2fef3e4d637d63a84099).
+18:24:56 [INFO] __main__: Logged in as HODLmyBeer#7054 (ID: 1279900783596408853)
+18:24:56 [INFO] __main__: HODLmyBeer#7054 is connected to 2 guild(s)
+18:26:37 [INFO] __main__: Shutting down bot...
+18:26:37 [INFO] database.manager: Database connection closed.
+18:33:58 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+18:33:58 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+18:33:58 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+18:33:58 [INFO] discord.client: logging in using static token
+18:34:01 [INFO] database.manager: Database connection established successfully.
+18:34:01 [INFO] database.manager: Executed statement successfully.
+18:34:01 [INFO] database.manager: Executed statement successfully.
+18:34:01 [INFO] __main__: Database initialized successfully.
+18:34:01 [INFO] __main__: Loaded extension: alerts.py
+18:34:01 [INFO] __main__: Loaded extension: analysis.py
+18:34:01 [INFO] __main__: Loaded extension: misc.py
+18:34:01 [INFO] __main__: Loaded extension: news.py
+18:34:02 [INFO] __main__: Loaded extension: graphs.py
+18:34:02 [INFO] __main__: Loaded extension: vote.py
+18:34:02 [INFO] __main__: Loaded extension: price.py
+18:34:02 [INFO] __main__: Loaded extension: calendar.py
+18:34:02 [INFO] __main__: Loaded extension: info.py
+18:34:02 [INFO] __main__: Loaded extension: help.py
+18:34:02 [INFO] __main__: Loaded extension: admin.py
+18:34:02 [INFO] __main__: Loaded extension: tutorials.py
+18:34:02 [INFO] __main__: Loaded extension: list_crypto.py
+18:34:02 [INFO] __main__: Loaded extension: ask_gpt.py
+18:34:02 [INFO] __main__: Loaded extension: feargreed.py
+18:34:02 [INFO] __main__: Loaded extension: predictions.py
+18:34:02 [INFO] __main__: Loaded extension: trend.py
+18:34:02 [INFO] cogs.alerts: Checking alerts...
+18:34:02 [INFO] database.manager: Getting alerts
+18:34:08 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+18:34:09 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: b5522399e744ed563108f890e7f4fa62).
+18:34:12 [INFO] __main__: Logged in as Le Crypto Club#7054 (ID: 1279900783596408853)
+18:34:12 [INFO] __main__: Le Crypto Club#7054 is connected to 2 guild(s)
+18:34:46 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+18:34:47 [INFO] cogs.ask_gpt: Processing the ask command.
+18:34:47 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+18:35:00 [WARNING] discord.gateway: Shard ID None heartbeat blocked for more than 10 seconds.
+Loop thread traceback (most recent call last):
+  File "/home/admin/my_bot_directory/src/main.py", line 115, in <module>
+    bot.run(DISCORD_BOT_TOKEN)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+  File "/usr/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1151, in wrapper
+    await self._call(interaction)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "/home/admin/my_bot_directory/src/cogs/ask_gpt.py", line 64, in ask
+    response = await self.get_gpt_response(question)
+  File "/home/admin/my_bot_directory/src/cogs/ask_gpt.py", line 28, in get_gpt_response
+    response = client.chat.completions.create(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 274, in wrapper
+    return func(*args, **kwargs)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 704, in create
+    return self._post(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 1260, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 937, in request
+    return self._request(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 973, in _request
+    response = self._client.send(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 926, in send
+    response = self._send_handling_auth(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 954, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 991, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 1027, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 236, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 196, in handle_request
+    response = connection.handle_request(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    return self._connection.handle_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 113, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 186, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 224, in _receive_event
+    data = self._network_stream.read(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 126, in read
+    return self._sock.recv(max_bytes)
+  File "/usr/lib/python3.11/ssl.py", line 1296, in recv
+    return self.read(buflen)
+  File "/usr/lib/python3.11/ssl.py", line 1169, in read
+    return self._sslobj.read(len)
+
+18:35:10 [WARNING] discord.gateway: Shard ID None heartbeat blocked for more than 20 seconds.
+Loop thread traceback (most recent call last):
+  File "/home/admin/my_bot_directory/src/main.py", line 115, in <module>
+    bot.run(DISCORD_BOT_TOKEN)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+  File "/usr/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1151, in wrapper
+    await self._call(interaction)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "/home/admin/my_bot_directory/src/cogs/ask_gpt.py", line 64, in ask
+    response = await self.get_gpt_response(question)
+  File "/home/admin/my_bot_directory/src/cogs/ask_gpt.py", line 28, in get_gpt_response
+    response = client.chat.completions.create(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 274, in wrapper
+    return func(*args, **kwargs)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 704, in create
+    return self._post(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 1260, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 937, in request
+    return self._request(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/openai/_base_client.py", line 973, in _request
+    response = self._client.send(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 926, in send
+    response = self._send_handling_auth(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 954, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 991, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_client.py", line 1027, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 236, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 196, in handle_request
+    response = connection.handle_request(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    return self._connection.handle_request(request)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 113, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 186, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 224, in _receive_event
+    data = self._network_stream.read(
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 126, in read
+    return self._sock.recv(max_bytes)
+  File "/usr/lib/python3.11/ssl.py", line 1296, in recv
+    return self.read(buflen)
+  File "/usr/lib/python3.11/ssl.py", line 1169, in read
+    return self._sslobj.read(len)
+
+18:35:15 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+18:35:15 [INFO] cogs.ask_gpt: Successfully received GPT response.
+18:35:15 [INFO] cogs.ask_gpt: Sending long message.
+18:35:15 [ERROR] discord.client: Attempting a reconnect in 1.87s
+Traceback (most recent call last):
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 625, in poll_event
+    await self.received_message(msg.data)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 533, in received_message
+    await self.send_as_json(beat)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 661, in send_as_json
+    await self.send(utils._to_json(data))
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 657, in send
+    await self.socket.send_str(data)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/client_ws.py", line 225, in send_str
+    await self._writer.send(data, binary=False, compress=compress)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 726, in send
+    await self._send_frame(message, WSMsgType.TEXT, compress)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 672, in _send_frame
+    self._write(header + mask + message)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 699, in _write
+    raise ConnectionResetError("Cannot write to closing transport")
+ConnectionResetError: Cannot write to closing transport
+18:35:17 [INFO] cogs.ask_gpt: Long message sent in parts.
+18:35:17 [INFO] cogs.ask_gpt: Response sent successfully.
+18:35:17 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+18:35:18 [INFO] discord.gateway: Shard ID None has successfully RESUMED session b5522399e744ed563108f890e7f4fa62.
+18:37:52 [INFO] utils.autocomplete: Input:  | user: gulyzm
+18:37:52 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+18:37:54 [INFO] utils.autocomplete: Input: D | user: gulyzm
+18:37:54 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+18:38:03 [INFO] database.manager: Getting predictions
+18:38:03 [INFO] cogs.predictions: Fetching actual price for bitcoin at 2023-12-24
+18:38:04 [INFO] cogs.predictions: Fetching actual price for the-open-network at 2023-12-24
+18:38:06 [INFO] cogs.predictions: Fetching actual price for the-open-network at 2023-12-23
+18:38:07 [INFO] cogs.predictions: Fetching actual price for bitcoin at 2024-09-13
+18:38:08 [INFO] cogs.predictions: Fetching actual price for bitcoin at 2024-09-18
+18:38:10 [INFO] __main__: Executed command: leaderboard in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+18:44:02 [INFO] cogs.alerts: Checking alerts...
+18:44:02 [INFO] database.manager: Getting alerts
+18:54:02 [INFO] cogs.alerts: Checking alerts...
+18:54:02 [INFO] database.manager: Getting alerts
+19:04:02 [INFO] cogs.alerts: Checking alerts...
+19:04:02 [INFO] database.manager: Getting alerts
+19:04:58 [INFO] __main__: Shutting down bot...
+19:04:58 [INFO] database.manager: Database connection closed.
+08:13:42 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+08:13:42 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json
+08:13:43 [INFO] utils.crypto_data: Cached 574 items.
+08:13:43 [INFO] utils.crypto_data: Fetching data from API: data/crypto_list.json
+08:13:43 [INFO] utils.crypto_data: Cached 250 items.
+08:13:43 [INFO] discord.client: logging in using static token
+08:13:43 [INFO] __main__: Shutting down bot...
+08:21:07 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+08:21:07 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+08:21:07 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+08:21:07 [INFO] discord.client: logging in using static token
+08:21:08 [INFO] database.manager: Database connection established successfully.
+08:21:08 [INFO] database.manager: Executed statement successfully.
+08:21:08 [INFO] database.manager: Executed statement successfully.
+08:21:08 [INFO] __main__: Database initialized successfully.
+08:21:08 [INFO] __main__: Loaded extension: alerts.py
+08:21:08 [INFO] __main__: Loaded extension: analysis.py
+08:21:08 [INFO] __main__: Loaded extension: misc.py
+08:21:08 [INFO] __main__: Loaded extension: news.py
+08:21:09 [INFO] __main__: Loaded extension: graphs.py
+08:21:09 [INFO] __main__: Loaded extension: vote.py
+08:21:09 [INFO] __main__: Loaded extension: price.py
+08:21:09 [INFO] __main__: Loaded extension: calendar.py
+08:21:09 [INFO] __main__: Loaded extension: info.py
+08:21:09 [INFO] __main__: Loaded extension: help.py
+08:21:09 [INFO] __main__: Loaded extension: admin.py
+08:21:09 [INFO] __main__: Loaded extension: tutorials.py
+08:21:09 [INFO] __main__: Loaded extension: list_crypto.py
+08:21:09 [INFO] __main__: Loaded extension: ask_gpt.py
+08:21:09 [INFO] __main__: Loaded extension: feargreed.py
+08:21:09 [INFO] __main__: Loaded extension: predictions.py
+08:21:09 [INFO] __main__: Loaded extension: trend.py
+08:21:09 [INFO] cogs.alerts: Checking alerts...
+08:21:09 [INFO] database.manager: Getting alerts
+08:21:10 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+08:21:10 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: 06351873eec366df810e8eeb8fc39091).
+08:21:13 [INFO] __main__: Logged in as Le Crypto Club#7054 (ID: 1279900783596408853)
+08:21:13 [INFO] __main__: Le Crypto Club#7054 is connected to 2 guild(s)
+08:31:09 [INFO] cogs.alerts: Checking alerts...
+08:31:09 [INFO] database.manager: Getting alerts
+08:41:09 [INFO] cogs.alerts: Checking alerts...
+08:41:09 [INFO] database.manager: Getting alerts
+08:51:09 [INFO] cogs.alerts: Checking alerts...
+08:51:09 [INFO] database.manager: Getting alerts
+09:01:09 [INFO] cogs.alerts: Checking alerts...
+09:01:09 [INFO] database.manager: Getting alerts
+09:11:09 [INFO] cogs.alerts: Checking alerts...
+09:11:09 [INFO] database.manager: Getting alerts
+09:21:09 [INFO] cogs.alerts: Checking alerts...
+09:21:09 [INFO] database.manager: Getting alerts
+09:31:09 [INFO] cogs.alerts: Checking alerts...
+09:31:09 [INFO] database.manager: Getting alerts
+09:37:52 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+09:37:53 [INFO] cogs.ask_gpt: Processing the ask command.
+09:37:53 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+09:38:08 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:38:08 [INFO] cogs.ask_gpt: Successfully received GPT response.
+09:38:08 [INFO] cogs.ask_gpt: Sending long message.
+09:38:09 [INFO] cogs.ask_gpt: Long message sent in parts.
+09:38:10 [INFO] cogs.ask_gpt: Response sent successfully.
+09:38:10 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by nolz5120 (ID: 351496210848415756)
+09:38:34 [INFO] discord.gateway: Shard ID None has successfully RESUMED session 06351873eec366df810e8eeb8fc39091.
+09:41:09 [INFO] cogs.alerts: Checking alerts...
+09:41:09 [INFO] database.manager: Getting alerts
+09:51:09 [INFO] cogs.alerts: Checking alerts...
+09:51:09 [INFO] database.manager: Getting alerts
+10:01:09 [INFO] cogs.alerts: Checking alerts...
+10:01:09 [INFO] database.manager: Getting alerts
+10:11:09 [INFO] cogs.alerts: Checking alerts...
+10:11:09 [INFO] database.manager: Getting alerts
+10:21:09 [INFO] cogs.alerts: Checking alerts...
+10:21:09 [INFO] database.manager: Getting alerts
+10:31:09 [INFO] cogs.alerts: Checking alerts...
+10:31:09 [INFO] database.manager: Getting alerts
+10:41:09 [INFO] cogs.alerts: Checking alerts...
+10:41:09 [INFO] database.manager: Getting alerts
+10:43:53 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+10:43:53 [INFO] cogs.ask_gpt: Processing the ask command.
+10:43:53 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+10:44:01 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+10:44:01 [INFO] cogs.ask_gpt: Successfully received GPT response.
+10:44:01 [INFO] cogs.ask_gpt: Sending long message.
+10:44:01 [INFO] cogs.ask_gpt: Message sent successfully.
+10:44:02 [INFO] cogs.ask_gpt: Response sent successfully.
+10:44:02 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by yannpellenard (ID: 883314392475779073)
+10:44:26 [INFO] utils.autocomplete: Input:  | user: yannpellenard
+10:44:26 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+10:44:28 [INFO] utils.autocomplete: Input: B | user: yannpellenard
+10:44:28 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+10:44:29 [INFO] utils.autocomplete: Input: BTC | user: yannpellenard
+10:44:29 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+10:44:30 [INFO] cogs.price: Input crypto: BTC
+10:44:30 [INFO] cogs.price: Resolved crypto: bitcoin
+10:44:30 [INFO] cogs.price: Price fetched successfully for BTC: $97642
+10:44:30 [INFO] __main__: Executed command: single in LeCryptoClub (ID: 1261789585025798226) by yannpellenard (ID: 883314392475779073)
+10:44:47 [INFO] utils.autocomplete: Input:  | user: yannpellenard
+10:44:47 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+10:51:09 [INFO] cogs.alerts: Checking alerts...
+10:51:09 [INFO] database.manager: Getting alerts
+11:01:09 [INFO] cogs.alerts: Checking alerts...
+11:01:09 [INFO] database.manager: Getting alerts
+11:11:09 [INFO] cogs.alerts: Checking alerts...
+11:11:09 [INFO] database.manager: Getting alerts
+11:21:09 [INFO] cogs.alerts: Checking alerts...
+11:21:09 [INFO] database.manager: Getting alerts
+11:31:09 [INFO] cogs.alerts: Checking alerts...
+11:31:09 [INFO] database.manager: Getting alerts
+11:41:09 [INFO] cogs.alerts: Checking alerts...
+11:41:09 [INFO] database.manager: Getting alerts
+11:51:09 [INFO] cogs.alerts: Checking alerts...
+11:51:09 [INFO] database.manager: Getting alerts
+12:01:01 [INFO] __main__: Shutting down bot...
+12:01:01 [INFO] database.manager: Database connection closed.
+12:03:40 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+12:03:40 [INFO] utils.crypto_data: Loading data from cache: data/crypto_map.json
+12:03:40 [INFO] utils.crypto_data: Loading data from cache: data/crypto_list.json
+12:03:40 [INFO] discord.client: logging in using static token
+12:03:41 [INFO] database.manager: Database connection established successfully.
+12:03:41 [INFO] database.manager: Executed statement successfully.
+12:03:41 [INFO] database.manager: Executed statement successfully.
+12:03:41 [INFO] __main__: Database initialized successfully.
+12:03:41 [INFO] __main__: Loaded extension: alerts.py
+12:03:41 [INFO] __main__: Loaded extension: analysis.py
+12:03:41 [INFO] __main__: Loaded extension: misc.py
+12:03:41 [INFO] __main__: Loaded extension: news.py
+12:03:42 [INFO] __main__: Loaded extension: graphs.py
+12:03:42 [INFO] __main__: Loaded extension: vote.py
+12:03:42 [INFO] __main__: Loaded extension: price.py
+12:03:42 [INFO] __main__: Loaded extension: calendar.py
+12:03:42 [INFO] __main__: Loaded extension: info.py
+12:03:42 [INFO] __main__: Loaded extension: help.py
+12:03:42 [INFO] __main__: Loaded extension: admin.py
+12:03:42 [INFO] __main__: Loaded extension: tutorials.py
+12:03:42 [INFO] __main__: Loaded extension: list_crypto.py
+12:03:42 [INFO] __main__: Loaded extension: ask_gpt.py
+12:03:42 [INFO] __main__: Loaded extension: feargreed.py
+12:03:42 [INFO] __main__: Loaded extension: predictions.py
+12:03:42 [INFO] __main__: Loaded extension: trend.py
+12:03:42 [INFO] cogs.alerts: Checking alerts...
+12:03:42 [INFO] database.manager: Getting alerts
+12:03:43 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+12:03:43 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: d05cd9b863136548e5c45dda77af5eaf).
+12:03:45 [INFO] __main__: Logged in as Le Crypto Club#7054 (ID: 1279900783596408853)
+12:03:45 [INFO] __main__: Le Crypto Club#7054 is connected to 2 guild(s)
+12:13:42 [INFO] cogs.alerts: Checking alerts...
+12:13:42 [INFO] database.manager: Getting alerts
+12:23:42 [INFO] cogs.alerts: Checking alerts...
+12:23:42 [INFO] database.manager: Getting alerts
+12:33:42 [INFO] cogs.alerts: Checking alerts...
+12:33:42 [INFO] database.manager: Getting alerts
+12:43:42 [INFO] cogs.alerts: Checking alerts...
+12:43:42 [INFO] database.manager: Getting alerts
+12:53:42 [INFO] cogs.alerts: Checking alerts...
+12:53:42 [INFO] database.manager: Getting alerts
+12:56:53 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+13:03:42 [INFO] cogs.alerts: Checking alerts...
+13:03:42 [INFO] database.manager: Getting alerts
+13:13:42 [INFO] cogs.alerts: Checking alerts...
+13:13:42 [INFO] database.manager: Getting alerts
+13:23:42 [INFO] cogs.alerts: Checking alerts...
+13:23:42 [INFO] database.manager: Getting alerts
+13:33:42 [INFO] cogs.alerts: Checking alerts...
+13:33:42 [INFO] database.manager: Getting alerts
+13:43:42 [INFO] cogs.alerts: Checking alerts...
+13:43:42 [INFO] database.manager: Getting alerts
+13:53:42 [INFO] cogs.alerts: Checking alerts...
+13:53:42 [INFO] database.manager: Getting alerts
+14:03:42 [INFO] cogs.alerts: Checking alerts...
+14:03:42 [INFO] database.manager: Getting alerts
+14:13:42 [INFO] cogs.alerts: Checking alerts...
+14:13:42 [INFO] database.manager: Getting alerts
+14:23:42 [INFO] cogs.alerts: Checking alerts...
+14:23:42 [INFO] database.manager: Getting alerts
+14:30:07 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+14:33:42 [INFO] cogs.alerts: Checking alerts...
+14:33:42 [INFO] database.manager: Getting alerts
+14:43:42 [INFO] cogs.alerts: Checking alerts...
+14:43:42 [INFO] database.manager: Getting alerts
+14:53:42 [INFO] cogs.alerts: Checking alerts...
+14:53:42 [INFO] database.manager: Getting alerts
+15:03:42 [INFO] cogs.alerts: Checking alerts...
+15:03:42 [INFO] database.manager: Getting alerts
+15:13:42 [INFO] cogs.alerts: Checking alerts...
+15:13:42 [INFO] database.manager: Getting alerts
+15:23:42 [INFO] cogs.alerts: Checking alerts...
+15:23:42 [INFO] database.manager: Getting alerts
+15:33:42 [INFO] cogs.alerts: Checking alerts...
+15:33:42 [INFO] database.manager: Getting alerts
+15:43:42 [INFO] cogs.alerts: Checking alerts...
+15:43:42 [INFO] database.manager: Getting alerts
+15:53:42 [INFO] cogs.alerts: Checking alerts...
+15:53:42 [INFO] database.manager: Getting alerts
+16:03:42 [INFO] cogs.alerts: Checking alerts...
+16:03:42 [INFO] database.manager: Getting alerts
+16:13:42 [INFO] cogs.alerts: Checking alerts...
+16:13:42 [INFO] database.manager: Getting alerts
+16:23:42 [INFO] cogs.alerts: Checking alerts...
+16:23:42 [INFO] database.manager: Getting alerts
+16:33:42 [INFO] cogs.alerts: Checking alerts...
+16:33:42 [INFO] database.manager: Getting alerts
+16:43:42 [INFO] cogs.alerts: Checking alerts...
+16:43:42 [INFO] database.manager: Getting alerts
+16:53:42 [INFO] cogs.alerts: Checking alerts...
+16:53:42 [INFO] database.manager: Getting alerts
+17:03:42 [INFO] cogs.alerts: Checking alerts...
+17:03:42 [INFO] database.manager: Getting alerts
+17:13:42 [INFO] cogs.alerts: Checking alerts...
+17:13:42 [INFO] database.manager: Getting alerts
+17:23:42 [INFO] cogs.alerts: Checking alerts...
+17:23:42 [INFO] database.manager: Getting alerts
+17:29:05 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+17:33:42 [INFO] cogs.alerts: Checking alerts...
+17:33:42 [INFO] database.manager: Getting alerts
+17:43:42 [INFO] cogs.alerts: Checking alerts...
+17:43:42 [INFO] database.manager: Getting alerts
+17:53:42 [INFO] cogs.alerts: Checking alerts...
+17:53:42 [INFO] database.manager: Getting alerts
+18:03:42 [INFO] cogs.alerts: Checking alerts...
+18:03:42 [INFO] database.manager: Getting alerts
+18:13:42 [INFO] cogs.alerts: Checking alerts...
+18:13:42 [INFO] database.manager: Getting alerts
+18:23:42 [INFO] cogs.alerts: Checking alerts...
+18:23:42 [INFO] database.manager: Getting alerts
+18:33:42 [INFO] cogs.alerts: Checking alerts...
+18:33:42 [INFO] database.manager: Getting alerts
+18:43:42 [INFO] cogs.alerts: Checking alerts...
+18:43:42 [INFO] database.manager: Getting alerts
+18:53:42 [INFO] cogs.alerts: Checking alerts...
+18:53:42 [INFO] database.manager: Getting alerts
+19:03:42 [INFO] cogs.alerts: Checking alerts...
+19:03:42 [INFO] database.manager: Getting alerts
+19:13:42 [INFO] cogs.alerts: Checking alerts...
+19:13:42 [INFO] database.manager: Getting alerts
+19:23:42 [INFO] cogs.alerts: Checking alerts...
+19:23:42 [INFO] database.manager: Getting alerts
+19:33:42 [INFO] cogs.alerts: Checking alerts...
+19:33:42 [INFO] database.manager: Getting alerts
+19:43:42 [INFO] cogs.alerts: Checking alerts...
+19:43:42 [INFO] database.manager: Getting alerts
+19:53:42 [INFO] cogs.alerts: Checking alerts...
+19:53:42 [INFO] database.manager: Getting alerts
+20:03:42 [INFO] cogs.alerts: Checking alerts...
+20:03:42 [INFO] database.manager: Getting alerts
+20:13:42 [INFO] cogs.alerts: Checking alerts...
+20:13:42 [INFO] database.manager: Getting alerts
+20:23:42 [INFO] cogs.alerts: Checking alerts...
+20:23:42 [INFO] database.manager: Getting alerts
+20:33:42 [INFO] cogs.alerts: Checking alerts...
+20:33:42 [INFO] database.manager: Getting alerts
+20:43:42 [INFO] cogs.alerts: Checking alerts...
+20:43:42 [INFO] database.manager: Getting alerts
+20:53:42 [INFO] cogs.alerts: Checking alerts...
+20:53:42 [INFO] database.manager: Getting alerts
+21:03:42 [INFO] cogs.alerts: Checking alerts...
+21:03:42 [INFO] database.manager: Getting alerts
+21:13:42 [INFO] cogs.alerts: Checking alerts...
+21:13:42 [INFO] database.manager: Getting alerts
+21:23:42 [INFO] cogs.alerts: Checking alerts...
+21:23:42 [INFO] database.manager: Getting alerts
+21:25:45 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+21:33:42 [INFO] cogs.alerts: Checking alerts...
+21:33:42 [INFO] database.manager: Getting alerts
+21:43:42 [INFO] cogs.alerts: Checking alerts...
+21:43:42 [INFO] database.manager: Getting alerts
+21:53:42 [INFO] cogs.alerts: Checking alerts...
+21:53:42 [INFO] database.manager: Getting alerts
+22:03:42 [INFO] cogs.alerts: Checking alerts...
+22:03:42 [INFO] database.manager: Getting alerts
+22:13:42 [INFO] cogs.alerts: Checking alerts...
+22:13:42 [INFO] database.manager: Getting alerts
+22:23:42 [INFO] cogs.alerts: Checking alerts...
+22:23:42 [INFO] database.manager: Getting alerts
+22:33:42 [INFO] cogs.alerts: Checking alerts...
+22:33:42 [INFO] database.manager: Getting alerts
+22:43:42 [INFO] cogs.alerts: Checking alerts...
+22:43:42 [INFO] database.manager: Getting alerts
+22:53:42 [INFO] cogs.alerts: Checking alerts...
+22:53:42 [INFO] database.manager: Getting alerts
+23:03:42 [INFO] cogs.alerts: Checking alerts...
+23:03:42 [INFO] database.manager: Getting alerts
+23:13:42 [INFO] cogs.alerts: Checking alerts...
+23:13:42 [INFO] database.manager: Getting alerts
+23:23:42 [INFO] cogs.alerts: Checking alerts...
+23:23:42 [INFO] database.manager: Getting alerts
+23:33:42 [INFO] cogs.alerts: Checking alerts...
+23:33:42 [INFO] database.manager: Getting alerts
+23:43:42 [INFO] cogs.alerts: Checking alerts...
+23:43:42 [INFO] database.manager: Getting alerts
+23:53:42 [INFO] cogs.alerts: Checking alerts...
+23:53:42 [INFO] database.manager: Getting alerts
+00:03:42 [INFO] cogs.alerts: Checking alerts...
+00:03:42 [INFO] database.manager: Getting alerts
+00:13:42 [INFO] cogs.alerts: Checking alerts...
+00:13:42 [INFO] database.manager: Getting alerts
+00:23:42 [INFO] cogs.alerts: Checking alerts...
+00:23:42 [INFO] database.manager: Getting alerts
+00:33:42 [INFO] cogs.alerts: Checking alerts...
+00:33:42 [INFO] database.manager: Getting alerts
+00:43:42 [INFO] cogs.alerts: Checking alerts...
+00:43:42 [INFO] database.manager: Getting alerts
+00:53:42 [INFO] cogs.alerts: Checking alerts...
+00:53:42 [INFO] database.manager: Getting alerts
+01:03:42 [INFO] cogs.alerts: Checking alerts...
+01:03:42 [INFO] database.manager: Getting alerts
+01:13:42 [INFO] cogs.alerts: Checking alerts...
+01:13:42 [INFO] database.manager: Getting alerts
+01:23:42 [INFO] cogs.alerts: Checking alerts...
+01:23:42 [INFO] database.manager: Getting alerts
+01:24:28 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+01:33:42 [INFO] cogs.alerts: Checking alerts...
+01:33:42 [INFO] database.manager: Getting alerts
+01:43:42 [INFO] cogs.alerts: Checking alerts...
+01:43:42 [INFO] database.manager: Getting alerts
+01:53:42 [INFO] cogs.alerts: Checking alerts...
+01:53:42 [INFO] database.manager: Getting alerts
+02:03:42 [INFO] cogs.alerts: Checking alerts...
+02:03:42 [INFO] database.manager: Getting alerts
+02:13:42 [INFO] cogs.alerts: Checking alerts...
+02:13:42 [INFO] database.manager: Getting alerts
+02:15:47 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+02:23:42 [INFO] cogs.alerts: Checking alerts...
+02:23:42 [INFO] database.manager: Getting alerts
+02:33:42 [INFO] cogs.alerts: Checking alerts...
+02:33:42 [INFO] database.manager: Getting alerts
+02:43:42 [INFO] cogs.alerts: Checking alerts...
+02:43:42 [INFO] database.manager: Getting alerts
+02:53:42 [INFO] cogs.alerts: Checking alerts...
+02:53:42 [INFO] database.manager: Getting alerts
+03:03:42 [INFO] cogs.alerts: Checking alerts...
+03:03:42 [INFO] database.manager: Getting alerts
+03:13:42 [INFO] cogs.alerts: Checking alerts...
+03:13:42 [INFO] database.manager: Getting alerts
+03:18:39 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+03:23:42 [INFO] cogs.alerts: Checking alerts...
+03:23:42 [INFO] database.manager: Getting alerts
+03:33:42 [INFO] cogs.alerts: Checking alerts...
+03:33:42 [INFO] database.manager: Getting alerts
+03:43:42 [INFO] cogs.alerts: Checking alerts...
+03:43:42 [INFO] database.manager: Getting alerts
+03:53:42 [INFO] cogs.alerts: Checking alerts...
+03:53:42 [INFO] database.manager: Getting alerts
+04:03:42 [INFO] cogs.alerts: Checking alerts...
+04:03:42 [INFO] database.manager: Getting alerts
+04:13:42 [INFO] cogs.alerts: Checking alerts...
+04:13:42 [INFO] database.manager: Getting alerts
+04:23:42 [INFO] cogs.alerts: Checking alerts...
+04:23:42 [INFO] database.manager: Getting alerts
+04:31:35 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+04:33:42 [INFO] cogs.alerts: Checking alerts...
+04:33:42 [INFO] database.manager: Getting alerts
+04:43:42 [INFO] cogs.alerts: Checking alerts...
+04:43:42 [INFO] database.manager: Getting alerts
+04:53:42 [INFO] cogs.alerts: Checking alerts...
+04:53:42 [INFO] database.manager: Getting alerts
+05:03:42 [INFO] cogs.alerts: Checking alerts...
+05:03:42 [INFO] database.manager: Getting alerts
+05:13:42 [INFO] cogs.alerts: Checking alerts...
+05:13:42 [INFO] database.manager: Getting alerts
+05:23:42 [INFO] cogs.alerts: Checking alerts...
+05:23:42 [INFO] database.manager: Getting alerts
+05:33:42 [INFO] cogs.alerts: Checking alerts...
+05:33:42 [INFO] database.manager: Getting alerts
+05:43:42 [INFO] cogs.alerts: Checking alerts...
+05:43:42 [INFO] database.manager: Getting alerts
+05:53:42 [INFO] cogs.alerts: Checking alerts...
+05:53:42 [INFO] database.manager: Getting alerts
+06:03:42 [INFO] cogs.alerts: Checking alerts...
+06:03:42 [INFO] database.manager: Getting alerts
+06:13:42 [INFO] cogs.alerts: Checking alerts...
+06:13:42 [INFO] database.manager: Getting alerts
+06:23:42 [INFO] cogs.alerts: Checking alerts...
+06:23:42 [INFO] database.manager: Getting alerts
+06:33:42 [INFO] cogs.alerts: Checking alerts...
+06:33:42 [INFO] database.manager: Getting alerts
+06:43:42 [INFO] cogs.alerts: Checking alerts...
+06:43:42 [INFO] database.manager: Getting alerts
+06:53:42 [INFO] cogs.alerts: Checking alerts...
+06:53:42 [INFO] database.manager: Getting alerts
+07:03:42 [INFO] cogs.alerts: Checking alerts...
+07:03:42 [INFO] database.manager: Getting alerts
+07:13:42 [INFO] cogs.alerts: Checking alerts...
+07:13:42 [INFO] database.manager: Getting alerts
+07:23:42 [INFO] cogs.alerts: Checking alerts...
+07:23:42 [INFO] database.manager: Getting alerts
+07:33:42 [INFO] cogs.alerts: Checking alerts...
+07:33:42 [INFO] database.manager: Getting alerts
+07:43:42 [INFO] cogs.alerts: Checking alerts...
+07:43:42 [INFO] database.manager: Getting alerts
+07:53:42 [INFO] cogs.alerts: Checking alerts...
+07:53:42 [INFO] database.manager: Getting alerts
+08:03:42 [INFO] cogs.alerts: Checking alerts...
+08:03:42 [INFO] database.manager: Getting alerts
+08:13:42 [INFO] cogs.alerts: Checking alerts...
+08:13:42 [INFO] database.manager: Getting alerts
+08:20:06 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+08:23:42 [INFO] cogs.alerts: Checking alerts...
+08:23:42 [INFO] database.manager: Getting alerts
+08:33:42 [INFO] cogs.alerts: Checking alerts...
+08:33:42 [INFO] database.manager: Getting alerts
+08:37:01 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+08:43:42 [INFO] cogs.alerts: Checking alerts...
+08:43:42 [INFO] database.manager: Getting alerts
+08:53:42 [INFO] cogs.alerts: Checking alerts...
+08:53:42 [INFO] database.manager: Getting alerts
+09:03:42 [INFO] cogs.alerts: Checking alerts...
+09:03:42 [INFO] database.manager: Getting alerts
+09:13:42 [INFO] cogs.alerts: Checking alerts...
+09:13:42 [INFO] database.manager: Getting alerts
+09:23:42 [INFO] cogs.alerts: Checking alerts...
+09:23:42 [INFO] database.manager: Getting alerts
+09:33:42 [INFO] cogs.alerts: Checking alerts...
+09:33:42 [INFO] database.manager: Getting alerts
+09:41:32 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+09:43:42 [INFO] cogs.alerts: Checking alerts...
+09:43:42 [INFO] database.manager: Getting alerts
+09:53:42 [INFO] cogs.alerts: Checking alerts...
+09:53:42 [INFO] database.manager: Getting alerts
+10:03:42 [INFO] cogs.alerts: Checking alerts...
+10:03:42 [INFO] database.manager: Getting alerts
+10:13:42 [INFO] cogs.alerts: Checking alerts...
+10:13:42 [INFO] database.manager: Getting alerts
+10:23:42 [INFO] cogs.alerts: Checking alerts...
+10:23:42 [INFO] database.manager: Getting alerts
+10:33:42 [INFO] cogs.alerts: Checking alerts...
+10:33:42 [INFO] database.manager: Getting alerts
+10:43:42 [INFO] cogs.alerts: Checking alerts...
+10:43:42 [INFO] database.manager: Getting alerts
+10:53:42 [INFO] cogs.alerts: Checking alerts...
+10:53:42 [INFO] database.manager: Getting alerts
+11:03:42 [INFO] cogs.alerts: Checking alerts...
+11:03:42 [INFO] database.manager: Getting alerts
+11:13:42 [INFO] cogs.alerts: Checking alerts...
+11:13:42 [INFO] database.manager: Getting alerts
+11:23:42 [INFO] cogs.alerts: Checking alerts...
+11:23:42 [INFO] database.manager: Getting alerts
+11:33:42 [INFO] cogs.alerts: Checking alerts...
+11:33:42 [INFO] database.manager: Getting alerts
+11:43:42 [INFO] cogs.alerts: Checking alerts...
+11:43:42 [INFO] database.manager: Getting alerts
+11:53:42 [INFO] cogs.alerts: Checking alerts...
+11:53:42 [INFO] database.manager: Getting alerts
+12:03:42 [INFO] cogs.alerts: Checking alerts...
+12:03:42 [INFO] database.manager: Getting alerts
+12:13:42 [INFO] cogs.alerts: Checking alerts...
+12:13:42 [INFO] database.manager: Getting alerts
+12:23:42 [INFO] cogs.alerts: Checking alerts...
+12:23:42 [INFO] database.manager: Getting alerts
+12:33:42 [INFO] cogs.alerts: Checking alerts...
+12:33:42 [INFO] database.manager: Getting alerts
+12:43:42 [INFO] cogs.alerts: Checking alerts...
+12:43:42 [INFO] database.manager: Getting alerts
+12:53:42 [INFO] cogs.alerts: Checking alerts...
+12:53:42 [INFO] database.manager: Getting alerts
+13:03:42 [INFO] cogs.alerts: Checking alerts...
+13:03:42 [INFO] database.manager: Getting alerts
+13:06:37 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+13:11:04 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+13:11:04 [INFO] cogs.ask_gpt: Processing the ask command.
+13:11:04 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+13:11:26 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+13:11:26 [INFO] cogs.ask_gpt: Successfully received GPT response.
+13:11:26 [INFO] cogs.ask_gpt: Sending long message.
+13:11:27 [INFO] cogs.ask_gpt: Long message sent in parts.
+13:11:27 [INFO] cogs.ask_gpt: Response sent successfully.
+13:11:27 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by kiki_57296 (ID: 1309207585257427015)
+13:13:42 [INFO] cogs.alerts: Checking alerts...
+13:13:42 [INFO] database.manager: Getting alerts
+13:23:42 [INFO] cogs.alerts: Checking alerts...
+13:23:42 [INFO] database.manager: Getting alerts
+13:33:42 [INFO] cogs.alerts: Checking alerts...
+13:33:42 [INFO] database.manager: Getting alerts
+13:40:09 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+13:43:42 [INFO] cogs.alerts: Checking alerts...
+13:43:42 [INFO] database.manager: Getting alerts
+13:53:42 [INFO] cogs.alerts: Checking alerts...
+13:53:42 [INFO] database.manager: Getting alerts
+14:03:42 [INFO] cogs.alerts: Checking alerts...
+14:03:42 [INFO] database.manager: Getting alerts
+14:13:42 [INFO] cogs.alerts: Checking alerts...
+14:13:42 [INFO] database.manager: Getting alerts
+14:23:42 [INFO] cogs.alerts: Checking alerts...
+14:23:42 [INFO] database.manager: Getting alerts
+14:33:42 [INFO] cogs.alerts: Checking alerts...
+14:33:42 [INFO] database.manager: Getting alerts
+14:43:42 [INFO] cogs.alerts: Checking alerts...
+14:43:42 [INFO] database.manager: Getting alerts
+14:53:42 [INFO] cogs.alerts: Checking alerts...
+14:53:42 [INFO] database.manager: Getting alerts
+15:03:42 [INFO] cogs.alerts: Checking alerts...
+15:03:42 [INFO] database.manager: Getting alerts
+15:13:42 [INFO] cogs.alerts: Checking alerts...
+15:13:42 [INFO] database.manager: Getting alerts
+15:23:42 [INFO] cogs.alerts: Checking alerts...
+15:23:42 [INFO] database.manager: Getting alerts
+15:33:42 [INFO] cogs.alerts: Checking alerts...
+15:33:42 [INFO] database.manager: Getting alerts
+15:43:42 [INFO] cogs.alerts: Checking alerts...
+15:43:42 [INFO] database.manager: Getting alerts
+15:53:42 [INFO] cogs.alerts: Checking alerts...
+15:53:42 [INFO] database.manager: Getting alerts
+16:02:48 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+16:03:42 [INFO] cogs.alerts: Checking alerts...
+16:03:42 [INFO] database.manager: Getting alerts
+16:13:42 [INFO] cogs.alerts: Checking alerts...
+16:13:42 [INFO] database.manager: Getting alerts
+16:23:42 [INFO] cogs.alerts: Checking alerts...
+16:23:42 [INFO] database.manager: Getting alerts
+16:33:42 [INFO] cogs.alerts: Checking alerts...
+16:33:42 [INFO] database.manager: Getting alerts
+16:43:42 [INFO] cogs.alerts: Checking alerts...
+16:43:42 [INFO] database.manager: Getting alerts
+16:53:42 [INFO] cogs.alerts: Checking alerts...
+16:53:42 [INFO] database.manager: Getting alerts
+17:00:03 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+17:00:04 [INFO] cogs.ask_gpt: Processing the ask command.
+17:00:04 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+17:00:23 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+17:00:23 [INFO] cogs.ask_gpt: Successfully received GPT response.
+17:00:23 [INFO] cogs.ask_gpt: Sending long message.
+17:00:24 [INFO] cogs.ask_gpt: Long message sent in parts.
+17:00:24 [INFO] cogs.ask_gpt: Response sent successfully.
+17:00:24 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by yannpellenard (ID: 883314392475779073)
+17:03:42 [INFO] cogs.alerts: Checking alerts...
+17:03:42 [INFO] database.manager: Getting alerts
+17:13:16 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+17:13:42 [INFO] cogs.alerts: Checking alerts...
+17:13:42 [INFO] database.manager: Getting alerts
+17:23:42 [INFO] cogs.alerts: Checking alerts...
+17:23:42 [INFO] database.manager: Getting alerts
+17:33:42 [INFO] cogs.alerts: Checking alerts...
+17:33:42 [INFO] database.manager: Getting alerts
+17:43:42 [INFO] cogs.alerts: Checking alerts...
+17:43:42 [INFO] database.manager: Getting alerts
+17:53:42 [INFO] cogs.alerts: Checking alerts...
+17:53:42 [INFO] database.manager: Getting alerts
+18:03:42 [INFO] cogs.alerts: Checking alerts...
+18:03:42 [INFO] database.manager: Getting alerts
+18:13:42 [INFO] cogs.alerts: Checking alerts...
+18:13:42 [INFO] database.manager: Getting alerts
+18:19:11 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+18:23:42 [INFO] cogs.alerts: Checking alerts...
+18:23:42 [INFO] database.manager: Getting alerts
+18:33:42 [INFO] cogs.alerts: Checking alerts...
+18:33:42 [INFO] database.manager: Getting alerts
+18:43:42 [INFO] cogs.alerts: Checking alerts...
+18:43:42 [INFO] database.manager: Getting alerts
+18:53:42 [INFO] cogs.alerts: Checking alerts...
+18:53:42 [INFO] database.manager: Getting alerts
+19:03:42 [INFO] cogs.alerts: Checking alerts...
+19:03:42 [INFO] database.manager: Getting alerts
+19:13:42 [INFO] cogs.alerts: Checking alerts...
+19:13:42 [INFO] database.manager: Getting alerts
+19:23:42 [INFO] cogs.alerts: Checking alerts...
+19:23:42 [INFO] database.manager: Getting alerts
+19:33:42 [INFO] cogs.alerts: Checking alerts...
+19:33:42 [INFO] database.manager: Getting alerts
+19:43:42 [INFO] cogs.alerts: Checking alerts...
+19:43:42 [INFO] database.manager: Getting alerts
+19:53:42 [INFO] cogs.alerts: Checking alerts...
+19:53:42 [INFO] database.manager: Getting alerts
+20:03:42 [INFO] cogs.alerts: Checking alerts...
+20:03:42 [INFO] database.manager: Getting alerts
+20:13:42 [INFO] cogs.alerts: Checking alerts...
+20:13:42 [INFO] database.manager: Getting alerts
+20:23:42 [INFO] cogs.alerts: Checking alerts...
+20:23:42 [INFO] database.manager: Getting alerts
+20:23:55 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+20:33:42 [INFO] cogs.alerts: Checking alerts...
+20:33:42 [INFO] database.manager: Getting alerts
+20:43:42 [INFO] cogs.alerts: Checking alerts...
+20:43:42 [INFO] database.manager: Getting alerts
+20:53:42 [INFO] cogs.alerts: Checking alerts...
+20:53:42 [INFO] database.manager: Getting alerts
+20:58:19 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+21:03:42 [INFO] cogs.alerts: Checking alerts...
+21:03:42 [INFO] database.manager: Getting alerts
+21:13:42 [INFO] cogs.alerts: Checking alerts...
+21:13:42 [INFO] database.manager: Getting alerts
+21:23:42 [INFO] cogs.alerts: Checking alerts...
+21:23:42 [INFO] database.manager: Getting alerts
+21:33:42 [INFO] cogs.alerts: Checking alerts...
+21:33:42 [INFO] database.manager: Getting alerts
+21:43:42 [INFO] cogs.alerts: Checking alerts...
+21:43:42 [INFO] database.manager: Getting alerts
+21:53:42 [INFO] cogs.alerts: Checking alerts...
+21:53:42 [INFO] database.manager: Getting alerts
+22:03:42 [INFO] cogs.alerts: Checking alerts...
+22:03:42 [INFO] database.manager: Getting alerts
+22:13:42 [INFO] cogs.alerts: Checking alerts...
+22:13:42 [INFO] database.manager: Getting alerts
+22:23:42 [INFO] cogs.alerts: Checking alerts...
+22:23:42 [INFO] database.manager: Getting alerts
+22:33:42 [INFO] cogs.alerts: Checking alerts...
+22:33:42 [INFO] database.manager: Getting alerts
+22:43:42 [INFO] cogs.alerts: Checking alerts...
+22:43:42 [INFO] database.manager: Getting alerts
+22:53:42 [INFO] cogs.alerts: Checking alerts...
+22:53:42 [INFO] database.manager: Getting alerts
+23:03:42 [INFO] cogs.alerts: Checking alerts...
+23:03:42 [INFO] database.manager: Getting alerts
+23:13:42 [INFO] cogs.alerts: Checking alerts...
+23:13:42 [INFO] database.manager: Getting alerts
+23:23:42 [INFO] cogs.alerts: Checking alerts...
+23:23:42 [INFO] database.manager: Getting alerts
+23:33:42 [INFO] cogs.alerts: Checking alerts...
+23:33:42 [INFO] database.manager: Getting alerts
+23:43:42 [INFO] cogs.alerts: Checking alerts...
+23:43:42 [INFO] database.manager: Getting alerts
+23:53:42 [INFO] cogs.alerts: Checking alerts...
+23:53:42 [INFO] database.manager: Getting alerts
+23:58:49 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+00:03:42 [INFO] cogs.alerts: Checking alerts...
+00:03:42 [INFO] database.manager: Getting alerts
+00:13:42 [INFO] cogs.alerts: Checking alerts...
+00:13:42 [INFO] database.manager: Getting alerts
+00:23:42 [INFO] cogs.alerts: Checking alerts...
+00:23:42 [INFO] database.manager: Getting alerts
+00:33:42 [INFO] cogs.alerts: Checking alerts...
+00:33:42 [INFO] database.manager: Getting alerts
+00:43:42 [INFO] cogs.alerts: Checking alerts...
+00:43:42 [INFO] database.manager: Getting alerts
+00:53:42 [INFO] cogs.alerts: Checking alerts...
+00:53:42 [INFO] database.manager: Getting alerts
+01:03:42 [INFO] cogs.alerts: Checking alerts...
+01:03:42 [INFO] database.manager: Getting alerts
+01:05:11 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+01:13:42 [INFO] cogs.alerts: Checking alerts...
+01:13:42 [INFO] database.manager: Getting alerts
+01:23:42 [INFO] cogs.alerts: Checking alerts...
+01:23:42 [INFO] database.manager: Getting alerts
+01:33:42 [INFO] cogs.alerts: Checking alerts...
+01:33:42 [INFO] database.manager: Getting alerts
+01:37:21 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+01:43:42 [INFO] cogs.alerts: Checking alerts...
+01:43:42 [INFO] database.manager: Getting alerts
+01:53:42 [INFO] cogs.alerts: Checking alerts...
+01:53:42 [INFO] database.manager: Getting alerts
+02:03:42 [INFO] cogs.alerts: Checking alerts...
+02:03:42 [INFO] database.manager: Getting alerts
+02:13:42 [INFO] cogs.alerts: Checking alerts...
+02:13:42 [INFO] database.manager: Getting alerts
+02:23:42 [INFO] cogs.alerts: Checking alerts...
+02:23:42 [INFO] database.manager: Getting alerts
+02:33:42 [INFO] cogs.alerts: Checking alerts...
+02:33:42 [INFO] database.manager: Getting alerts
+02:43:42 [INFO] cogs.alerts: Checking alerts...
+02:43:42 [INFO] database.manager: Getting alerts
+02:53:42 [INFO] cogs.alerts: Checking alerts...
+02:53:42 [INFO] database.manager: Getting alerts
+03:03:42 [INFO] cogs.alerts: Checking alerts...
+03:03:42 [INFO] database.manager: Getting alerts
+03:13:42 [INFO] cogs.alerts: Checking alerts...
+03:13:42 [INFO] database.manager: Getting alerts
+03:23:42 [INFO] cogs.alerts: Checking alerts...
+03:23:42 [INFO] database.manager: Getting alerts
+03:33:42 [INFO] cogs.alerts: Checking alerts...
+03:33:42 [INFO] database.manager: Getting alerts
+03:43:42 [INFO] cogs.alerts: Checking alerts...
+03:43:42 [INFO] database.manager: Getting alerts
+03:53:42 [INFO] cogs.alerts: Checking alerts...
+03:53:42 [INFO] database.manager: Getting alerts
+04:03:42 [INFO] cogs.alerts: Checking alerts...
+04:03:42 [INFO] database.manager: Getting alerts
+04:13:42 [INFO] cogs.alerts: Checking alerts...
+04:13:42 [INFO] database.manager: Getting alerts
+04:23:42 [INFO] cogs.alerts: Checking alerts...
+04:23:42 [INFO] database.manager: Getting alerts
+04:33:42 [INFO] cogs.alerts: Checking alerts...
+04:33:42 [INFO] database.manager: Getting alerts
+04:43:42 [INFO] cogs.alerts: Checking alerts...
+04:43:42 [INFO] database.manager: Getting alerts
+04:53:42 [INFO] cogs.alerts: Checking alerts...
+04:53:42 [INFO] database.manager: Getting alerts
+05:03:42 [INFO] cogs.alerts: Checking alerts...
+05:03:42 [INFO] database.manager: Getting alerts
+05:13:42 [INFO] cogs.alerts: Checking alerts...
+05:13:42 [INFO] database.manager: Getting alerts
+05:15:36 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+05:23:42 [INFO] cogs.alerts: Checking alerts...
+05:23:42 [INFO] database.manager: Getting alerts
+05:33:42 [INFO] cogs.alerts: Checking alerts...
+05:33:42 [INFO] database.manager: Getting alerts
+05:43:42 [INFO] cogs.alerts: Checking alerts...
+05:43:42 [INFO] database.manager: Getting alerts
+05:53:42 [INFO] cogs.alerts: Checking alerts...
+05:53:42 [INFO] database.manager: Getting alerts
+06:03:42 [INFO] cogs.alerts: Checking alerts...
+06:03:42 [INFO] database.manager: Getting alerts
+06:13:42 [INFO] cogs.alerts: Checking alerts...
+06:13:42 [INFO] database.manager: Getting alerts
+06:23:42 [INFO] cogs.alerts: Checking alerts...
+06:23:42 [INFO] database.manager: Getting alerts
+06:33:42 [INFO] cogs.alerts: Checking alerts...
+06:33:42 [INFO] database.manager: Getting alerts
+06:43:42 [INFO] cogs.alerts: Checking alerts...
+06:43:42 [INFO] database.manager: Getting alerts
+06:53:42 [INFO] cogs.alerts: Checking alerts...
+06:53:42 [INFO] database.manager: Getting alerts
+07:03:42 [INFO] cogs.alerts: Checking alerts...
+07:03:42 [INFO] database.manager: Getting alerts
+07:13:42 [INFO] cogs.alerts: Checking alerts...
+07:13:42 [INFO] database.manager: Getting alerts
+07:23:42 [INFO] cogs.alerts: Checking alerts...
+07:23:42 [INFO] database.manager: Getting alerts
+07:33:42 [INFO] cogs.alerts: Checking alerts...
+07:33:42 [INFO] database.manager: Getting alerts
+07:43:42 [INFO] cogs.alerts: Checking alerts...
+07:43:42 [INFO] database.manager: Getting alerts
+07:53:42 [INFO] cogs.alerts: Checking alerts...
+07:53:42 [INFO] database.manager: Getting alerts
+08:03:42 [INFO] cogs.alerts: Checking alerts...
+08:03:42 [INFO] database.manager: Getting alerts
+08:13:42 [INFO] cogs.alerts: Checking alerts...
+08:13:42 [INFO] database.manager: Getting alerts
+08:19:50 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+08:23:42 [INFO] cogs.alerts: Checking alerts...
+08:23:42 [INFO] database.manager: Getting alerts
+08:33:42 [INFO] cogs.alerts: Checking alerts...
+08:33:42 [INFO] database.manager: Getting alerts
+08:43:42 [INFO] cogs.alerts: Checking alerts...
+08:43:42 [INFO] database.manager: Getting alerts
+08:53:42 [INFO] cogs.alerts: Checking alerts...
+08:53:42 [INFO] database.manager: Getting alerts
+09:03:42 [INFO] cogs.alerts: Checking alerts...
+09:03:42 [INFO] database.manager: Getting alerts
+09:13:42 [INFO] cogs.alerts: Checking alerts...
+09:13:42 [INFO] database.manager: Getting alerts
+09:23:42 [INFO] cogs.alerts: Checking alerts...
+09:23:42 [INFO] database.manager: Getting alerts
+09:33:42 [INFO] cogs.alerts: Checking alerts...
+09:33:42 [INFO] database.manager: Getting alerts
+09:43:42 [INFO] cogs.alerts: Checking alerts...
+09:43:42 [INFO] database.manager: Getting alerts
+09:53:42 [INFO] cogs.alerts: Checking alerts...
+09:53:42 [INFO] database.manager: Getting alerts
+10:03:42 [INFO] cogs.alerts: Checking alerts...
+10:03:42 [INFO] database.manager: Getting alerts
+10:13:42 [INFO] cogs.alerts: Checking alerts...
+10:13:42 [INFO] database.manager: Getting alerts
+10:23:42 [INFO] cogs.alerts: Checking alerts...
+10:23:42 [INFO] database.manager: Getting alerts
+10:33:42 [INFO] cogs.alerts: Checking alerts...
+10:33:42 [INFO] database.manager: Getting alerts
+10:43:42 [INFO] cogs.alerts: Checking alerts...
+10:43:42 [INFO] database.manager: Getting alerts
+10:53:42 [INFO] cogs.alerts: Checking alerts...
+10:53:42 [INFO] database.manager: Getting alerts
+11:03:42 [INFO] cogs.alerts: Checking alerts...
+11:03:42 [INFO] database.manager: Getting alerts
+11:13:42 [INFO] cogs.alerts: Checking alerts...
+11:13:42 [INFO] database.manager: Getting alerts
+11:23:42 [INFO] cogs.alerts: Checking alerts...
+11:23:42 [INFO] database.manager: Getting alerts
+11:27:41 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+11:33:42 [INFO] cogs.alerts: Checking alerts...
+11:33:42 [INFO] database.manager: Getting alerts
+11:43:42 [INFO] cogs.alerts: Checking alerts...
+11:43:42 [INFO] database.manager: Getting alerts
+11:53:42 [INFO] cogs.alerts: Checking alerts...
+11:53:42 [INFO] database.manager: Getting alerts
+11:55:38 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+12:03:42 [INFO] cogs.alerts: Checking alerts...
+12:03:42 [INFO] database.manager: Getting alerts
+12:13:42 [INFO] cogs.alerts: Checking alerts...
+12:13:42 [INFO] database.manager: Getting alerts
+12:23:42 [INFO] cogs.alerts: Checking alerts...
+12:23:42 [INFO] database.manager: Getting alerts
+12:33:42 [INFO] cogs.alerts: Checking alerts...
+12:33:42 [INFO] database.manager: Getting alerts
+12:43:42 [INFO] cogs.alerts: Checking alerts...
+12:43:42 [INFO] database.manager: Getting alerts
+12:53:42 [INFO] cogs.alerts: Checking alerts...
+12:53:42 [INFO] database.manager: Getting alerts
+13:03:42 [INFO] cogs.alerts: Checking alerts...
+13:03:42 [INFO] database.manager: Getting alerts
+13:13:42 [INFO] cogs.alerts: Checking alerts...
+13:13:42 [INFO] database.manager: Getting alerts
+13:23:42 [INFO] cogs.alerts: Checking alerts...
+13:23:42 [INFO] database.manager: Getting alerts
+13:33:42 [INFO] cogs.alerts: Checking alerts...
+13:33:42 [INFO] database.manager: Getting alerts
+13:43:42 [INFO] cogs.alerts: Checking alerts...
+13:43:42 [INFO] database.manager: Getting alerts
+13:53:42 [INFO] cogs.alerts: Checking alerts...
+13:53:42 [INFO] database.manager: Getting alerts
+14:03:42 [INFO] cogs.alerts: Checking alerts...
+14:03:42 [INFO] database.manager: Getting alerts
+14:13:42 [INFO] cogs.alerts: Checking alerts...
+14:13:42 [INFO] database.manager: Getting alerts
+14:23:42 [INFO] cogs.alerts: Checking alerts...
+14:23:42 [INFO] database.manager: Getting alerts
+14:33:42 [INFO] cogs.alerts: Checking alerts...
+14:33:42 [INFO] database.manager: Getting alerts
+14:43:42 [INFO] cogs.alerts: Checking alerts...
+14:43:42 [INFO] database.manager: Getting alerts
+14:45:23 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+14:53:42 [INFO] cogs.alerts: Checking alerts...
+14:53:42 [INFO] database.manager: Getting alerts
+15:03:42 [INFO] cogs.alerts: Checking alerts...
+15:03:42 [INFO] database.manager: Getting alerts
+15:13:42 [INFO] cogs.alerts: Checking alerts...
+15:13:42 [INFO] database.manager: Getting alerts
+15:19:18 [ERROR] discord.client: Attempting a reconnect in 1.40s
+Traceback (most recent call last):
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 625, in poll_event
+    await self.received_message(msg.data)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 533, in received_message
+    await self.send_as_json(beat)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 661, in send_as_json
+    await self.send(utils._to_json(data))
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 657, in send
+    await self.socket.send_str(data)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/client_ws.py", line 225, in send_str
+    await self._writer.send(data, binary=False, compress=compress)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 726, in send
+    await self._send_frame(message, WSMsgType.TEXT, compress)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 672, in _send_frame
+    self._write(header + mask + message)
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/http_websocket.py", line 699, in _write
+    raise ConnectionResetError("Cannot write to closing transport")
+ConnectionResetError: Cannot write to closing transport
+15:19:35 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+15:23:42 [INFO] cogs.alerts: Checking alerts...
+15:23:42 [INFO] database.manager: Getting alerts
+15:33:42 [INFO] cogs.alerts: Checking alerts...
+15:33:42 [INFO] database.manager: Getting alerts
+15:43:42 [INFO] cogs.alerts: Checking alerts...
+15:43:42 [INFO] database.manager: Getting alerts
+15:53:42 [INFO] cogs.alerts: Checking alerts...
+15:53:42 [INFO] database.manager: Getting alerts
+16:03:42 [INFO] cogs.alerts: Checking alerts...
+16:03:42 [INFO] database.manager: Getting alerts
+16:13:42 [INFO] cogs.alerts: Checking alerts...
+16:13:42 [INFO] database.manager: Getting alerts
+16:23:42 [INFO] cogs.alerts: Checking alerts...
+16:23:42 [INFO] database.manager: Getting alerts
+16:33:42 [INFO] cogs.alerts: Checking alerts...
+16:33:42 [INFO] database.manager: Getting alerts
+16:43:42 [INFO] cogs.alerts: Checking alerts...
+16:43:42 [INFO] database.manager: Getting alerts
+16:53:42 [INFO] cogs.alerts: Checking alerts...
+16:53:42 [INFO] database.manager: Getting alerts
+17:02:18 [ERROR] discord.client: Attempting a reconnect in 0.08s
+Traceback (most recent call last):
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1301, in _create_direct_connection
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 911, in _resolve_host
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 948, in _resolve_host_with_throttle
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/resolver.py", line 37, in resolve
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 867, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/socket.py", line 962, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/client.py", line 664, in connect
+  File "/usr/lib/python3.11/asyncio/tasks.py", line 479, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/gateway.py", line 374, in from_client
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/discord/http.py", line 550, in ws_connect
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/client.py", line 931, in _ws_connect
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/client.py", line 657, in _request
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 564, in connect
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 975, in _create_connection
+  File "/home/admin/my_bot_directory/venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1307, in _create_direct_connection
+aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [Name or service not known]
+17:02:18 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+17:03:42 [INFO] cogs.alerts: Checking alerts...
+17:03:42 [INFO] database.manager: Getting alerts
+17:13:42 [INFO] cogs.alerts: Checking alerts...
+17:13:42 [INFO] database.manager: Getting alerts
+17:23:42 [INFO] cogs.alerts: Checking alerts...
+17:23:42 [INFO] database.manager: Getting alerts
+17:33:42 [INFO] cogs.alerts: Checking alerts...
+17:33:42 [INFO] database.manager: Getting alerts
+17:43:42 [INFO] cogs.alerts: Checking alerts...
+17:43:42 [INFO] database.manager: Getting alerts
+17:53:42 [INFO] cogs.alerts: Checking alerts...
+17:53:42 [INFO] database.manager: Getting alerts
+18:03:42 [INFO] cogs.alerts: Checking alerts...
+18:03:42 [INFO] database.manager: Getting alerts
+18:13:42 [INFO] cogs.alerts: Checking alerts...
+18:13:42 [INFO] database.manager: Getting alerts
+18:21:40 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+18:23:42 [INFO] cogs.alerts: Checking alerts...
+18:23:42 [INFO] database.manager: Getting alerts
+18:33:42 [INFO] cogs.alerts: Checking alerts...
+18:33:42 [INFO] database.manager: Getting alerts
+18:43:42 [INFO] cogs.alerts: Checking alerts...
+18:43:42 [INFO] database.manager: Getting alerts
+18:53:42 [INFO] cogs.alerts: Checking alerts...
+18:53:42 [INFO] database.manager: Getting alerts
+19:03:42 [INFO] cogs.alerts: Checking alerts...
+19:03:42 [INFO] database.manager: Getting alerts
+19:13:42 [INFO] cogs.alerts: Checking alerts...
+19:13:42 [INFO] database.manager: Getting alerts
+19:23:42 [INFO] cogs.alerts: Checking alerts...
+19:23:42 [INFO] database.manager: Getting alerts
+19:33:42 [INFO] cogs.alerts: Checking alerts...
+19:33:42 [INFO] database.manager: Getting alerts
+19:43:42 [INFO] cogs.alerts: Checking alerts...
+19:43:42 [INFO] database.manager: Getting alerts
+19:53:25 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+19:53:42 [INFO] cogs.alerts: Checking alerts...
+19:53:42 [INFO] database.manager: Getting alerts
+20:03:42 [INFO] cogs.alerts: Checking alerts...
+20:03:42 [INFO] database.manager: Getting alerts
+20:13:42 [INFO] cogs.alerts: Checking alerts...
+20:13:42 [INFO] database.manager: Getting alerts
+20:23:42 [INFO] cogs.alerts: Checking alerts...
+20:23:42 [INFO] database.manager: Getting alerts
+20:33:42 [INFO] cogs.alerts: Checking alerts...
+20:33:42 [INFO] database.manager: Getting alerts
+20:43:42 [INFO] cogs.alerts: Checking alerts...
+20:43:42 [INFO] database.manager: Getting alerts
+20:44:07 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+20:53:42 [INFO] cogs.alerts: Checking alerts...
+20:53:42 [INFO] database.manager: Getting alerts
+21:03:42 [INFO] cogs.alerts: Checking alerts...
+21:03:42 [INFO] database.manager: Getting alerts
+21:13:42 [INFO] cogs.alerts: Checking alerts...
+21:13:42 [INFO] database.manager: Getting alerts
+21:23:42 [INFO] cogs.alerts: Checking alerts...
+21:23:42 [INFO] database.manager: Getting alerts
+21:33:42 [INFO] cogs.alerts: Checking alerts...
+21:33:42 [INFO] database.manager: Getting alerts
+21:39:47 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+21:43:42 [INFO] cogs.alerts: Checking alerts...
+21:43:42 [INFO] database.manager: Getting alerts
+21:49:58 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+21:53:42 [INFO] cogs.alerts: Checking alerts...
+21:53:42 [INFO] database.manager: Getting alerts
+22:03:42 [INFO] cogs.alerts: Checking alerts...
+22:03:42 [INFO] database.manager: Getting alerts
+22:13:42 [INFO] cogs.alerts: Checking alerts...
+22:13:42 [INFO] database.manager: Getting alerts
+22:17:01 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+22:23:42 [INFO] cogs.alerts: Checking alerts...
+22:23:42 [INFO] database.manager: Getting alerts
+22:33:42 [INFO] cogs.alerts: Checking alerts...
+22:33:42 [INFO] database.manager: Getting alerts
+22:43:42 [INFO] cogs.alerts: Checking alerts...
+22:43:42 [INFO] database.manager: Getting alerts
+22:53:42 [INFO] cogs.alerts: Checking alerts...
+22:53:42 [INFO] database.manager: Getting alerts
+23:03:42 [INFO] cogs.alerts: Checking alerts...
+23:03:42 [INFO] database.manager: Getting alerts
+23:13:42 [INFO] cogs.alerts: Checking alerts...
+23:13:42 [INFO] database.manager: Getting alerts
+23:23:42 [INFO] cogs.alerts: Checking alerts...
+23:23:42 [INFO] database.manager: Getting alerts
+23:33:42 [INFO] cogs.alerts: Checking alerts...
+23:33:42 [INFO] database.manager: Getting alerts
+23:43:42 [INFO] cogs.alerts: Checking alerts...
+23:43:42 [INFO] database.manager: Getting alerts
+23:53:42 [INFO] cogs.alerts: Checking alerts...
+23:53:42 [INFO] database.manager: Getting alerts
+00:03:42 [INFO] cogs.alerts: Checking alerts...
+00:03:42 [INFO] database.manager: Getting alerts
+00:13:42 [INFO] cogs.alerts: Checking alerts...
+00:13:42 [INFO] database.manager: Getting alerts
+00:23:42 [INFO] cogs.alerts: Checking alerts...
+00:23:42 [INFO] database.manager: Getting alerts
+00:33:42 [INFO] cogs.alerts: Checking alerts...
+00:33:42 [INFO] database.manager: Getting alerts
+00:43:42 [INFO] cogs.alerts: Checking alerts...
+00:43:42 [INFO] database.manager: Getting alerts
+00:53:42 [INFO] cogs.alerts: Checking alerts...
+00:53:42 [INFO] database.manager: Getting alerts
+01:03:42 [INFO] cogs.alerts: Checking alerts...
+01:03:42 [INFO] database.manager: Getting alerts
+01:13:42 [INFO] cogs.alerts: Checking alerts...
+01:13:42 [INFO] database.manager: Getting alerts
+01:23:42 [INFO] cogs.alerts: Checking alerts...
+01:23:42 [INFO] database.manager: Getting alerts
+01:33:42 [INFO] cogs.alerts: Checking alerts...
+01:33:42 [INFO] database.manager: Getting alerts
+01:37:54 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+01:43:42 [INFO] cogs.alerts: Checking alerts...
+01:43:42 [INFO] database.manager: Getting alerts
+01:53:42 [INFO] cogs.alerts: Checking alerts...
+01:53:42 [INFO] database.manager: Getting alerts
+02:03:42 [INFO] cogs.alerts: Checking alerts...
+02:03:42 [INFO] database.manager: Getting alerts
+02:13:42 [INFO] cogs.alerts: Checking alerts...
+02:13:42 [INFO] database.manager: Getting alerts
+02:23:42 [INFO] cogs.alerts: Checking alerts...
+02:23:42 [INFO] database.manager: Getting alerts
+02:23:58 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+02:33:42 [INFO] cogs.alerts: Checking alerts...
+02:33:42 [INFO] database.manager: Getting alerts
+02:43:42 [INFO] cogs.alerts: Checking alerts...
+02:43:42 [INFO] database.manager: Getting alerts
+02:53:42 [INFO] cogs.alerts: Checking alerts...
+02:53:42 [INFO] database.manager: Getting alerts
+03:03:42 [INFO] cogs.alerts: Checking alerts...
+03:03:42 [INFO] database.manager: Getting alerts
+03:11:09 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+03:13:42 [INFO] cogs.alerts: Checking alerts...
+03:13:42 [INFO] database.manager: Getting alerts
+03:23:42 [INFO] cogs.alerts: Checking alerts...
+03:23:42 [INFO] database.manager: Getting alerts
+03:33:42 [INFO] cogs.alerts: Checking alerts...
+03:33:42 [INFO] database.manager: Getting alerts
+03:43:42 [INFO] cogs.alerts: Checking alerts...
+03:43:42 [INFO] database.manager: Getting alerts
+03:46:40 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+03:53:42 [INFO] cogs.alerts: Checking alerts...
+03:53:42 [INFO] database.manager: Getting alerts
+04:03:42 [INFO] cogs.alerts: Checking alerts...
+04:03:42 [INFO] database.manager: Getting alerts
+04:11:19 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+04:13:42 [INFO] cogs.alerts: Checking alerts...
+04:13:42 [INFO] database.manager: Getting alerts
+04:23:42 [INFO] cogs.alerts: Checking alerts...
+04:23:42 [INFO] database.manager: Getting alerts
+04:33:42 [INFO] cogs.alerts: Checking alerts...
+04:33:42 [INFO] database.manager: Getting alerts
+04:43:42 [INFO] cogs.alerts: Checking alerts...
+04:43:42 [INFO] database.manager: Getting alerts
+04:53:42 [INFO] cogs.alerts: Checking alerts...
+04:53:42 [INFO] database.manager: Getting alerts
+05:03:42 [INFO] cogs.alerts: Checking alerts...
+05:03:42 [INFO] database.manager: Getting alerts
+05:13:42 [INFO] cogs.alerts: Checking alerts...
+05:13:42 [INFO] database.manager: Getting alerts
+05:23:00 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+05:23:42 [INFO] cogs.alerts: Checking alerts...
+05:23:42 [INFO] database.manager: Getting alerts
+05:33:42 [INFO] cogs.alerts: Checking alerts...
+05:33:42 [INFO] database.manager: Getting alerts
+05:43:42 [INFO] cogs.alerts: Checking alerts...
+05:43:42 [INFO] database.manager: Getting alerts
+05:53:42 [INFO] cogs.alerts: Checking alerts...
+05:53:42 [INFO] database.manager: Getting alerts
+06:03:42 [INFO] cogs.alerts: Checking alerts...
+06:03:42 [INFO] database.manager: Getting alerts
+06:13:42 [INFO] cogs.alerts: Checking alerts...
+06:13:42 [INFO] database.manager: Getting alerts
+06:23:42 [INFO] cogs.alerts: Checking alerts...
+06:23:42 [INFO] database.manager: Getting alerts
+06:24:40 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+06:33:42 [INFO] cogs.alerts: Checking alerts...
+06:33:42 [INFO] database.manager: Getting alerts
+06:43:42 [INFO] cogs.alerts: Checking alerts...
+06:43:42 [INFO] database.manager: Getting alerts
+06:53:42 [INFO] cogs.alerts: Checking alerts...
+06:53:42 [INFO] database.manager: Getting alerts
+07:03:42 [INFO] cogs.alerts: Checking alerts...
+07:03:42 [INFO] database.manager: Getting alerts
+07:13:42 [INFO] cogs.alerts: Checking alerts...
+07:13:42 [INFO] database.manager: Getting alerts
+07:23:42 [INFO] cogs.alerts: Checking alerts...
+07:23:42 [INFO] database.manager: Getting alerts
+07:33:42 [INFO] cogs.alerts: Checking alerts...
+07:33:42 [INFO] database.manager: Getting alerts
+07:43:42 [INFO] cogs.alerts: Checking alerts...
+07:43:42 [INFO] database.manager: Getting alerts
+07:53:42 [INFO] cogs.alerts: Checking alerts...
+07:53:42 [INFO] database.manager: Getting alerts
+08:03:42 [INFO] cogs.alerts: Checking alerts...
+08:03:42 [INFO] database.manager: Getting alerts
+08:13:42 [INFO] cogs.alerts: Checking alerts...
+08:13:42 [INFO] database.manager: Getting alerts
+08:23:42 [INFO] cogs.alerts: Checking alerts...
+08:23:42 [INFO] database.manager: Getting alerts
+08:33:42 [INFO] cogs.alerts: Checking alerts...
+08:33:42 [INFO] database.manager: Getting alerts
+08:43:42 [INFO] cogs.alerts: Checking alerts...
+08:43:42 [INFO] database.manager: Getting alerts
+08:53:42 [INFO] cogs.alerts: Checking alerts...
+08:53:42 [INFO] database.manager: Getting alerts
+09:03:42 [INFO] cogs.alerts: Checking alerts...
+09:03:42 [INFO] database.manager: Getting alerts
+09:13:42 [INFO] cogs.alerts: Checking alerts...
+09:13:42 [INFO] database.manager: Getting alerts
+09:21:01 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+09:23:42 [INFO] cogs.alerts: Checking alerts...
+09:23:42 [INFO] database.manager: Getting alerts
+09:33:42 [INFO] cogs.alerts: Checking alerts...
+09:33:42 [INFO] database.manager: Getting alerts
+09:43:42 [INFO] cogs.alerts: Checking alerts...
+09:43:42 [INFO] database.manager: Getting alerts
+09:53:42 [INFO] cogs.alerts: Checking alerts...
+09:53:42 [INFO] database.manager: Getting alerts
+10:03:42 [INFO] cogs.alerts: Checking alerts...
+10:03:42 [INFO] database.manager: Getting alerts
+10:13:42 [INFO] cogs.alerts: Checking alerts...
+10:13:42 [INFO] database.manager: Getting alerts
+10:20:15 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+10:23:42 [INFO] cogs.alerts: Checking alerts...
+10:23:42 [INFO] database.manager: Getting alerts
+10:33:42 [INFO] cogs.alerts: Checking alerts...
+10:33:42 [INFO] database.manager: Getting alerts
+10:43:42 [INFO] cogs.alerts: Checking alerts...
+10:43:42 [INFO] database.manager: Getting alerts
+10:43:42 [ERROR] database.manager: Error fetching alerts: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+10:53:42 [INFO] cogs.alerts: Checking alerts...
+10:53:42 [INFO] database.manager: Getting alerts
+10:53:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:01:37 [INFO] discord.gateway: Shard ID None has successfully RESUMED session d05cd9b863136548e5c45dda77af5eaf.
+11:03:42 [INFO] cogs.alerts: Checking alerts...
+11:03:42 [INFO] database.manager: Getting alerts
+11:03:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:13:42 [INFO] cogs.alerts: Checking alerts...
+11:13:42 [INFO] database.manager: Getting alerts
+11:13:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:23:42 [INFO] cogs.alerts: Checking alerts...
+11:23:42 [INFO] database.manager: Getting alerts
+11:23:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:33:42 [INFO] cogs.alerts: Checking alerts...
+11:33:42 [INFO] database.manager: Getting alerts
+11:33:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:43:42 [INFO] cogs.alerts: Checking alerts...
+11:43:42 [INFO] database.manager: Getting alerts
+11:43:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+11:53:42 [INFO] cogs.alerts: Checking alerts...
+11:53:42 [INFO] database.manager: Getting alerts
+11:53:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+12:03:42 [INFO] cogs.alerts: Checking alerts...
+12:03:42 [INFO] database.manager: Getting alerts
+12:03:42 [ERROR] database.manager: Error fetching alerts: connection already closed
+12:04:06 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+12:04:06 [INFO] cogs.ask_gpt: Processing the ask command.
+12:04:06 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+12:04:06 [INFO] openai._base_client: Retrying request to /chat/completions in 0.942199 seconds
+12:04:07 [INFO] openai._base_client: Retrying request to /chat/completions in 1.962819 seconds
+12:04:09 [ERROR] cogs.ask_gpt: Error in get_gpt_response: Connection error.
+12:04:09 [INFO] cogs.ask_gpt: Sending long message.
+12:04:10 [INFO] cogs.ask_gpt: Message sent successfully.
+12:04:10 [INFO] cogs.ask_gpt: Response sent successfully.
+12:04:10 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:04:15 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+12:04:15 [INFO] cogs.ask_gpt: Processing the ask command.
+12:04:15 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+12:04:16 [INFO] openai._base_client: Retrying request to /chat/completions in 0.876833 seconds
+12:04:17 [INFO] openai._base_client: Retrying request to /chat/completions in 1.848954 seconds
+12:04:19 [ERROR] cogs.ask_gpt: Error in get_gpt_response: Connection error.
+12:04:19 [INFO] cogs.ask_gpt: Sending long message.
+12:04:19 [INFO] cogs.ask_gpt: Message sent successfully.
+12:04:19 [INFO] cogs.ask_gpt: Response sent successfully.
+12:04:19 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:05:23 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+12:05:23 [INFO] cogs.ask_gpt: Processing the ask command.
+12:05:23 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+12:05:23 [INFO] openai._base_client: Retrying request to /chat/completions in 0.825508 seconds
+12:05:24 [INFO] openai._base_client: Retrying request to /chat/completions in 1.853047 seconds
+12:05:26 [ERROR] cogs.ask_gpt: Error in get_gpt_response: Connection error.
+12:05:26 [INFO] cogs.ask_gpt: Sending long message.
+12:05:27 [INFO] cogs.ask_gpt: Message sent successfully.
+12:05:29 [INFO] cogs.ask_gpt: Response sent successfully.
+12:05:29 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:05:51 [INFO] __main__: Shutting down bot...
+12:05:51 [INFO] database.manager: Database connection closed.
+12:19:48 [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+12:19:48 [INFO] utils.crypto_data: Fetching data from API: data/crypto_map.json
+12:19:49 [INFO] utils.crypto_data: Cached 576 items.
+12:19:49 [INFO] utils.crypto_data: Fetching data from API: data/crypto_list.json
+12:19:49 [INFO] utils.crypto_data: Cached 250 items.
+12:19:49 [INFO] discord.client: logging in using static token
+12:19:50 [INFO] database.manager: Database connection established successfully.
+12:19:50 [INFO] database.manager: Executed statement successfully.
+12:19:50 [INFO] database.manager: Executed statement successfully.
+12:19:50 [INFO] __main__: Database initialized successfully.
+12:19:50 [INFO] __main__: Loaded extension: alerts.py
+12:19:50 [INFO] __main__: Loaded extension: analysis.py
+12:19:50 [INFO] __main__: Loaded extension: misc.py
+12:19:50 [INFO] __main__: Loaded extension: news.py
+12:19:51 [INFO] __main__: Loaded extension: graphs.py
+12:19:51 [INFO] __main__: Loaded extension: vote.py
+12:19:51 [INFO] __main__: Loaded extension: price.py
+12:19:51 [INFO] __main__: Loaded extension: calendar.py
+12:19:51 [INFO] __main__: Loaded extension: info.py
+12:19:51 [INFO] __main__: Loaded extension: help.py
+12:19:51 [INFO] __main__: Loaded extension: admin.py
+12:19:51 [INFO] __main__: Loaded extension: tutorials.py
+12:19:51 [INFO] __main__: Loaded extension: list_crypto.py
+12:19:51 [INFO] __main__: Loaded extension: ask_gpt.py
+12:19:51 [INFO] __main__: Loaded extension: feargreed.py
+12:19:51 [INFO] __main__: Loaded extension: predictions.py
+12:19:51 [INFO] __main__: Loaded extension: trend.py
+12:19:51 [INFO] cogs.alerts: Checking alerts...
+12:19:51 [INFO] database.manager: Getting alerts
+12:19:51 [INFO] __main__: Command tree synced with guild 1261789585025798226.
+12:19:52 [INFO] discord.gateway: Shard ID None has connected to Gateway (Session ID: fd3e7207f422ce8035800609d022ec4c).
+12:19:54 [INFO] __main__: Logged in as Le Crypto Club#7054 (ID: 1279900783596408853)
+12:19:54 [INFO] __main__: Le Crypto Club#7054 is connected to 2 guild(s)
+12:20:08 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+12:20:08 [INFO] cogs.ask_gpt: Processing the ask command.
+12:20:08 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+12:20:22 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+12:20:22 [INFO] cogs.ask_gpt: Successfully received GPT response.
+12:20:22 [INFO] cogs.ask_gpt: Sending long message.
+12:20:23 [INFO] cogs.ask_gpt: Long message sent in parts.
+12:20:23 [INFO] cogs.ask_gpt: Response sent successfully.
+12:20:23 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+12:29:51 [INFO] cogs.alerts: Checking alerts...
+12:29:51 [INFO] database.manager: Getting alerts
+12:39:51 [INFO] cogs.alerts: Checking alerts...
+12:39:51 [INFO] database.manager: Getting alerts
+12:49:51 [INFO] cogs.alerts: Checking alerts...
+12:49:51 [INFO] database.manager: Getting alerts
+12:59:51 [INFO] cogs.alerts: Checking alerts...
+12:59:51 [INFO] database.manager: Getting alerts
+13:09:51 [INFO] cogs.alerts: Checking alerts...
+13:09:51 [INFO] database.manager: Getting alerts
+13:19:51 [INFO] cogs.alerts: Checking alerts...
+13:19:51 [INFO] database.manager: Getting alerts
+13:29:51 [INFO] cogs.alerts: Checking alerts...
+13:29:51 [INFO] database.manager: Getting alerts
+13:39:51 [INFO] cogs.alerts: Checking alerts...
+13:39:51 [INFO] database.manager: Getting alerts
+13:49:51 [INFO] cogs.alerts: Checking alerts...
+13:49:51 [INFO] database.manager: Getting alerts
+13:59:51 [INFO] cogs.alerts: Checking alerts...
+13:59:51 [INFO] database.manager: Getting alerts
+14:09:51 [INFO] cogs.alerts: Checking alerts...
+14:09:51 [INFO] database.manager: Getting alerts
+14:19:51 [INFO] cogs.alerts: Checking alerts...
+14:19:51 [INFO] database.manager: Getting alerts
+14:29:51 [INFO] cogs.alerts: Checking alerts...
+14:29:51 [INFO] database.manager: Getting alerts
+14:39:51 [INFO] cogs.alerts: Checking alerts...
+14:39:51 [INFO] database.manager: Getting alerts
+14:49:51 [INFO] cogs.alerts: Checking alerts...
+14:49:51 [INFO] database.manager: Getting alerts
+14:59:51 [INFO] cogs.alerts: Checking alerts...
+14:59:51 [INFO] database.manager: Getting alerts
+15:08:09 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+15:09:51 [INFO] cogs.alerts: Checking alerts...
+15:09:51 [INFO] database.manager: Getting alerts
+15:19:50 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+15:19:50 [INFO] cogs.ask_gpt: Processing the ask command.
+15:19:50 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+15:20:12 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+15:20:12 [INFO] cogs.ask_gpt: Successfully received GPT response.
+15:20:12 [INFO] cogs.ask_gpt: Sending long message.
+15:20:12 [INFO] cogs.alerts: Checking alerts...
+15:20:12 [INFO] database.manager: Getting alerts
+15:20:12 [INFO] cogs.ask_gpt: Long message sent in parts.
+15:20:14 [INFO] cogs.ask_gpt: Response sent successfully.
+15:20:14 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by wyatt6525 (ID: 365951736621563905)
+15:29:51 [INFO] cogs.alerts: Checking alerts...
+15:29:51 [INFO] database.manager: Getting alerts
+15:39:51 [INFO] cogs.alerts: Checking alerts...
+15:39:51 [INFO] database.manager: Getting alerts
+15:49:51 [INFO] cogs.alerts: Checking alerts...
+15:49:51 [INFO] database.manager: Getting alerts
+15:59:51 [INFO] cogs.alerts: Checking alerts...
+15:59:51 [INFO] database.manager: Getting alerts
+16:09:51 [INFO] cogs.alerts: Checking alerts...
+16:09:51 [INFO] database.manager: Getting alerts
+16:19:51 [INFO] cogs.alerts: Checking alerts...
+16:19:51 [INFO] database.manager: Getting alerts
+16:29:51 [INFO] cogs.alerts: Checking alerts...
+16:29:51 [INFO] database.manager: Getting alerts
+16:39:51 [INFO] cogs.alerts: Checking alerts...
+16:39:51 [INFO] database.manager: Getting alerts
+16:49:51 [INFO] cogs.alerts: Checking alerts...
+16:49:51 [INFO] database.manager: Getting alerts
+16:59:51 [INFO] cogs.alerts: Checking alerts...
+16:59:51 [INFO] database.manager: Getting alerts
+17:09:51 [INFO] cogs.alerts: Checking alerts...
+17:09:51 [INFO] database.manager: Getting alerts
+17:19:51 [INFO] cogs.alerts: Checking alerts...
+17:19:51 [INFO] database.manager: Getting alerts
+17:29:51 [INFO] cogs.alerts: Checking alerts...
+17:29:51 [INFO] database.manager: Getting alerts
+17:39:51 [INFO] cogs.alerts: Checking alerts...
+17:39:51 [INFO] database.manager: Getting alerts
+17:49:51 [INFO] cogs.alerts: Checking alerts...
+17:49:51 [INFO] database.manager: Getting alerts
+17:59:51 [INFO] cogs.alerts: Checking alerts...
+17:59:51 [INFO] database.manager: Getting alerts
+18:09:51 [INFO] cogs.alerts: Checking alerts...
+18:09:51 [INFO] database.manager: Getting alerts
+18:19:51 [INFO] cogs.alerts: Checking alerts...
+18:19:51 [INFO] database.manager: Getting alerts
+18:29:51 [INFO] cogs.alerts: Checking alerts...
+18:29:51 [INFO] database.manager: Getting alerts
+18:39:51 [INFO] cogs.alerts: Checking alerts...
+18:39:51 [INFO] database.manager: Getting alerts
+18:49:51 [INFO] cogs.alerts: Checking alerts...
+18:49:51 [INFO] database.manager: Getting alerts
+18:59:51 [INFO] cogs.alerts: Checking alerts...
+18:59:51 [INFO] database.manager: Getting alerts
+19:04:35 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+19:09:51 [INFO] cogs.alerts: Checking alerts...
+19:09:51 [INFO] database.manager: Getting alerts
+19:19:51 [INFO] cogs.alerts: Checking alerts...
+19:19:51 [INFO] database.manager: Getting alerts
+19:29:51 [INFO] cogs.alerts: Checking alerts...
+19:29:51 [INFO] database.manager: Getting alerts
+19:39:51 [INFO] cogs.alerts: Checking alerts...
+19:39:51 [INFO] database.manager: Getting alerts
+19:49:51 [INFO] cogs.alerts: Checking alerts...
+19:49:51 [INFO] database.manager: Getting alerts
+19:59:51 [INFO] cogs.alerts: Checking alerts...
+19:59:51 [INFO] database.manager: Getting alerts
+20:09:51 [INFO] cogs.alerts: Checking alerts...
+20:09:51 [INFO] database.manager: Getting alerts
+20:19:51 [INFO] cogs.alerts: Checking alerts...
+20:19:51 [INFO] database.manager: Getting alerts
+20:29:51 [INFO] cogs.alerts: Checking alerts...
+20:29:51 [INFO] database.manager: Getting alerts
+20:39:51 [INFO] cogs.alerts: Checking alerts...
+20:39:51 [INFO] database.manager: Getting alerts
+20:49:26 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+20:49:51 [INFO] cogs.alerts: Checking alerts...
+20:49:51 [INFO] database.manager: Getting alerts
+20:59:51 [INFO] cogs.alerts: Checking alerts...
+20:59:51 [INFO] database.manager: Getting alerts
+21:09:51 [INFO] cogs.alerts: Checking alerts...
+21:09:51 [INFO] database.manager: Getting alerts
+21:19:51 [INFO] cogs.alerts: Checking alerts...
+21:19:51 [INFO] database.manager: Getting alerts
+21:29:51 [INFO] cogs.alerts: Checking alerts...
+21:29:51 [INFO] database.manager: Getting alerts
+21:39:51 [INFO] cogs.alerts: Checking alerts...
+21:39:51 [INFO] database.manager: Getting alerts
+21:49:51 [INFO] cogs.alerts: Checking alerts...
+21:49:51 [INFO] database.manager: Getting alerts
+21:59:51 [INFO] cogs.alerts: Checking alerts...
+21:59:51 [INFO] database.manager: Getting alerts
+22:09:51 [INFO] cogs.alerts: Checking alerts...
+22:09:51 [INFO] database.manager: Getting alerts
+22:19:51 [INFO] cogs.alerts: Checking alerts...
+22:19:51 [INFO] database.manager: Getting alerts
+22:29:51 [INFO] cogs.alerts: Checking alerts...
+22:29:51 [INFO] database.manager: Getting alerts
+22:39:51 [INFO] cogs.alerts: Checking alerts...
+22:39:51 [INFO] database.manager: Getting alerts
+22:49:51 [INFO] cogs.alerts: Checking alerts...
+22:49:51 [INFO] database.manager: Getting alerts
+22:59:51 [INFO] cogs.alerts: Checking alerts...
+22:59:51 [INFO] database.manager: Getting alerts
+23:09:51 [INFO] cogs.alerts: Checking alerts...
+23:09:51 [INFO] database.manager: Getting alerts
+23:19:51 [INFO] cogs.alerts: Checking alerts...
+23:19:51 [INFO] database.manager: Getting alerts
+23:29:51 [INFO] cogs.alerts: Checking alerts...
+23:29:51 [INFO] database.manager: Getting alerts
+23:39:51 [INFO] cogs.alerts: Checking alerts...
+23:39:51 [INFO] database.manager: Getting alerts
+23:49:51 [INFO] cogs.alerts: Checking alerts...
+23:49:51 [INFO] database.manager: Getting alerts
+23:49:53 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+23:59:51 [INFO] cogs.alerts: Checking alerts...
+23:59:51 [INFO] database.manager: Getting alerts
+00:09:51 [INFO] cogs.alerts: Checking alerts...
+00:09:51 [INFO] database.manager: Getting alerts
+00:19:51 [INFO] cogs.alerts: Checking alerts...
+00:19:51 [INFO] database.manager: Getting alerts
+00:29:51 [INFO] cogs.alerts: Checking alerts...
+00:29:51 [INFO] database.manager: Getting alerts
+00:39:51 [INFO] cogs.alerts: Checking alerts...
+00:39:51 [INFO] database.manager: Getting alerts
+00:49:51 [INFO] cogs.alerts: Checking alerts...
+00:49:51 [INFO] database.manager: Getting alerts
+00:59:51 [INFO] cogs.alerts: Checking alerts...
+00:59:51 [INFO] database.manager: Getting alerts
+01:09:51 [INFO] cogs.alerts: Checking alerts...
+01:09:51 [INFO] database.manager: Getting alerts
+01:19:51 [INFO] cogs.alerts: Checking alerts...
+01:19:51 [INFO] database.manager: Getting alerts
+01:29:51 [INFO] cogs.alerts: Checking alerts...
+01:29:51 [INFO] database.manager: Getting alerts
+01:39:51 [INFO] cogs.alerts: Checking alerts...
+01:39:51 [INFO] database.manager: Getting alerts
+01:49:51 [INFO] cogs.alerts: Checking alerts...
+01:49:51 [INFO] database.manager: Getting alerts
+01:59:51 [INFO] cogs.alerts: Checking alerts...
+01:59:51 [INFO] database.manager: Getting alerts
+02:09:51 [INFO] cogs.alerts: Checking alerts...
+02:09:51 [INFO] database.manager: Getting alerts
+02:19:51 [INFO] cogs.alerts: Checking alerts...
+02:19:51 [INFO] database.manager: Getting alerts
+02:21:51 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+02:29:51 [INFO] cogs.alerts: Checking alerts...
+02:29:51 [INFO] database.manager: Getting alerts
+02:39:51 [INFO] cogs.alerts: Checking alerts...
+02:39:51 [INFO] database.manager: Getting alerts
+02:49:51 [INFO] cogs.alerts: Checking alerts...
+02:49:51 [INFO] database.manager: Getting alerts
+02:59:51 [INFO] cogs.alerts: Checking alerts...
+02:59:51 [INFO] database.manager: Getting alerts
+03:09:51 [INFO] cogs.alerts: Checking alerts...
+03:09:51 [INFO] database.manager: Getting alerts
+03:19:51 [INFO] cogs.alerts: Checking alerts...
+03:19:51 [INFO] database.manager: Getting alerts
+03:29:51 [INFO] cogs.alerts: Checking alerts...
+03:29:51 [INFO] database.manager: Getting alerts
+03:39:51 [INFO] cogs.alerts: Checking alerts...
+03:39:51 [INFO] database.manager: Getting alerts
+03:49:51 [INFO] cogs.alerts: Checking alerts...
+03:49:51 [INFO] database.manager: Getting alerts
+03:59:51 [INFO] cogs.alerts: Checking alerts...
+03:59:51 [INFO] database.manager: Getting alerts
+04:09:51 [INFO] cogs.alerts: Checking alerts...
+04:09:51 [INFO] database.manager: Getting alerts
+04:19:51 [INFO] cogs.alerts: Checking alerts...
+04:19:51 [INFO] database.manager: Getting alerts
+04:29:51 [INFO] cogs.alerts: Checking alerts...
+04:29:51 [INFO] database.manager: Getting alerts
+04:39:51 [INFO] cogs.alerts: Checking alerts...
+04:39:51 [INFO] database.manager: Getting alerts
+04:49:51 [INFO] cogs.alerts: Checking alerts...
+04:49:51 [INFO] database.manager: Getting alerts
+04:59:51 [INFO] cogs.alerts: Checking alerts...
+04:59:51 [INFO] database.manager: Getting alerts
+05:09:51 [INFO] cogs.alerts: Checking alerts...
+05:09:51 [INFO] database.manager: Getting alerts
+05:19:51 [INFO] cogs.alerts: Checking alerts...
+05:19:51 [INFO] database.manager: Getting alerts
+05:28:16 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+05:29:51 [INFO] cogs.alerts: Checking alerts...
+05:29:51 [INFO] database.manager: Getting alerts
+05:39:51 [INFO] cogs.alerts: Checking alerts...
+05:39:51 [INFO] database.manager: Getting alerts
+05:49:51 [INFO] cogs.alerts: Checking alerts...
+05:49:51 [INFO] database.manager: Getting alerts
+05:59:51 [INFO] cogs.alerts: Checking alerts...
+05:59:51 [INFO] database.manager: Getting alerts
+06:09:51 [INFO] cogs.alerts: Checking alerts...
+06:09:51 [INFO] database.manager: Getting alerts
+06:19:51 [INFO] cogs.alerts: Checking alerts...
+06:19:51 [INFO] database.manager: Getting alerts
+06:29:51 [INFO] cogs.alerts: Checking alerts...
+06:29:51 [INFO] database.manager: Getting alerts
+06:39:51 [INFO] cogs.alerts: Checking alerts...
+06:39:51 [INFO] database.manager: Getting alerts
+06:49:51 [INFO] cogs.alerts: Checking alerts...
+06:49:51 [INFO] database.manager: Getting alerts
+06:57:24 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+06:59:51 [INFO] cogs.alerts: Checking alerts...
+06:59:51 [INFO] database.manager: Getting alerts
+07:09:51 [INFO] cogs.alerts: Checking alerts...
+07:09:51 [INFO] database.manager: Getting alerts
+07:19:51 [INFO] cogs.alerts: Checking alerts...
+07:19:51 [INFO] database.manager: Getting alerts
+07:29:51 [INFO] cogs.alerts: Checking alerts...
+07:29:51 [INFO] database.manager: Getting alerts
+07:29:58 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+07:39:51 [INFO] cogs.alerts: Checking alerts...
+07:39:51 [INFO] database.manager: Getting alerts
+07:49:51 [INFO] cogs.alerts: Checking alerts...
+07:49:51 [INFO] database.manager: Getting alerts
+07:59:51 [INFO] cogs.alerts: Checking alerts...
+07:59:51 [INFO] database.manager: Getting alerts
+08:09:51 [INFO] cogs.alerts: Checking alerts...
+08:09:51 [INFO] database.manager: Getting alerts
+08:15:49 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+08:19:51 [INFO] cogs.alerts: Checking alerts...
+08:19:51 [INFO] database.manager: Getting alerts
+08:29:51 [INFO] cogs.alerts: Checking alerts...
+08:29:51 [INFO] database.manager: Getting alerts
+08:39:51 [INFO] cogs.alerts: Checking alerts...
+08:39:51 [INFO] database.manager: Getting alerts
+08:49:51 [INFO] cogs.alerts: Checking alerts...
+08:49:51 [INFO] database.manager: Getting alerts
+08:59:51 [INFO] cogs.alerts: Checking alerts...
+08:59:51 [INFO] database.manager: Getting alerts
+09:09:51 [INFO] cogs.alerts: Checking alerts...
+09:09:51 [INFO] database.manager: Getting alerts
+09:19:51 [INFO] cogs.alerts: Checking alerts...
+09:19:51 [INFO] database.manager: Getting alerts
+09:29:51 [INFO] cogs.alerts: Checking alerts...
+09:29:51 [INFO] database.manager: Getting alerts
+09:39:51 [INFO] cogs.alerts: Checking alerts...
+09:39:51 [INFO] database.manager: Getting alerts
+09:49:51 [INFO] cogs.alerts: Checking alerts...
+09:49:51 [INFO] database.manager: Getting alerts
+09:59:51 [INFO] cogs.alerts: Checking alerts...
+09:59:51 [INFO] database.manager: Getting alerts
+10:09:51 [INFO] cogs.alerts: Checking alerts...
+10:09:51 [INFO] database.manager: Getting alerts
+10:19:51 [INFO] cogs.alerts: Checking alerts...
+10:19:51 [INFO] database.manager: Getting alerts
+10:29:51 [INFO] cogs.alerts: Checking alerts...
+10:29:51 [INFO] database.manager: Getting alerts
+10:39:51 [INFO] cogs.alerts: Checking alerts...
+10:39:51 [INFO] database.manager: Getting alerts
+10:49:51 [INFO] cogs.alerts: Checking alerts...
+10:49:51 [INFO] database.manager: Getting alerts
+10:59:51 [INFO] cogs.alerts: Checking alerts...
+10:59:51 [INFO] database.manager: Getting alerts
+11:09:51 [INFO] cogs.alerts: Checking alerts...
+11:09:51 [INFO] database.manager: Getting alerts
+11:19:51 [INFO] cogs.alerts: Checking alerts...
+11:19:51 [INFO] database.manager: Getting alerts
+11:29:42 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+11:29:51 [INFO] cogs.alerts: Checking alerts...
+11:29:51 [INFO] database.manager: Getting alerts
+11:39:51 [INFO] cogs.alerts: Checking alerts...
+11:39:51 [INFO] database.manager: Getting alerts
+11:49:51 [INFO] cogs.alerts: Checking alerts...
+11:49:51 [INFO] database.manager: Getting alerts
+11:59:51 [INFO] cogs.alerts: Checking alerts...
+11:59:51 [INFO] database.manager: Getting alerts
+12:09:51 [INFO] cogs.alerts: Checking alerts...
+12:09:51 [INFO] database.manager: Getting alerts
+12:19:51 [INFO] cogs.alerts: Checking alerts...
+12:19:51 [INFO] database.manager: Getting alerts
+12:29:51 [INFO] cogs.alerts: Checking alerts...
+12:29:51 [INFO] database.manager: Getting alerts
+12:39:51 [INFO] cogs.alerts: Checking alerts...
+12:39:51 [INFO] database.manager: Getting alerts
+12:49:51 [INFO] cogs.alerts: Checking alerts...
+12:49:51 [INFO] database.manager: Getting alerts
+12:59:51 [INFO] cogs.alerts: Checking alerts...
+12:59:51 [INFO] database.manager: Getting alerts
+13:09:51 [INFO] cogs.alerts: Checking alerts...
+13:09:51 [INFO] database.manager: Getting alerts
+13:19:51 [INFO] cogs.alerts: Checking alerts...
+13:19:51 [INFO] database.manager: Getting alerts
+13:29:51 [INFO] cogs.alerts: Checking alerts...
+13:29:51 [INFO] database.manager: Getting alerts
+13:39:51 [INFO] cogs.alerts: Checking alerts...
+13:39:51 [INFO] database.manager: Getting alerts
+13:49:51 [INFO] cogs.alerts: Checking alerts...
+13:49:51 [INFO] database.manager: Getting alerts
+13:59:51 [INFO] cogs.alerts: Checking alerts...
+13:59:51 [INFO] database.manager: Getting alerts
+14:04:41 [INFO] discord.gateway: Shard ID None has successfully RESUMED session fd3e7207f422ce8035800609d022ec4c.
+14:09:51 [INFO] cogs.alerts: Checking alerts...
+14:09:51 [INFO] database.manager: Getting alerts
+14:19:51 [INFO] cogs.alerts: Checking alerts...
+14:19:51 [INFO] database.manager: Getting alerts
+14:29:51 [INFO] cogs.alerts: Checking alerts...
+14:29:51 [INFO] database.manager: Getting alerts
+14:32:43 [INFO] cogs.ask_gpt: Received 'ask' command in channel ID: 1299047160184045608 | Expected channel ID: 1299047160184045608
+14:32:44 [INFO] cogs.ask_gpt: Processing the ask command.
+14:32:44 [INFO] cogs.ask_gpt: Getting GPT response for the message.
+14:33:02 [WARNING] discord.gateway: Shard ID None heartbeat blocked for more than 10 seconds.
+Loop thread traceback (most recent call last):
+  File "/home/admin/Lecryptoclub/src/main.py", line 115, in <module>
+    bot.run(DISCORD_BOT_TOKEN)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/discord/client.py", line 869, in run
+    asyncio.run(runner())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 640, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 607, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 1922, in _run_once
+    handle._run()
+  File "/usr/lib/python3.11/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1151, in wrapper
+    await self._call(interaction)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "/home/admin/Lecryptoclub/src/cogs/ask_gpt.py", line 64, in ask
+    response = await self.get_gpt_response(question)
+  File "/home/admin/Lecryptoclub/src/cogs/ask_gpt.py", line 28, in get_gpt_response
+    response = client.chat.completions.create(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/openai/_utils/_utils.py", line 274, in wrapper
+    return func(*args, **kwargs)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/openai/resources/chat/completions.py", line 704, in create
+    return self._post(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/openai/_base_client.py", line 1260, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/openai/_base_client.py", line 937, in request
+    return self._request(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/openai/_base_client.py", line 973, in _request
+    response = self._client.send(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpx/_client.py", line 926, in send
+    response = self._send_handling_auth(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpx/_client.py", line 954, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpx/_client.py", line 991, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpx/_client.py", line 1027, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpx/_transports/default.py", line 236, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_sync/connection_pool.py", line 196, in handle_request
+    response = connection.handle_request(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_sync/connection.py", line 101, in handle_request
+    return self._connection.handle_request(request)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 113, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 186, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_sync/http11.py", line 224, in _receive_event
+    data = self._network_stream.read(
+  File "/home/admin/Lecryptoclub/myenv/lib/python3.11/site-packages/httpcore/_backends/sync.py", line 126, in read
+    return self._sock.recv(max_bytes)
+  File "/usr/lib/python3.11/ssl.py", line 1296, in recv
+    return self.read(buflen)
+  File "/usr/lib/python3.11/ssl.py", line 1169, in read
+    return self._sslobj.read(len)
+
+14:33:03 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+14:33:03 [INFO] cogs.ask_gpt: Successfully received GPT response.
+14:33:03 [INFO] cogs.ask_gpt: Sending long message.
+14:33:04 [INFO] cogs.ask_gpt: Long message sent in parts.
+14:33:05 [INFO] cogs.ask_gpt: Response sent successfully.
+14:33:05 [INFO] __main__: Executed command: ask in LeCryptoClub (ID: 1261789585025798226) by gulyzm (ID: 243051996200828929)
+14:39:51 [INFO] cogs.alerts: Checking alerts...
+14:39:51 [INFO] database.manager: Getting alerts
+14:49:51 [INFO] cogs.alerts: Checking alerts...
+14:49:51 [INFO] database.manager: Getting alerts
+14:59:51 [INFO] cogs.alerts: Checking alerts...
+14:59:51 [INFO] database.manager: Getting alerts
+15:09:51 [INFO] cogs.alerts: Checking alerts...
+15:09:51 [INFO] database.manager: Getting alerts
+15:13:39 [INFO] __main__: Shutting down bot...
+15:13:39 [INFO] database.manager: Database connection closed.
