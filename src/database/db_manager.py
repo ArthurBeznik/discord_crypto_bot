@@ -6,14 +6,17 @@ from utils.logger import logging
 from .db_init import DBInitializer
 from .alerts_manager import AlertsDatabaseManager
 from .predictions_manager import PredictionsDatabaseManager
+from .trades_manager import TradesDatabaseManager
 
 logger = logging.getLogger(__name__)
+
 
 class DatabaseManager:
     def __init__(self):
         self.conn = psycopg2.connect(DATABASE_URL)
         self.alerts = AlertsDatabaseManager(self.conn)
         self.predictions = PredictionsDatabaseManager(self.conn)
+        self.trades = TradesDatabaseManager(self.conn)
         self.initializer = DBInitializer()
 
     def close(self):

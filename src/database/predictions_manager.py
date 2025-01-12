@@ -44,7 +44,6 @@ class PredictionsDatabaseManager:
         query = """
             INSERT INTO predictions (user_id, crypto, prediction_date, predicted_price, actual_price, accuracy)
             VALUES (%s, %s, %s, %s, %s, %s)
-            VALUES (%s, %s, %s, %s, %s, %s)
         """
         params = (
             user_id,
@@ -250,13 +249,14 @@ class PredictionsDatabaseManager:
             self.conn.commit()
 
             if user_id is not None:
-                logger.info(f"Successfully removed all predictions for user [{user_id}]")
+                logger.info(
+                    f"Successfully removed all predictions for user [{user_id}]"
+                )
             else:
                 logger.info("Successfully removed all predictions for all users")
         except Exception as e:
             logger.error(f"Error clearing predictions: {e}")
             self.conn.rollback()
-
 
     def remove_prediction(self, user_id: int, prediction_id: int) -> bool:
         """Removes a specific prediction for a user from the database.

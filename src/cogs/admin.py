@@ -1,13 +1,19 @@
 # admin.py
 
+from typing import List
 import discord
 from discord.ext import commands
-from discord import app_commands
+from discord import User, app_commands
+
 from bot import CryptoBot
+from utils.trades_helpers import format_trades_table_with_username
 from utils.response_helpers import send_error_response, send_success_response
 from utils.predictions_helpers import format_predictions_table
 from utils.config import (
     DISCORD_GUILD_OBJ,
+)
+from custom_types.trade_types import (
+    TradeType,
 )
 from utils.logger import logging
 
@@ -129,7 +135,7 @@ class Admin(commands.Cog, name="admin"):
     @app_commands.default_permissions(administrator=True)
     async def get_all_predictions(self, interaction: discord.Interaction) -> None:
         """
-        Clears all predictions made by all users.
+        Gets all predictions made by all users.
 
         Args:
             interaction (discord.Interaction): The interaction that triggered this command.
@@ -200,6 +206,63 @@ class Admin(commands.Cog, name="admin"):
         except Exception as e:
             await send_error_response(interaction, "Error listing users", f"{e}")
             logger.error(f"Error listing users: {e}")
+
+    @app_commands.command(
+        name="get_all_trades",
+        description="Get all trades for all users, or for a specific one",
+    )
+    @app_commands.describe(user_id="ID of the user")
+    @app_commands.default_permissions(administrator=True)
+    async def get_all_trades(
+        self, interaction: discord.Interaction, user_id: str = None
+    ) -> None:
+        """
+        Gets all trades made by all users.
+
+        Args:
+            interaction (discord.Interaction): The interaction that triggered this command.
+
+        Returns:
+            None
+        """
+        try:
+            logger.info("Admin is getting all trades for all users")
+
+            # Fetch all trades from the database
+            trades: List[TradeType] = self.bot.db.trades.get_all_trades(user_id)
+            # logger.debug(f"trades: {trades}")  # ? debug
+            # logger.debug(f"trades type: {type(trades)}")  # ? debug
+
+            if not trades:
+                logger.warning("No trades found in the database.")
+                await interaction.response.send_message(
+                    "No trades found for any users."
+                )
+                return
+
+            # Format the trades into a table
+            formatted_trades = []
+            for trade in trades:
+                user_id, position_size, leverage = trade
+                user: User = await self.bot.fetch_user(
+                    user_id
+                )  # Fetch the user by user_id
+
+                # Replace user_id with user.global_name
+                user_name = user.global_name if user else f"User {user_id}"
+
+                formatted_trades.append((user_name, position_size, leverage))
+
+            # Use the helper function to format the trades as a table
+            trades_message = await format_trades_table_with_username(formatted_trades)
+
+            # Send the formatted table as a response
+            await interaction.response.send_message(trades_message)
+            logger.info("Successfully fetched all trades for all users.")
+
+        except Exception as e:
+            await interaction.response.send_message(f"Error fetching trades: {e}")
+            logger.error(f"Failed to fetch all trades: {e}")
 
 
 async def setup(bot: CryptoBot) -> None:

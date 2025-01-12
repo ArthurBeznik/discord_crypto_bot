@@ -12,7 +12,10 @@ from bot import CryptoBot
 from utils.config import (
     ASK_CHAT_CHANNEL_ID,
     CHATGPT_API_KEY,
-    GPT_SYSTEM_MESSAGE,
+)
+from utils.gpt_system import (
+    ASSISTANT_DEFAULT,
+    ASSISTANT_SPOT,
 )
 from utils.logger import logging
 
@@ -23,15 +26,16 @@ class AskGPT(commands.Cog, name="askGPT"):
     def __init__(self, bot: CryptoBot) -> None:
         self.bot = bot
 
-    async def get_gpt_response(self, message: str) -> str:
+    async def get_gpt_response(self, message: str, gpt_system_message) -> str:
         logger.info("Getting GPT response for the message.")
+
         try:
             client = OpenAI(api_key=CHATGPT_API_KEY)
 
             response = client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 messages=[
-                    {"role": "system", "content": GPT_SYSTEM_MESSAGE},
+                    {"role": "system", "content": gpt_system_message},
                     {"role": "user", "content": message},
                 ],
                 max_tokens=1000,
@@ -68,7 +72,38 @@ class AskGPT(commands.Cog, name="askGPT"):
             logger.info("Processing the ask command.")
 
             try:
-                response = await self.get_gpt_response(question)
+                response = await self.get_gpt_response(question, ASSISTANT_DEFAULT)
+                await self.send_long_message(
+                    interaction.channel, f"Response: {response}"
+                )
+                await interaction.followup.send("Response sent.", ephemeral=True)
+                logger.info("Response sent successfully.")
+            except Exception as e:
+                logger.error(f"Error processing 'ask' command: {e}")
+                await interaction.followup.send(
+                    "An error occured while processing your request.", ephemeral=True
+                )
+        else:
+            await interaction.response.send_message(
+                "Sorry, I can only reply in the designated channel [ask-gpt]",
+                ephemeral=True,
+            )
+            logger.warning(
+                f"Command issued in an unauthorized channel: {interaction.channel.id}"
+            )
+
+    async def send_gpt_message(
+        self, interaction: discord.Interaction, question: str, gpt_system_message: str
+    ) -> None:
+        logger.info(f"Sending message to assistant [{question}]")
+
+        if interaction.channel.id == ASK_CHAT_CHANNEL_ID:
+            # Notify Discord that we're processing the command
+            await interaction.response.defer(thinking=True)
+            logger.info("Processing the ask command.")
+
+            try:
+                response = await self.get_gpt_response(question, gpt_system_message)
                 await self.send_long_message(
                     interaction.channel, f"Response: {response}"
                 )
@@ -92,19 +127,26 @@ class AskGPT(commands.Cog, name="askGPT"):
         name="ask_assistant", description="Ask something to a specific GPT assistant."
     )
     @app_commands.rename()
-    async def ask_test(
+    async def ask_assistant(
         self,
         interaction: discord.Interaction,
         type: Literal[
-            "Fraud Detection",
-            "News and Trends",
-            "Fiscality",
-            "Technical Analysis",
+            "Default",
             "SPOT",
+            # "Fraud Detection",
+            # "News and Trends",
+            # "Fiscality",
+            # "Technical Analysis",
         ],
         question: str,
     ) -> None:
-        if type == "Fraud Detection":
+        logger.info(f"Sending message to assistant [{type}]")
+
+        if type == "Default":
+            await self.send_gpt_message(interaction, question, ASSISTANT_DEFAULT)
+        elif type == "SPOT":
+            await self.send_gpt_message(interaction, question, ASSISTANT_SPOT)
+        elif type == "Fraud Detection":
             await interaction.response.send_message(
                 "TODO implement Assistant Fraud Detection..."
             )
@@ -120,8 +162,6 @@ class AskGPT(commands.Cog, name="askGPT"):
             await interaction.response.send_message(
                 "TODO implement Assistant Technical Analysis..."
             )
-        elif type == "SPOT":
-            await interaction.response.send_message("TODO implement Assistant SPOT...")
 
 
 async def setup(bot: CryptoBot) -> None:

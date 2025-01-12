@@ -49,12 +49,11 @@ class Trade(commands.Cog, name="trade"):
                 True,
             )
 
-            # TODO send to specific channel?
-            # await send_success_response(
-            #     interaction, "", f"```json\n{str(trade_data)}```"
-            # )
+            # Send trade to trade channel
             trade_channel = self.bot.get_channel(TRADE_CHANNEL_ID)
             await trade_channel.send(f"```json\n{str(trade_data)}```")
+
+            self.bot.db.trades.create_trade(**trade_data)  # save trade in DB
 
         except Exception as e:
             await send_error_response(interaction, "Error creating trade", f"{e}")
@@ -62,6 +61,7 @@ class Trade(commands.Cog, name="trade"):
                 f"Error processing trade ps [{position_size}] and leverage [{leverage}]: {e}"
             )
 
+    
 
 async def setup(bot: CryptoBot) -> None:
     await bot.add_cog(Trade(bot))
